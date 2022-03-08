@@ -14,6 +14,7 @@ export default function App() {
       <Route exact path="/" component={ Login } />
       <HomeProvider>
         <Route path="/foods" component={ Home } />
+        <Route path="/drinks" component={ Home } />
         <Route exact path="/profile" component={ Profile } />
       </HomeProvider>
     </Switch>

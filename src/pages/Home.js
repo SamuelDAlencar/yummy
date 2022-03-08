@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Recipe from '../components/Recipe';
 import homeContext from '../contexts/homeContext';
 
@@ -67,6 +68,7 @@ export default function Home() {
       {recipes
         && recipes.map((recipe, i) => i < MIN_RECIPES_INDEX
           && <Recipe key={ recipe.idMeal } data={ recipe } i={ i } />)}
+      <Footer />
     </>
   );
 }

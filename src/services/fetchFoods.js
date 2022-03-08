@@ -1,4 +1,4 @@
-export default async function fetchRecipes(searchParam, searchType) {
+export default async function fetchFoods(searchParam, searchType) {
   try {
     switch (searchType) {
     case 'Ingredient': {

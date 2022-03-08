@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import homeContext from '../contexts/homeContext';
-import fetchRecipes from '../services/fetchApi';
+import fetchFoods from '../services/fetchFoods';
+import fetchDrinks from '../services/fetchDrinks';
 
 export default function HomeProvider({ children }) {
   const [isMounted, setIsMounted] = useState(false);
@@ -21,11 +22,19 @@ export default function HomeProvider({ children }) {
     if (filter === 'First letter' && searchValue.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (searchValue.length > 0) {
-      const apiReturn = await fetchRecipes(searchValue, filter);
-      if (apiReturn !== undefined) {
-        setRecipes(apiReturn.meals);
+      if (history.location.pathname === '/foods') {
+        const apiReturn = await fetchFoods(searchValue, filter);
+        if (apiReturn !== undefined) {
+          setRecipes(apiReturn.meals);
+        }
+        setSearchAttempt(!searchAttempt);
+      } else {
+        const apiReturn = await fetchDrinks(searchValue, filter);
+        if (apiReturn !== undefined) {
+          setRecipes(apiReturn.drinks);
+        }
+        setSearchAttempt(!searchAttempt);
       }
-      setSearchAttempt(!searchAttempt);
     }
   };
 
@@ -38,9 +47,14 @@ export default function HomeProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log(recipes);
-    if (recipes && isMounted && recipes.length === 1) {
-      history.push(`/foods/${recipes[0].idMeal}`);
+    if (recipes
+      && isMounted
+      && recipes.length === 1) {
+      if (history.location.pathname === '/foods') {
+        history.push(`/foods/${recipes[0].idMeal}`);
+      } else {
+        history.push(`/drinks/${recipes[0].idDrink}`);
+      }
     }
   }, [recipes]);
 
