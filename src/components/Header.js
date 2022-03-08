@@ -2,7 +2,7 @@ import React from 'react';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-export default function Header() {
+export default function Header({ history }) {
   return (
     <header>
       <section>
@@ -10,10 +10,14 @@ export default function Header() {
           type="submit"
           data-testid="profile-top-btn"
           id="profile-top-btn"
+          onClick={ () => history.push('/profile') }
         >
           <img src={ profileIcon } data-testid="profile-top-btn" alt="profile-top-btn" />
         </button>
         <h2 data-testid="page-title">Foods</h2>
+        <label htmlFor="search-input">
+          <input data-testid="search-input"></input>
+        </label>
         <button
           type="submit"
           data-testid="search-top-btn"
@@ -56,3 +60,7 @@ export default function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  history: propTypes.string,
+}.isRequired;
