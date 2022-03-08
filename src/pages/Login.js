@@ -59,7 +59,6 @@ export default function Login({ history }) {
     </div>
   );
 }
-
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
