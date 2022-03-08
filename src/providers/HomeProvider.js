@@ -9,6 +9,7 @@ export default function HomeProvider({ children }) {
   const [filter, setFilter] = useState();
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
+  const [searchAttempt, setSearchAttempt] = useState(false);
 
   const history = useHistory();
 
@@ -19,15 +20,12 @@ export default function HomeProvider({ children }) {
   const searchRecipes = async () => {
     if (filter === 'First letter' && searchValue.length > 1) {
       global.alert('Your search must have only 1 (one) character');
-    }
-    if (searchValue.length > 0) {
+    } else if (searchValue.length > 0) {
       const apiReturn = await fetchRecipes(searchValue, filter);
-      console.log(apiReturn);
-      if (apiReturn.meals !== null) {
+      if (apiReturn !== undefined) {
         setRecipes(apiReturn.meals);
-      } else {
-        setRecipes(undefined);
       }
+      setSearchAttempt(!searchAttempt);
     }
   };
 
@@ -52,6 +50,7 @@ export default function HomeProvider({ children }) {
         searchRecipes,
         handleInput,
         recipes,
+        searchAttempt,
       } }
     >
       { children }

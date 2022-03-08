@@ -11,6 +11,7 @@ export default function Home() {
     handleInput,
     searchRecipes,
     recipes,
+    searchAttempt,
   } = useContext(homeContext);
 
   useEffect(() => {
@@ -21,15 +22,10 @@ export default function Home() {
     if (!recipes && isMounted === true) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
-  }, [recipes]);
+  }, [searchAttempt]);
 
   return (
     <>
-      <input
-        onChange={ handleInput }
-        type="text"
-        id="input_only_for_testing"
-      />
       <Header />
       <label htmlFor="Ingredient">
         Ingredient
