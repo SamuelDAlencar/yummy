@@ -7,8 +7,9 @@ import fetchRecipes from '../services/fetchApi';
 export default function HomeProvider({ children }) {
   const [isMounted, setIsMounted] = useState(false);
   const [filter, setFilter] = useState();
-  const [searchValue, setSearchValue] = useState();
-  const [recipes, setRecipes] = useState();
+  const [searchValue, setSearchValue] = useState('');
+  const [recipes, setRecipes] = useState([]);
+  const [searchAttempt, setSearchAttempt] = useState(false);
 
   const history = useHistory();
 
@@ -17,8 +18,15 @@ export default function HomeProvider({ children }) {
   }, []);
 
   const searchRecipes = async () => {
-    const apiReturn = await fetchRecipes(searchValue, filter);
-    setRecipes(apiReturn.meals);
+    if (filter === 'First letter' && searchValue.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else if (searchValue.length > 0) {
+      const apiReturn = await fetchRecipes(searchValue, filter);
+      if (apiReturn !== undefined) {
+        setRecipes(apiReturn.meals);
+      }
+      setSearchAttempt(!searchAttempt);
+    }
   };
 
   const handleInput = ({ target: { type, value, id } }) => {
@@ -30,7 +38,8 @@ export default function HomeProvider({ children }) {
   };
 
   useEffect(() => {
-    if (isMounted && recipes.length === 1) {
+    console.log(recipes);
+    if (recipes && isMounted && recipes.length === 1) {
       history.push(`/foods/${recipes[0].idMeal}`);
     }
   }, [recipes]);
@@ -41,6 +50,7 @@ export default function HomeProvider({ children }) {
         searchRecipes,
         handleInput,
         recipes,
+        searchAttempt,
       } }
     >
       { children }

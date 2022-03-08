@@ -5,11 +5,13 @@ import homeContext from '../contexts/homeContext';
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
+  const MIN_RECIPES_INDEX = 12;
 
   const {
     handleInput,
     searchRecipes,
     recipes,
+    searchAttempt,
   } = useContext(homeContext);
 
   useEffect(() => {
@@ -20,15 +22,10 @@ export default function Home() {
     if (!recipes && isMounted === true) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
-  }, [recipes]);
+  }, [searchAttempt]);
 
   return (
-    <main>
-      <input
-        onChange={ handleInput }
-        type="text"
-        id="input_only_for_testing"
-      />
+    <>
       <Header />
       <label htmlFor="Ingredient">
         Ingredient
@@ -68,9 +65,8 @@ export default function Home() {
         Search
       </button>
       {recipes
-        && recipes.map((recipe, i) => (
-          <Recipe key={ recipe.idMeal } data={ recipe } index={ i } />
-        ))}
-    </main>
+        && recipes.map((recipe, i) => i < MIN_RECIPES_INDEX
+          && <Recipe key={ recipe.idMeal } data={ recipe } i={ i } />)}
+    </>
   );
 }

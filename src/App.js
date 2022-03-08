@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import HomeProvider from './providers/HomeProvider';
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route exact path="/" component={ Login } />
       <HomeProvider>
         <Route path="/foods" component={ Home } />
+        <Route exact path="/profile" component={ Profile } />
       </HomeProvider>
     </Switch>
   );
