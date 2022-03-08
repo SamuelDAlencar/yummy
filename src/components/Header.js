@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
@@ -16,7 +17,7 @@ export default function Header({ history }) {
         </button>
         <h2 data-testid="page-title">Foods</h2>
         <label htmlFor="search-input">
-          <input data-testid="search-input"></input>
+          <input data-testid="search-input" />
         </label>
         <button
           type="submit"
@@ -24,39 +25,8 @@ export default function Header({ history }) {
           id="search-top-btn"
         >
           <img src={ searchIcon } data-testid="search-top-btn" alt="search-top-btn" />
-
         </button>
       </section>
-      <label htmlFor="ingredients-search">
-        Search by Ingredients
-        <input
-          type="radio"
-          id="ingredients-search"
-          data-testid="ingredient-search-radio"
-        />
-      </label>
-      <label htmlFor="name-search">
-        Search by Name
-        <input
-          type="radio"
-          id="name-search"
-          data-testid="name-search-radio"
-        />
-      </label>
-      <label htmlFor="letter-search">
-        Search by first letter
-        <input
-          type="radio"
-          id="letter-search"
-          data-testid="first-letter-search-radio"
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-      >
-        Search
-      </button>
     </header>
   );
 }
