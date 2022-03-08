@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
-import fetchRecipes from '../services/fetchApi';
+import Recipe from '../components/Recipe';
+import homeContext from '../contexts/homeContext';
 
 export default function Home() {
-  const [filter, setFilter] = useState();
-  const [searchValue, setSearchValue] = useState();
-  const [recipes, setRecipes] = useState();
+  const [isMounted, setIsMounted] = useState(false);
 
-  const searchRecipes = async () => {
-    const apiReturn = await fetchRecipes(searchValue, filter);
-    setRecipes(apiReturn);
-    console.log(recipes);
-  };
+  const {
+    handleInput,
+    searchRecipes,
+    recipes,
+  } = useContext(homeContext);
 
-  const handleInput = ({ target: { type, value, id } }) => {
-    if (type === 'text') {
-      setSearchValue(value);
-    } else {
-      setFilter(id);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!recipes && isMounted === true) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
-  };
+  }, [recipes]);
 
   return (
     <main>
@@ -66,6 +67,10 @@ export default function Home() {
       >
         Search
       </button>
+      {recipes
+        && recipes.map((recipe, i) => (
+          <Recipe key={ recipe.idMeal } data={ recipe } index={ i } />
+        ))}
     </main>
   );
 }
