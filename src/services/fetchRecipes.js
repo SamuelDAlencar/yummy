@@ -19,8 +19,12 @@ export default async function fetchRecipes(apiType, searchValue, searchType) {
       const data = await response.json();
       return data;
     }
-    default:
-      return undefined;
+    default: {
+      const url = `https://www.${apiType}.com/api/json/v1/1/search.php?s=`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }
     }
   } catch (error) {
     console.error(error);

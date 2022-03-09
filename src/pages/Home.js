@@ -1,26 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Recipe from '../components/Recipe';
 import homeContext from '../contexts/homeContext';
+import fetchRecipes from '../services/fetchRecipes';
 
 export default function Home() {
-  const [isMounted, setIsMounted] = useState(false);
   const MIN_RECIPES_INDEX = 12;
+  const { location: { pathname } } = useHistory();
 
   const {
     handleInput,
     searchRecipes,
     recipes,
     searchAttempt,
+    setRecipes,
+    apiType,
   } = useContext(homeContext);
 
+  const fetchDefault = async () => {
+    const data = await fetchRecipes(apiType);
+    setRecipes(Object.values(data)[0]);
+  };
+
   useEffect(() => {
-    setIsMounted(true);
+    fetchDefault();
   }, []);
 
   useEffect(() => {
-    if (!recipes && isMounted === true) {
+    if (!recipes && isMounted) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
   }, [searchAttempt]);
@@ -65,9 +74,14 @@ export default function Home() {
       >
         Search
       </button>
+      {/* { console.log(recipes) } */}
       {recipes
         && recipes.map((recipe, i) => i < MIN_RECIPES_INDEX
-          && <Recipe key={ recipe.idMeal } data={ recipe } i={ i } />)}
+          && <Recipe
+            key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
+            data={ recipe }
+            i={ i }
+          />)}
       <Footer />
     </>
   );

@@ -5,21 +5,18 @@ import homeContext from '../contexts/homeContext';
 import fetchRecipes from '../services/fetchRecipes';
 
 export default function HomeProvider({ children }) {
-  const [apiType, setApiType] = useState();
-  const [isMounted, setIsMounted] = useState(false);
+  const history = useHistory();
+  const { pathname } = history.location;
+
+  const [apiType, setApiType] = useState(
+    pathname === '/foods' ? 'themealdb' : 'thecocktaildb',
+  );
   const [filter, setFilter] = useState();
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [searchAttempt, setSearchAttempt] = useState(false);
 
-  const history = useHistory();
-
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const { pathname } = history.location;
     if (pathname === '/foods') {
       setApiType('themealdb');
     } else {
@@ -49,7 +46,7 @@ export default function HomeProvider({ children }) {
 
   useEffect(() => {
     if (recipes
-      && isMounted
+      // && isMounted
       && recipes.length === 1) {
       if (history.location.pathname === '/foods') {
         history.push(`/foods/${recipes[0].idMeal}`);
@@ -66,6 +63,8 @@ export default function HomeProvider({ children }) {
         handleInput,
         recipes,
         searchAttempt,
+        setRecipes,
+        apiType,
       } }
     >
       { children }
