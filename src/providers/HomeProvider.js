@@ -1,40 +1,40 @@
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import homeContext from '../contexts/homeContext';
-import fetchFoods from '../services/fetchFoods';
-import fetchDrinks from '../services/fetchDrinks';
+import fetchRecipes from '../services/fetchRecipes';
 
 export default function HomeProvider({ children }) {
-  const [isMounted, setIsMounted] = useState(false);
-  const [filter, setFilter] = useState();
+  const history = useHistory();
+  const { pathname } = history.location;
+
+  // State variables
+  const [apiType, setApiType] = useState(
+    pathname === '/foods' ? 'themealdb' : 'thecocktaildb',
+  );
+  const [searchType, setSearchType] = useState();
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
-  const [searchAttempt, setSearchAttempt] = useState(false);
+  const [attemptedSearch, setAttemptedSearch] = useState(false);
 
-  const history = useHistory();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const fetchDefault = async () => {
+    const data = await fetchRecipes(apiType);
+    setRecipes(Object.values(data)[0]);
+  };
 
   const searchRecipes = async () => {
-    if (filter === 'First letter' && searchValue.length > 1) {
+    if (searchType === 'First letter' && searchValue.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (searchValue.length > 0) {
-      if (history.location.pathname === '/foods') {
-        const apiReturn = await fetchFoods(searchValue, filter);
-        if (apiReturn !== undefined) {
-          setRecipes(apiReturn.meals);
-        }
-        setSearchAttempt(!searchAttempt);
+      const apiReturn = await fetchRecipes(apiType, searchValue, searchType);
+
+      if (apiReturn === undefined) {
+        setRecipes(null);
       } else {
-        const apiReturn = await fetchDrinks(searchValue, filter);
-        if (apiReturn !== undefined) {
-          setRecipes(apiReturn.drinks);
-        }
-        setSearchAttempt(!searchAttempt);
+        setRecipes(Object.values(apiReturn)[0]);
       }
+
+      setAttemptedSearch(!attemptedSearch);
     }
   };
 
@@ -42,21 +42,9 @@ export default function HomeProvider({ children }) {
     if (type === 'text') {
       setSearchValue(value);
     } else {
-      setFilter(id);
+      setSearchType(id);
     }
   };
-
-  useEffect(() => {
-    if (recipes
-      && isMounted
-      && recipes.length === 1) {
-      if (history.location.pathname === '/foods') {
-        history.push(`/foods/${recipes[0].idMeal}`);
-      } else {
-        history.push(`/drinks/${recipes[0].idDrink}`);
-      }
-    }
-  }, [recipes]);
 
   return (
     <homeContext.Provider
@@ -64,7 +52,11 @@ export default function HomeProvider({ children }) {
         searchRecipes,
         handleInput,
         recipes,
-        searchAttempt,
+        attemptedSearch,
+        setRecipes,
+        apiType,
+        setApiType,
+        fetchDefault,
       } }
     >
       { children }
