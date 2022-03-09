@@ -23,6 +23,11 @@ export default function Home() {
 
   // Set the first 12 recipes
   useEffect(() => {
+    if (pathname === '/foods') {
+      setApiType('themealdb');
+    } else {
+      setApiType('thecocktaildb');
+    }
     fetchDefault();
   }, []);
 
@@ -32,14 +37,6 @@ export default function Home() {
   }, [apiType]);
 
   // Update the apiType depending on the page url (foods/drinks)
-  useEffect(() => {
-    if (pathname === '/foods') {
-      setApiType('themealdb');
-    } else {
-      setApiType('thecocktaildb');
-    }
-    fetchDefault();
-  });
 
   // Redirect to the detailed recipe page if the api returns only one result
   useEffect(() => {
