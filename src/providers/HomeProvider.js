@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import homeContext from '../contexts/homeContext';
 import fetchRecipes from '../services/fetchRecipes';
 
@@ -8,31 +8,33 @@ export default function HomeProvider({ children }) {
   const history = useHistory();
   const { pathname } = history.location;
 
+  // State variables
   const [apiType, setApiType] = useState(
     pathname === '/foods' ? 'themealdb' : 'thecocktaildb',
   );
-  const [filter, setFilter] = useState();
+  const [searchType, setSearchType] = useState();
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
-  const [searchAttempt, setSearchAttempt] = useState(false);
+  const [attemptedSearch, setAttemptedSearch] = useState(false);
 
-  useEffect(() => {
-    if (pathname === '/foods') {
-      setApiType('themealdb');
-    } else {
-      setApiType('thecocktaildb');
-    }
-  });
+  const fetchDefault = async () => {
+    const data = await fetchRecipes(apiType);
+    setRecipes(Object.values(data)[0]);
+  };
 
   const searchRecipes = async () => {
-    if (filter === 'First letter' && searchValue.length > 1) {
+    if (searchType === 'First letter' && searchValue.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (searchValue.length > 0) {
-      const apiReturn = await fetchRecipes(apiType, searchValue, filter);
-      if (apiReturn !== undefined) {
+      const apiReturn = await fetchRecipes(apiType, searchValue, searchType);
+
+      if (apiReturn === undefined) {
+        setRecipes(null);
+      } else {
         setRecipes(Object.values(apiReturn)[0]);
       }
-      setSearchAttempt(!searchAttempt);
+
+      setAttemptedSearch(!attemptedSearch);
     }
   };
 
@@ -40,21 +42,9 @@ export default function HomeProvider({ children }) {
     if (type === 'text') {
       setSearchValue(value);
     } else {
-      setFilter(id);
+      setSearchType(id);
     }
   };
-
-  useEffect(() => {
-    if (recipes
-      // && isMounted
-      && recipes.length === 1) {
-      if (history.location.pathname === '/foods') {
-        history.push(`/foods/${recipes[0].idMeal}`);
-      } else {
-        history.push(`/drinks/${recipes[0].idDrink}`);
-      }
-    }
-  }, [recipes]);
 
   return (
     <homeContext.Provider
@@ -62,9 +52,11 @@ export default function HomeProvider({ children }) {
         searchRecipes,
         handleInput,
         recipes,
-        searchAttempt,
+        attemptedSearch,
         setRecipes,
         apiType,
+        setApiType,
+        fetchDefault,
       } }
     >
       { children }

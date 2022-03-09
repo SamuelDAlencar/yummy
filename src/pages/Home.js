@@ -1,38 +1,64 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import homeContext from '../contexts/homeContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Recipe from '../components/Recipe';
-import homeContext from '../contexts/homeContext';
-import fetchRecipes from '../services/fetchRecipes';
 
 export default function Home() {
-  const MIN_RECIPES_INDEX = 12;
+  const history = useHistory();
   const { location: { pathname } } = useHistory();
+  const INITIAL_RECIPES_AMOUNT = 12;
 
+  // Context variables
   const {
     handleInput,
     searchRecipes,
     recipes,
-    searchAttempt,
-    setRecipes,
+    attemptedSearch,
     apiType,
+    setApiType,
+    fetchDefault,
   } = useContext(homeContext);
 
-  const fetchDefault = async () => {
-    const data = await fetchRecipes(apiType);
-    setRecipes(Object.values(data)[0]);
-  };
-
+  // Set the first 12 recipes
   useEffect(() => {
     fetchDefault();
   }, []);
 
+  // Re-set the recipes when changing recipe types
   useEffect(() => {
-    if (!recipes && isMounted) {
+    fetchDefault();
+  }, [apiType]);
+
+  // Update the apiType depending on the page url (foods/drinks)
+  useEffect(() => {
+    if (pathname === '/foods') {
+      setApiType('themealdb');
+    } else {
+      setApiType('thecocktaildb');
+    }
+    fetchDefault();
+  });
+
+  // Redirect to the detailed recipe page if the api returns only one result
+  useEffect(() => {
+    if (recipes && recipes.length === 1) {
+      if (history.location.pathname === '/foods') {
+        history.push(`/foods/${recipes[0].idMeal}`);
+      } else {
+        history.push(`/drinks/${recipes[0].idDrink}`);
+      }
+    }
+  }, [recipes]);
+
+  // Trigger alert if there's no results
+  useEffect(() => {
+    console.log(recipes, !recipes);
+    if (!recipes) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
-  }, [searchAttempt]);
+  }, [attemptedSearch]);
 
   return (
     <>
@@ -74,13 +100,13 @@ export default function Home() {
       >
         Search
       </button>
-      {/* { console.log(recipes) } */}
       {recipes
-        && recipes.map((recipe, i) => i < MIN_RECIPES_INDEX
+        && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
           && <Recipe
             key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             data={ recipe }
             i={ i }
+            type={ pathname }
           />)}
       <Footer />
     </>
