@@ -20,7 +20,6 @@ export default function HomeProvider({ children }) {
 
   useEffect(() => {
     const { pathname } = history.location;
-    console.log(pathname, apiType);
     if (pathname === '/foods') {
       setApiType('themealdb');
     } else {
@@ -34,7 +33,7 @@ export default function HomeProvider({ children }) {
     } else if (searchValue.length > 0) {
       const apiReturn = await fetchRecipes(apiType, searchValue, filter);
       if (apiReturn !== undefined) {
-        setRecipes(apiReturn.meals);
+        setRecipes(Object.values(apiReturn)[0]);
       }
       setSearchAttempt(!searchAttempt);
     }
