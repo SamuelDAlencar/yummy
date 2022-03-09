@@ -8,6 +8,9 @@ import homeContext from '../contexts/homeContext';
 export default function Header() {
   const [toggleInput, setToggleInput] = useState();
   const history = useHistory();
+  const { location: { pathname } } = history;
+  let namePage = pathname.substring(1);
+  namePage = namePage.charAt(0).toUpperCase() + namePage.substring(1);
   const {
     handleInput,
   } = useContext(homeContext);
@@ -15,8 +18,7 @@ export default function Header() {
   return (
     <header>
       <button
-        type="submit"
-        data-testid="profile-top-btn"
+        type="button"
         id="profile-top-btn"
         onClick={ () => history.push('/profile') }
       >
@@ -26,7 +28,7 @@ export default function Header() {
           alt="profile-top-btn"
         />
       </button>
-      <h2 data-testid="page-title">Foods</h2>
+      <h2 data-testid="page-title">{ namePage }</h2>
       { toggleInput
            && (
              <label htmlFor="search-input">
@@ -38,11 +40,10 @@ export default function Header() {
              </label>)}
       <button
         type="button"
-        data-testid="search-top-btn"
         id="search-top-btn"
         onClick={ () => setToggleInput(!toggleInput) }
       >
-        <img src={ searchIcon } alt="search-top-btn" />
+        <img src={ searchIcon } alt="search-top-btn" data-testid="search-top-btn" />
       </button>
     </header>
   );
