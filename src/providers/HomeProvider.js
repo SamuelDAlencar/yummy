@@ -6,7 +6,7 @@ import fetchFoods from '../services/fetchFoods';
 import fetchDrinks from '../services/fetchDrinks';
 
 export default function HomeProvider({ children }) {
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
   const [filter, setFilter] = useState();
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
@@ -14,9 +14,11 @@ export default function HomeProvider({ children }) {
 
   const history = useHistory();
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   // setIsMounted(true);
+  //   // console.log(fetchDefault());
+  //   console.log('y');
+  // }, []);
 
   const searchRecipes = async () => {
     if (filter === 'First letter' && searchValue.length > 1) {
@@ -48,7 +50,7 @@ export default function HomeProvider({ children }) {
 
   useEffect(() => {
     if (recipes
-      && isMounted
+      // && isMounted
       && recipes.length === 1) {
       if (history.location.pathname === '/foods') {
         history.push(`/foods/${recipes[0].idMeal}`);
@@ -65,6 +67,7 @@ export default function HomeProvider({ children }) {
         handleInput,
         recipes,
         searchAttempt,
+        setRecipes,
       } }
     >
       { children }
