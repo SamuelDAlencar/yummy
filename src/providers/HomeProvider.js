@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import homeContext from '../contexts/homeContext';
-import fetchFoods from '../services/fetchFoods';
-import fetchDrinks from '../services/fetchDrinks';
+import fetchRecipes from '../services/fetchRecipes';
 
 export default function HomeProvider({ children }) {
+  const [apiType, setApiType] = useState();
   const [isMounted, setIsMounted] = useState(false);
   const [filter, setFilter] = useState();
   const [searchValue, setSearchValue] = useState('');
@@ -18,23 +18,25 @@ export default function HomeProvider({ children }) {
     setIsMounted(true);
   }, []);
 
+  useEffect(() => {
+    const { pathname } = history.location;
+    console.log(pathname, apiType);
+    if (pathname === '/foods') {
+      setApiType('themealdb');
+    } else {
+      setApiType('thecocktaildb');
+    }
+  });
+
   const searchRecipes = async () => {
     if (filter === 'First letter' && searchValue.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (searchValue.length > 0) {
-      if (history.location.pathname === '/foods') {
-        const apiReturn = await fetchFoods(searchValue, filter);
-        if (apiReturn !== undefined) {
-          setRecipes(apiReturn.meals);
-        }
-        setSearchAttempt(!searchAttempt);
-      } else {
-        const apiReturn = await fetchDrinks(searchValue, filter);
-        if (apiReturn !== undefined) {
-          setRecipes(apiReturn.drinks);
-        }
-        setSearchAttempt(!searchAttempt);
+      const apiReturn = await fetchRecipes(apiType, searchValue, filter);
+      if (apiReturn !== undefined) {
+        setRecipes(apiReturn.meals);
       }
+      setSearchAttempt(!searchAttempt);
     }
   };
 
