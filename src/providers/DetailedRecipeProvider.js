@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import clipboardCopy from 'clipboard-copy';
 import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
@@ -15,6 +16,7 @@ export default function DetailedRecipeProvider({ children }) {
   const [recomendations, setRecomendations] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [favorite, setFavorite] = useState([]);
 
   const currPage = pathname.includes('foods') ? 'meals' : 'drinks';
   const apiType = pathname.includes('foods') ? 'themealdb' : 'thecocktaildb';
@@ -56,6 +58,22 @@ export default function DetailedRecipeProvider({ children }) {
     );
     setRecomendations(Object.values(recomendationsData)[0]);
   };
+
+  const startRecipeButton = () => {
+    history.push(`${pathname}/in-progress`);
+  };
+
+  const handleFavorite = () => {
+    const newFavorite = {
+      ...favorite,
+    };
+    setFavorite(newFavorite);
+  };
+
+  const handleShare = () => {
+    clipboardCopy(`${window.location.origin}${pathname}`);
+  };
+
   return (
     <detailedRecipeContext.Provider
       value={ {
@@ -71,6 +89,11 @@ export default function DetailedRecipeProvider({ children }) {
         setMeasures,
         getRecipe,
         getRecomendations,
+        startRecipeButton,
+        favorite,
+        setFavorite,
+        handleFavorite,
+        handleShare,
       } }
     >
       {children}

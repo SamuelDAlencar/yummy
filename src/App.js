@@ -9,6 +9,8 @@ import HomeProvider from './providers/HomeProvider';
 import Profile from './pages/Profile';
 import DetailedRecipe from './pages/DetailedRecipe';
 import DetailedRecipeProvider from './providers/DetailedRecipeProvider';
+import InProgressRecipe from './pages/inProgressRecipe';
+import DoneRecipes from './pages/DoneRecipes';
 
 export default function App() {
   return (
@@ -20,6 +22,9 @@ export default function App() {
         <DetailedRecipeProvider>
           <Route exact path="/foods/:id" component={ DetailedRecipe } />
           <Route exact path="/drinks/:id" component={ DetailedRecipe } />
+          <Route exact path="/foods/:id/in-progress" component={ InProgressRecipe } />
+          <Route exact path="/drinks/:id/in-progress" component={ InProgressRecipe } />
+          <Route exact path="/done-recipes" component={ DoneRecipes } />
         </DetailedRecipeProvider>
         <Route exact path="/profile" component={ Profile } />
       </Switch>
