@@ -16,7 +16,7 @@ export default function Header() {
   } = useContext(homeContext);
 
   return (
-    <header>
+    <header className="header">
       <button
         type="button"
         id="profile-top-btn"

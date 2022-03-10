@@ -1,9 +1,16 @@
 .recomendations-section {
+  align-items: center;
   border: 1px solid black;
   display: flex;
   overflow-x: scroll;
+  width: 100%;
 }
 
 .recomendation-card {
-  width: 55%;
+  margin: 2%;
+  width: 100%;
+}
+
+.recomendation-section__recipe-img {
+  width: 250px;
 }

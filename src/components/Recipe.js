@@ -8,11 +8,13 @@ export default function Recipe({ id, data, i, type, cardType }) {
   return (
     <section
       data-testid={ `${i}-recipe-card` }
-      style={ { border: '1px solid black' } }
       onClick={ () => history.push(`${type}/${id}`) }
       onKeyPress={ () => {} }
       role="button"
       tabIndex={ i }
+      className={ cardType === 'recomendation'
+        ? 'recomendation-section'
+        : 'recipe-section' }
     >
       <img
         data-testid={ `${i}-card-img` }
@@ -21,6 +23,9 @@ export default function Recipe({ id, data, i, type, cardType }) {
             : data.strDrinkThumb
         }
         alt={ `${type}_thumb` }
+        className={ cardType === 'recomendation'
+          ? 'recomendation-section__recipe-img'
+          : 'recipe-section__recipe-img' }
       />
       { cardType === 'recomendation'
         ? (

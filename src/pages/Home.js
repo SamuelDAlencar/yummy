@@ -4,6 +4,7 @@ import homeContext from '../contexts/homeContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Recipe from '../components/Recipe';
+import '../css/home.css';
 
 export default function Home() {
   const history = useHistory();
@@ -15,24 +16,18 @@ export default function Home() {
     handleInput,
     searchRecipes,
     recipes,
+    redirected,
     attemptedSearch,
-    apiType,
-    setApiType,
     fetchDefault,
   } = useContext(homeContext);
 
   useEffect(() => {
-    if (pathname === '/foods') {
-      setApiType('themealdb');
-    } else {
-      setApiType('thecocktaildb');
-    }
-    fetchDefault();
-  }, []);
+    const api = pathname === '/foods'
+      ? 'themealdb'
+      : 'thecocktaildb';
 
-  useEffect(() => {
-    fetchDefault();
-  }, [apiType]);
+    fetchDefault(api);
+  }, [redirected]);
 
   useEffect(() => {
     if (recipes && recipes.length === 1) {
@@ -53,43 +48,47 @@ export default function Home() {
   return (
     <>
       <Header />
-      <label htmlFor="Ingredient">
-        Ingredient
-        <input
-          name="filter-radio"
-          type="radio"
-          id="Ingredient"
-          data-testid="ingredient-search-radio"
-          onClick={ handleInput }
-        />
-      </label>
-      <label htmlFor="Name">
-        Name
-        <input
-          name="filter-radio"
-          type="radio"
-          id="Name"
-          data-testid="name-search-radio"
-          onClick={ handleInput }
-        />
-      </label>
-      <label htmlFor="First letter">
-        First letter
-        <input
-          name="filter-radio"
-          type="radio"
-          id="First letter"
-          data-testid="first-letter-search-radio"
-          onClick={ handleInput }
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ searchRecipes }
+      <section
+        className="searchFilters-section"
       >
-        Search
-      </button>
+        <label htmlFor="Ingredient">
+          Ingredient
+          <input
+            name="filter-radio"
+            type="radio"
+            id="Ingredient"
+            data-testid="ingredient-search-radio"
+            onClick={ handleInput }
+          />
+        </label>
+        <label htmlFor="Name">
+          Name
+          <input
+            name="filter-radio"
+            type="radio"
+            id="Name"
+            data-testid="name-search-radio"
+            onClick={ handleInput }
+          />
+        </label>
+        <label htmlFor="First letter">
+          First letter
+          <input
+            name="filter-radio"
+            type="radio"
+            id="First letter"
+            data-testid="first-letter-search-radio"
+            onClick={ handleInput }
+          />
+        </label>
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ searchRecipes }
+        >
+          Search
+        </button>
+      </section>
       {recipes
         && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
           && <Recipe
