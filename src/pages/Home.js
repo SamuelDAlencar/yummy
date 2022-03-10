@@ -12,6 +12,7 @@ export default function Home() {
   const { location: { pathname } } = useHistory();
   const [categoryControl, setCategoryControl] = useState('');
   const [categoryCondition, setCategoryCondition] = useState(true);
+  // const [controlAllCategory, setControlAllCategory] = useState(true);
 
   const INITIAL_RECIPES_AMOUNT = 12;
 
@@ -53,19 +54,26 @@ export default function Home() {
     }
   }, [attemptedSearch]);
 
-  const setRecipesAllHome = () => {
-    setRecipes(recipes.filter((o) => (
-      categories.some((obj) => obj.strCategory === o.strCategory)
-    )));
-  };
+  // const setRecipesAllHome = () => {
+  //   setRecipes(recipes.filter((o) => (
+  //     categories.some((obj) => obj.strCategory === o.strCategory)
+  //   )));
+  // };
 
   const handleClickAllCategory = () => {
     const api = pathname === '/foods' ? 'themealdb' : 'thecocktaildb';
-    if (!categoryControl) {
-      setRecipesAllHome();
-    } else {
-      fetchDefault(api, true);
-    }
+    // if (!categoryControl && controlAllCategory) {
+    //   setRecipesAllHome();
+    //   setControlAllCategory(false);
+    // } else if (controlAllCategory) {
+    //   fetchDefault(api, true);
+    //   setControlAllCategory(false);
+    // } else {
+    //   fetchDefault(api);
+    //   setControlAllCategory(true);
+    // }
+    // setCategoryControl('');
+    fetchDefault(api);
   };
 
   const handleClickCategory = async ({ target: { id } }) => {
