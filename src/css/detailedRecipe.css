@@ -7,10 +7,10 @@
 }
 
 .recomendation-card {
-  height: fit-content;
-  width: 50%;
+  margin: 2%;
+  width: 100%;
 }
 
 .recomendation-section__recipe-img {
-  width: 100%;
+  width: 250px;
 }

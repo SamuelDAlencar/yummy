@@ -13,8 +13,8 @@ export default function Recipe({ id, data, i, type, cardType }) {
       role="button"
       tabIndex={ i }
       className={ cardType === 'recomendation'
-        ? 'recomendation-section__recipe-img'
-        : 'recipe-section__recipe-img' }
+        ? 'recomendation-section'
+        : 'recipe-section' }
     >
       <img
         data-testid={ `${i}-card-img` }
@@ -23,7 +23,9 @@ export default function Recipe({ id, data, i, type, cardType }) {
             : data.strDrinkThumb
         }
         alt={ `${type}_thumb` }
-        className="recipe-section__recipe-img"
+        className={ cardType === 'recomendation'
+          ? 'recomendation-section__recipe-img'
+          : 'recipe-section__recipe-img' }
       />
       { cardType === 'recomendation'
         ? (
