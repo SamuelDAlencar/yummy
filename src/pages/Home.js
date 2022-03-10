@@ -51,7 +51,6 @@ export default function Home() {
 
   // Trigger alert if there's no results
   useEffect(() => {
-    console.log(recipes, !recipes);
     if (!recipes) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
@@ -101,6 +100,7 @@ export default function Home() {
         && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
           && <Recipe
             key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
+            id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             data={ recipe }
             i={ i }
             type={ pathname }

@@ -7,16 +7,22 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import HomeProvider from './providers/HomeProvider';
 import Profile from './pages/Profile';
+import DetailedRecipe from './pages/DetailedRecipe';
+import DetailedRecipeProvider from './providers/DetailedRecipeProvider';
 
 export default function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={ Login } />
-      <HomeProvider>
-        <Route path="/foods" component={ Home } />
-        <Route path="/drinks" component={ Home } />
+    <HomeProvider>
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/foods" component={ Home } />
+        <Route exact path="/drinks" component={ Home } />
+        <DetailedRecipeProvider>
+          <Route exact path="/foods/:id" component={ DetailedRecipe } />
+          <Route exact path="/drinks/:id" component={ DetailedRecipe } />
+        </DetailedRecipeProvider>
         <Route exact path="/profile" component={ Profile } />
-      </HomeProvider>
-    </Switch>
+      </Switch>
+    </HomeProvider>
   );
 }
