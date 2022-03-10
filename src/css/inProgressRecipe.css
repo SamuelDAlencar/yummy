@@ -1,0 +1,3 @@
+.inProgressRecipe__ingredient-input:checked + .inProgressRecipe__ingredient-label {
+  text-decoration: line-through;
+}

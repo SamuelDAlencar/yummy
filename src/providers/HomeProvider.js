@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import homeContext from '../contexts/homeContext';
 import fetchRecipes from '../services/fetchRecipes';
+import fetchCategories from '../services/fetchCategories';
 
 export default function HomeProvider({ children }) {
   const history = useHistory();
@@ -16,10 +17,25 @@ export default function HomeProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [attemptedSearch, setAttemptedSearch] = useState(false);
   const [redirected, setRedirected] = useState(false);
+  const [categories, setCategories] = useState([]);
 
-  const fetchDefault = async (api) => {
+  const setRecipesAll = (arr) => {
+    setRecipes(arr.filter((o) => (
+      categories.some((obj) => obj.strCategory === o.strCategory)
+    )));
+  };
+
+  const fetchDefault = async (api, filters) => {
     const data = await fetchRecipes(api);
-    setRecipes(Object.values(data)[0]);
+    const arr = Object.values(data)[0];
+    if (!filters) {
+      setRecipes(arr);
+    } else setRecipesAll(arr);
+  };
+
+  const fetchDefaultCategories = async (type) => {
+    const categoriesReturn = await fetchCategories(type);
+    setCategories(categoriesReturn);
   };
 
   const searchRecipes = async () => {
@@ -60,6 +76,8 @@ export default function HomeProvider({ children }) {
         setRecipes,
         setApiType,
         fetchDefault,
+        categories,
+        fetchDefaultCategories,
       } }
     >
       { children }

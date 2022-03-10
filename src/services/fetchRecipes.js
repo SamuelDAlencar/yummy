@@ -11,10 +11,17 @@ export default async function fetchRecipes(apiType, searchValue, searchType) {
       const url = `https://www.${apiType}.com/api/json/v1/1/search.php?s=${searchValue}`;
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       return data;
     }
     case 'First letter': {
       const url = `https://www.${apiType}.com/api/json/v1/1/search.php?f=${searchValue}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }
+    case 'Category': {
+      const url = `https://www.${apiType}.com/api/json/v1/1/filter.php?c=${searchValue}`;
       const response = await fetch(url);
       const data = await response.json();
       return data;
