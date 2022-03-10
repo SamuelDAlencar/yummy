@@ -8,7 +8,6 @@ export default function HomeProvider({ children }) {
   const history = useHistory();
   const { pathname } = history.location;
 
-  // State variables
   const [apiType, setApiType] = useState(
     pathname === '/foods' ? 'themealdb' : 'thecocktaildb',
   );
@@ -49,12 +48,12 @@ export default function HomeProvider({ children }) {
   return (
     <homeContext.Provider
       value={ {
-        searchRecipes,
-        handleInput,
         recipes,
         attemptedSearch,
-        setRecipes,
         apiType,
+        searchRecipes,
+        handleInput,
+        setRecipes,
         setApiType,
         fetchDefault,
       } }
