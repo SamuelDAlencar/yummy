@@ -1,0 +1,27 @@
+.header, .footer, .searchFilters-section {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  width: 100%;
+}
+
+.header {
+  border-bottom: 1px solid black;
+}
+
+.footer {
+  border-top: 1px solid black;
+}
+
+.searchFilters-section {
+  border-bottom: 1px solid black;
+}
+
+.recipe-section {
+
+}
+
+.recipe-section__recipe-img {
+  width: 100%;
+}

@@ -28,7 +28,9 @@ export default function DetailedRecipe() {
   }, []);
 
   return (
-    <section>
+    <section
+      className="recipe-section"
+    >
       <img
         alt="recipe-thumb"
         src={ recipe
@@ -36,6 +38,7 @@ export default function DetailedRecipe() {
             ? recipe.strMealThumb
             : recipe.strDrinkThumb) }
         data-testid="recipe-photo"
+        className="recipe-section__recipe-img"
       />
       <h1 data-testid="recipe-title">
         { recipe

@@ -15,9 +15,10 @@ export default function HomeProvider({ children }) {
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [attemptedSearch, setAttemptedSearch] = useState(false);
+  const [redirected, setRedirected] = useState(false);
 
-  const fetchDefault = async () => {
-    const data = await fetchRecipes(apiType);
+  const fetchDefault = async (api) => {
+    const data = await fetchRecipes(api);
     setRecipes(Object.values(data)[0]);
   };
 
@@ -51,6 +52,9 @@ export default function HomeProvider({ children }) {
         recipes,
         attemptedSearch,
         apiType,
+        redirected,
+        setRedirected,
+        setAttemptedSearch,
         searchRecipes,
         handleInput,
         setRecipes,
