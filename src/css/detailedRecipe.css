@@ -1,0 +1,9 @@
+.recomendations-section {
+  border: 1px solid black;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.recomendation-card {
+  width: 55%;
+}
