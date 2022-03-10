@@ -8,9 +8,9 @@ import Recipe from '../components/Recipe';
 export default function Home() {
   const history = useHistory();
   const { location: { pathname } } = useHistory();
+
   const INITIAL_RECIPES_AMOUNT = 12;
 
-  // Context variables
   const {
     handleInput,
     searchRecipes,
@@ -21,7 +21,6 @@ export default function Home() {
     fetchDefault,
   } = useContext(homeContext);
 
-  // Set the first 12 recipes
   useEffect(() => {
     if (pathname === '/foods') {
       setApiType('themealdb');
@@ -31,14 +30,10 @@ export default function Home() {
     fetchDefault();
   }, []);
 
-  // Re-set the recipes when changing recipe types
   useEffect(() => {
     fetchDefault();
   }, [apiType]);
 
-  // Update the apiType depending on the page url (foods/drinks)
-
-  // Redirect to the detailed recipe page if the api returns only one result
   useEffect(() => {
     if (recipes && recipes.length === 1) {
       if (history.location.pathname === '/foods') {
@@ -49,7 +44,6 @@ export default function Home() {
     }
   }, [recipes]);
 
-  // Trigger alert if there's no results
   useEffect(() => {
     if (!recipes) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
