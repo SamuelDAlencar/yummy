@@ -100,7 +100,7 @@ export default function Home() {
       <Header />
       <section>
         <section>
-          { categories.length > 0 && categories.map((o) => (
+          { recipes && categories.length > 0 && categories.map((o) => (
             <button
               type="button"
               id={ o.strCategory }
@@ -159,7 +159,7 @@ export default function Home() {
           </button>
         </section>
       </section>
-      {recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
+      {recipes && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
           && <Recipe
             key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
