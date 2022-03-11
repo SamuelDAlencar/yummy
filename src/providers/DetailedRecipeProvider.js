@@ -62,6 +62,19 @@ export default function DetailedRecipeProvider({ children }) {
   };
 
   const startRecipeButton = () => {
+    const [objKey, otherObjKey] = pathname.includes('foods')
+      ? ['meals', 'cocktails']
+      : ['cocktails', 'meals'];
+
+    const prevItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      [otherObjKey]: prevItem[otherObjKey],
+      [objKey]: {
+        ...prevItem[objKey],
+        [pathname.replace(/\D/g, '')]: ingredients,
+      },
+    }));
     history.push(`${pathname}/in-progress`);
   };
 

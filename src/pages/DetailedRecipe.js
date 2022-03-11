@@ -34,6 +34,12 @@ export default function DetailedRecipe() {
     getRecipe();
     setIngredients([]);
     setMeasures([]);
+    if (!localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: [],
+        cosktails: [],
+      }));
+    }
   }, []);
 
   return (
