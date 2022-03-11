@@ -33,7 +33,7 @@ export default function Footer() {
         onClick={ () => redirectPage() }
         type="button"
       >
-        <img src={ drinkIcon } alt="meal icon" data-testid="drink-bottom-btn" />
+        <img src={ drinkIcon } alt="meal icon" data-testid="drinks-bottom-btn" />
       </button>
       <button
         onClick={ () => redirectPage() }
