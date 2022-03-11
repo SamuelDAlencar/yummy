@@ -17,6 +17,8 @@ export default function InProgressRecipe() {
     setFavorite,
     setIngredients,
     setMeasures,
+    handleShare,
+    copied,
   } = useContext(detailedRecipeContext);
 
   const [checked, setChecked] = useState({});
@@ -53,6 +55,7 @@ export default function InProgressRecipe() {
       <button
         data-testid="share-btn"
         type="button"
+        onClick={ handleShare }
       >
         <img src={ shareIcon } alt="share-btn" />
       </button>
@@ -63,6 +66,7 @@ export default function InProgressRecipe() {
       >
         <img src={ whiteHeartIcon } alt="favorite-btn" />
       </button>
+      {copied && <p>Link copied!</p>}
       <h4 data-testid="recipe-category">
         {recipe && recipe.strCategory}
         {(recipe
