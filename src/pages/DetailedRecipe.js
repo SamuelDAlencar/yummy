@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import Recipe from '../components/Recipe';
 import '../css/detailedRecipe.css';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import Loading from '../components/Loading';
+import findItem from '../helpers/findItemInLocalStorage';
 
 export default function DetailedRecipe() {
   const history = useHistory();
@@ -24,7 +23,7 @@ export default function DetailedRecipe() {
     getRecipe,
     getRecomendations,
     startRecipeButton,
-    favorite,
+    heartIcon,
     getFavoriteRecipes,
     handleShare,
     addStorageStructure,
@@ -73,9 +72,7 @@ export default function DetailedRecipe() {
               <img src={ shareIcon } alt="share-btn" />
             </button>
             <input
-              src={ (favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))
-                ? blackHeartIcon
-                : whiteHeartIcon }
+              src={ heartIcon }
               alt="favorite-btn"
               data-testid="favorite-btn"
               type="image"
@@ -134,17 +131,21 @@ export default function DetailedRecipe() {
               Tutorial
             </a>
           </section>
-          <button
-            data-testid="start-recipe-btn"
-            className="recipe-section__start-button"
-            type="button"
-            onClick={ () => startRecipeButton() }
-          >
-            {JSON.parse(localStorage
-              .getItem('inProgressRecipes'))[currLocalStorageKey][id]
-              ? 'Continue Recipe'
-              : 'Start Recipe'}
-          </button>
+          {!findItem('doneRecipes', 'id', id)
+                && (
+                  <button
+                    data-testid="start-recipe-btn"
+                    className="recipe-section__start-button"
+                    type="button"
+                    onClick={ () => startRecipeButton() }
+                  >
+                    {
+                      JSON.parse(localStorage
+                        .getItem('inProgressRecipes'))[currLocalStorageKey][id]
+                        ? 'Continue Recipe'
+                        : 'Start Recipe'
+                    }
+                  </button>)}
         </>
       )
       : <Loading />

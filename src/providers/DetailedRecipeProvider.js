@@ -6,6 +6,8 @@ import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import addStorageStructure from '../helpers/addStorageStructure';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function DetailedRecipeProvider({ children }) {
   const history = useHistory();
@@ -131,6 +133,10 @@ export default function DetailedRecipeProvider({ children }) {
     }
   };
 
+  const heartIcon = (favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))
+    ? blackHeartIcon
+    : whiteHeartIcon;
+
   return (
     <detailedRecipeContext.Provider
       value={ {
@@ -144,6 +150,7 @@ export default function DetailedRecipeProvider({ children }) {
         measures,
         copied,
         favorite,
+        heartIcon,
         keyStr,
         recipeType,
         invertedKeyStr,

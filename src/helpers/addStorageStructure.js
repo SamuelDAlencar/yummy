@@ -6,6 +6,9 @@ const addStorageStructure = () => {
     }));
     localStorage.setItem('ongoingRecipesProgress', JSON.stringify({}));
   }
+  if (!localStorage.getItem('doneRecipes')) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
 };
 
 export default addStorageStructure;
