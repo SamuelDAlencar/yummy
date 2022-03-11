@@ -4,6 +4,7 @@ const addStorageStructure = () => {
       meals: [],
       cocktails: [],
     }));
+    localStorage.setItem('ongoingRecipesProgress', JSON.stringify({}));
   }
 };
 

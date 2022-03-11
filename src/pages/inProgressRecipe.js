@@ -7,6 +7,8 @@ import '../css/inProgressRecipe.css';
 
 export default function InProgressRecipe() {
   const history = useHistory();
+  const { pathname } = history.location;
+  const id = pathname.replace(/\D/g, '');
 
   const {
     recipe,
@@ -19,14 +21,50 @@ export default function InProgressRecipe() {
     setMeasures,
     handleShare,
     copied,
+    keyStr,
   } = useContext(detailedRecipeContext);
 
   const [checked, setChecked] = useState({});
+
+  const checkIngredient = (i) => {
+    setChecked((prevState) => ({
+      ...prevState,
+      [i]: !checked[i],
+    }));
+    localStorage.setItem('ongoingRecipesProgress', JSON.stringify({
+      ...JSON.parse(localStorage.getItem('ongoingRecipesProgress')),
+      [id]: {
+        ...JSON.parse(localStorage.getItem('ongoingRecipesProgress'))[id],
+        [i]: !checked[i],
+      },
+    }));
+  };
+
+  const getDoneIngredients = () => {
+    if (localStorage.getItem('ongoingRecipesProgress')) {
+      const recipeProgress = JSON
+        .parse(localStorage.getItem('ongoingRecipesProgress'))[id];
+
+      if (recipeProgress) {
+        Object.keys(recipeProgress).forEach((ingredient) => {
+          setChecked((prevState) => ({
+            ...prevState,
+            [ingredient]: recipeProgress[ingredient],
+          }));
+        });
+      }
+    } else {
+      return localStorage.setItem('ongoingRecipesProgress', JSON.stringify({
+        [id]: {},
+      }));
+    }
+  };
 
   useEffect(() => {
     getRecipe();
     setIngredients([]);
     setMeasures([]);
+    getDoneIngredients();
   }, []);
 
   const finishRecipe = () => {
@@ -34,80 +72,74 @@ export default function InProgressRecipe() {
   };
 
   return (
-    <section
-      className="recipe-section"
-    >
-      <img
-        alt="recipe-thumb"
-        src={ recipe
-          && (currPage === 'meals'
-            ? recipe.strMealThumb
-            : recipe.strDrinkThumb) }
-        data-testid="recipe-photo"
-        className="recipe-section__recipe-img"
-      />
-      <h1 data-testid="recipe-title">
-        {recipe
-          && (currPage === 'meals'
-            ? recipe.strMeal
-            : recipe.strDrink)}
-      </h1>
-      <button
-        data-testid="share-btn"
-        type="button"
-        onClick={ handleShare }
-      >
-        <img src={ shareIcon } alt="share-btn" />
-      </button>
-      <button
-        data-testid="favorite-btn"
-        type="button"
-        onClick={ () => handleFavorite(setFavorite) }
-      >
-        <img src={ whiteHeartIcon } alt="favorite-btn" />
-      </button>
-      {copied && <p>Link copied!</p>}
-      <h4 data-testid="recipe-category">
-        {recipe && recipe.strCategory}
-        {(recipe
-          && currPage === 'drinks')
-          && ` - ${recipe.strAlcoholic}`}
-      </h4>
-      <h2>Ingredients</h2>
-      {recipe && ingredients.map((ingredient, i) => (
-        <label
-          htmlFor={ `${i}-ingredient-step` }
-          data-testid={ `${i}-ingredient-step` }
-          key={ `${i}-ingredient` }
-          style={
-            checked[i]
-              ? { textDecoration: 'line-through' }
-              : { textDecoration: 'none' }
-          }
+    recipe
+      && (
+        <section
+          className="recipe-section"
         >
-          {`${ingredient[`strIngredient${i + 1}`]} - ${measures[i]}`}
-          <input
-            type="checkbox"
-            onChange={ () => setChecked((prevState) => ({
-              ...prevState,
-              [i]: !checked[i],
-            })) }
-            id={ `${i}-ingredient-step` }
+          <img
+            alt="recipe-thumb"
+            src={ recipe[`str${keyStr}Thumb`] }
+            data-testid="recipe-photo"
+            className="recipe-section__recipe-img"
           />
-        </label>))}
-      <h2>Instructions</h2>
-      <p data-testid="instructions">{recipe && recipe.strInstructions}</p>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-        onClick={ () => finishRecipe() }
-        disabled={
-          Object.keys(checked).length !== ingredients.length
+          <h1 data-testid="recipe-title">
+            { recipe[`str${keyStr}`]}
+          </h1>
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ handleShare }
+          >
+            <img src={ shareIcon } alt="share-btn" />
+          </button>
+          <button
+            data-testid="favorite-btn"
+            type="button"
+            onClick={ () => handleFavorite(setFavorite) }
+          >
+            <img src={ whiteHeartIcon } alt="favorite-btn" />
+          </button>
+          {copied && <p>Link copied!</p>}
+          <h4 data-testid="recipe-category">
+            {recipe.strCategory}
+            { currPage === 'drinks'
+              && ` - ${recipe.strAlcoholic}`}
+          </h4>
+          <h2>Ingredients</h2>
+          {ingredients.map((ingredient, i) => (
+            <label
+              htmlFor={ `${i}-ingredient-step` }
+              data-testid={ `${i}-ingredient-step` }
+              key={ `${i}-ingredient` }
+              style={
+                checked[i]
+                  ? { textDecoration: 'line-through' }
+                  : { textDecoration: 'none' }
+              }
+            >
+              {`${ingredient[`strIngredient${i + 1}`]} - ${measures[i]}`}
+              <input
+                type="checkbox"
+                onChange={ () => checkIngredient(i) }
+                checked={ checked[i] && 'checked' }
+                id={ `${i}-ingredient-step` }
+              />
+            </label>))}
+          <h2>Instructions</h2>
+          <p data-testid="instructions">{recipe.strInstructions}</p>
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            onClick={ () => finishRecipe() }
+            disabled={
+              Object.keys(checked).length !== ingredients.length
           || Object.values(checked).some((check) => check === false)
-        }
-      >
-        Finish Recipe
-      </button>
-    </section>
+            }
+          >
+            Finish Recipe
+          </button>
+        </section>
+      )
   );
 }
