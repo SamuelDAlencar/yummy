@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import Recipe from '../components/Recipe';
 import '../css/detailedRecipe.css';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
@@ -20,8 +21,9 @@ export default function DetailedRecipe() {
     getRecomendations,
     startRecipeButton,
     favorite,
-    // setFavorite,
+    setFavorite,
     handleShare,
+    handleFavorite,
     copied,
   } = useContext(detailedRecipeContext);
 
@@ -34,6 +36,10 @@ export default function DetailedRecipe() {
     getRecipe();
     setIngredients([]);
     setMeasures([]);
+    const getFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (getFavorite) {
+      setFavorite(getFavorite);
+    }
   }, []);
 
   return (
@@ -59,13 +65,23 @@ export default function DetailedRecipe() {
         >
           <img src={ shareIcon } alt="share-btn" />
         </button>
-        <button
+        <input
+          src={ (favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))
+            ? blackHeartIcon
+            : whiteHeartIcon }
+          alt="favorite-btn"
           data-testid="favorite-btn"
-          type="button"
-          onClick={ () => handleFavorite(favorite) }
-        >
-          <img src={ whiteHeartIcon } alt="favorite-btn" />
-        </button>
+          type="image"
+          onClick={ () => handleFavorite({
+            id: recipe[`id${keyStr}`],
+            type: currPage,
+            nationality: recipe.strArea,
+            category: recipe.strCategory,
+            alcoholicOrNot: currPage === 'drinks' ? recipe.strAlcoholic : null,
+            name: recipe[`str${keyStr}`],
+            image: recipe[`str${keyStr}Thumb`],
+          }) }
+        />
         {copied && <p>Link copied!</p>}
         <h4 data-testid="recipe-category">
           {recipe && recipe.strCategory}

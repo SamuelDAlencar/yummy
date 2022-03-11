@@ -13,7 +13,7 @@ export default function DetailedRecipeProvider({ children }) {
   const MAX_RECOMENDATIONS = 6;
   const MESSAGE_TIMEOUT = 5000;
 
-  const [recipe, setRecipe] = useState();
+  const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
@@ -65,10 +65,18 @@ export default function DetailedRecipeProvider({ children }) {
     history.push(`${pathname}/in-progress`);
   };
 
-  const handleFavorite = () => {
-    const newFavorite = {
-      ...favorite,
-    };
+  const handleFavorite = (data) => {
+    const keyStr = currPage === 'meals' ? 'Meal' : 'Drink';
+    let newFavorite = [];
+    if (!(favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))) {
+      newFavorite = [
+        ...favorite,
+        data,
+      ];
+    } else {
+      newFavorite = favorite.filter((fav) => fav.id !== recipe[`id${keyStr}`]);
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
     setFavorite(newFavorite);
   };
 
