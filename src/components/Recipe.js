@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import React from 'react';
 
-export default function Recipe({ id, data, i, type, cardType }) {
+export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
 
   return (
@@ -18,10 +18,7 @@ export default function Recipe({ id, data, i, type, cardType }) {
     >
       <img
         data-testid={ `${i}-card-img` }
-        src={
-          type.includes('/foods') ? data.strMealThumb
-            : data.strDrinkThumb
-        }
+        src={ data[`str${keyStrType}Thumb`] }
         alt={ `${type}_thumb` }
         className={ cardType === 'recomendation'
           ? 'recomendation-section__recipe-img'
@@ -32,19 +29,13 @@ export default function Recipe({ id, data, i, type, cardType }) {
           <h4
             data-testid={ `${i}-recomendation-title` }
           >
-            {
-              type.includes('/foods') ? data.strMeal
-                : data.strDrink
-            }
+            {data[`str${keyStrType}`]}
           </h4>)
         : (
           <h4
             data-testid={ `${i}-card-name` }
           >
-            {
-              type.includes('/foods') ? data.strMeal
-                : data.strDrink
-            }
+            {data[`str${keyStrType}`]}
           </h4>)}
     </section>
   );

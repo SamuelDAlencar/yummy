@@ -20,8 +20,36 @@ export default function DetailedRecipeProvider({ children }) {
   const [favorite, setFavorite] = useState([]);
   const [copied, setCopied] = useState(false);
 
-  const currPage = pathname.includes('foods') ? 'meals' : 'drinks';
-  const apiType = pathname.includes('foods') ? 'themealdb' : 'thecocktaildb';
+  const [
+    currPage,
+    invertedCurrPage,
+    apiType,
+    invertedApiType,
+    keyStr,
+    invertedKeyStr,
+    recipeType,
+    invertedUrlType,
+  ] = pathname.includes('foods')
+    ? [
+      'meals',
+      'cocktails',
+      'themealdb',
+      'thecocktaildb',
+      'Meal',
+      'Drink',
+      'food',
+      '/drinks',
+    ]
+    : [
+      'drinks',
+      'meals',
+      'thecocktaildb',
+      'themealdb',
+      'Drink',
+      'Meal',
+      'drink',
+      '/foods',
+    ];
 
   const getRecipe = async () => {
     const id = pathname.replace(/\D/g, '');
@@ -53,25 +81,17 @@ export default function DetailedRecipeProvider({ children }) {
   };
 
   const getRecomendations = async () => {
-    const recomendationsData = await fetchRecipes(
-      pathname.includes('foods')
-        ? 'thecocktaildb'
-        : 'themealdb', '', 'Name',
-    );
+    const recomendationsData = await fetchRecipes(invertedApiType);
     setRecomendations(Object.values(recomendationsData)[0]);
   };
 
   const startRecipeButton = () => {
-    const [objKey, otherObjKey] = pathname.includes('foods')
-      ? ['meals', 'cocktails']
-      : ['cocktails', 'meals'];
-
     const prevItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
     localStorage.setItem('inProgressRecipes', JSON.stringify({
-      [otherObjKey]: prevItem[otherObjKey],
-      [objKey]: {
-        ...prevItem[objKey],
+      [invertedCurrPage]: prevItem[invertedCurrPage],
+      [keyStr]: {
+        ...prevItem[keyStr],
         [pathname.replace(/\D/g, '')]: ingredients,
       },
     }));
@@ -79,7 +99,6 @@ export default function DetailedRecipeProvider({ children }) {
   };
 
   const handleFavorite = (data) => {
-    const keyStr = currPage === 'meals' ? 'Meal' : 'Drink';
     let newFavorite = [];
     if (!(favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))) {
       newFavorite = [
@@ -101,6 +120,13 @@ export default function DetailedRecipeProvider({ children }) {
     }, MESSAGE_TIMEOUT);
   };
 
+  const getFavoriteRecipes = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      setFavorite(favoriteRecipes);
+    }
+  };
+
   return (
     <detailedRecipeContext.Provider
       value={ {
@@ -112,16 +138,21 @@ export default function DetailedRecipeProvider({ children }) {
         recomendations,
         ingredients,
         measures,
+        copied,
+        favorite,
+        keyStr,
+        recipeType,
+        invertedKeyStr,
+        invertedUrlType,
+        getFavoriteRecipes,
         setIngredients,
         setMeasures,
         getRecipe,
         getRecomendations,
         startRecipeButton,
-        favorite,
         setFavorite,
         handleFavorite,
         handleShare,
-        copied,
         setCopied,
       } }
     >

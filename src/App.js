@@ -17,9 +17,9 @@ export default function App() {
     <HomeProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/foods" component={ Home } />
-        <Route exact path="/drinks" component={ Home } />
         <DetailedRecipeProvider>
+          <Route exact path="/foods" component={ Home } />
+          <Route exact path="/drinks" component={ Home } />
           <Route exact path="/foods/:id" component={ DetailedRecipe } />
           <Route exact path="/drinks/:id" component={ DetailedRecipe } />
           <Route exact path="/foods/:id/in-progress" component={ InProgressRecipe } />
