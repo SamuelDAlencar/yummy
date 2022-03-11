@@ -24,7 +24,9 @@ export default function DetailedRecipe() {
     handleShare,
   } = useContext(detailedRecipeContext);
 
-  const keyStr = currPage === 'meals' ? 'Meal' : 'Drink';
+  const [keyStr, invertedStr] = currPage === 'meals'
+    ? ['Meal', 'Drink']
+    : ['Drink', 'Meal'];
 
   useEffect(() => {
     getRecomendations();
@@ -92,9 +94,7 @@ export default function DetailedRecipe() {
                 className="recomendation-card"
               >
                 <Recipe
-                  id={ pathname.includes('foods')
-                    ? recomendation.idDrink
-                    : recomendation.idMeal }
+                  id={ recomendation[`idStr${invertedStr}`] }
                   data={ recomendation }
                   i={ i }
                   type={ pathname.includes('foods') ? '/drinks' : '/foods' }
