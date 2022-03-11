@@ -6,6 +6,8 @@ import Footer from '../components/Footer';
 import Recipe from '../components/Recipe';
 import '../css/home.css';
 import fetchRecipes from '../services/fetchRecipes';
+import detailedRecipeContext from '../contexts/detailedRecipeContext';
+// import Loading from '../components/Loading';
 
 export default function Home() {
   const history = useHistory();
@@ -27,6 +29,10 @@ export default function Home() {
     categories,
     setRecipes,
   } = useContext(homeContext);
+
+  const {
+    keyStr,
+  } = useContext(detailedRecipeContext);
 
   useEffect(() => {
     const api = pathname === '/foods'
@@ -153,14 +159,14 @@ export default function Home() {
           </button>
         </section>
       </section>
-      {recipes
-        && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
+      {recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
           && <Recipe
             key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             data={ recipe }
             i={ i }
             type={ pathname }
+            keyStrType={ keyStr }
           />)}
       <Footer />
     </>
