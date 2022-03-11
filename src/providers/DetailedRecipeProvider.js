@@ -5,6 +5,7 @@ import clipboardCopy from 'clipboard-copy';
 import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
+import addStorageStructure from '../helpers/addStorageStructure';
 
 export default function DetailedRecipeProvider({ children }) {
   const history = useHistory();
@@ -22,6 +23,7 @@ export default function DetailedRecipeProvider({ children }) {
 
   const [
     currPage,
+    currLocalStorageKey,
     invertedCurrPage,
     apiType,
     invertedApiType,
@@ -31,6 +33,7 @@ export default function DetailedRecipeProvider({ children }) {
     invertedUrlType,
   ] = pathname.includes('foods')
     ? [
+      'meals',
       'meals',
       'cocktails',
       'themealdb',
@@ -42,6 +45,7 @@ export default function DetailedRecipeProvider({ children }) {
     ]
     : [
       'drinks',
+      'cocktails',
       'meals',
       'thecocktaildb',
       'themealdb',
@@ -90,8 +94,8 @@ export default function DetailedRecipeProvider({ children }) {
 
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       [invertedCurrPage]: prevItem[invertedCurrPage],
-      [keyStr]: {
-        ...prevItem[keyStr],
+      [currLocalStorageKey]: {
+        ...prevItem[currLocalStorageKey],
         [pathname.replace(/\D/g, '')]: ingredients,
       },
     }));
@@ -144,6 +148,8 @@ export default function DetailedRecipeProvider({ children }) {
         recipeType,
         invertedKeyStr,
         invertedUrlType,
+        currLocalStorageKey,
+        addStorageStructure,
         getFavoriteRecipes,
         setIngredients,
         setMeasures,

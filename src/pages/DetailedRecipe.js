@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -8,6 +9,9 @@ import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import Loading from '../components/Loading';
 
 export default function DetailedRecipe() {
+  const history = useHistory();
+  const { pathname } = history.location;
+
   const {
     MAX_RECOMENDATIONS,
     currPage,
@@ -23,12 +27,14 @@ export default function DetailedRecipe() {
     favorite,
     getFavoriteRecipes,
     handleShare,
+    addStorageStructure,
     handleFavorite,
     copied,
     keyStr,
     recipeType,
     invertedKeyStr,
     invertedUrlType,
+    currLocalStorageKey,
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
@@ -37,16 +43,11 @@ export default function DetailedRecipe() {
     setIngredients([]);
     setMeasures([]);
     getFavoriteRecipes();
-
-    if (!localStorage.getItem('inProgressRecipes')) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        meals: [],
-        cosktails: [],
-      }));
-    }
+    addStorageStructure();
   }, []);
 
   const isCurrPageDrinks = currPage === 'drinks';
+  const id = pathname.replace(/\D/g, '');
 
   return (
     (recipe && recomendations)
@@ -139,7 +140,10 @@ export default function DetailedRecipe() {
             type="button"
             onClick={ () => startRecipeButton() }
           >
-            Start Recipe
+            {JSON.parse(localStorage
+              .getItem('inProgressRecipes'))[currLocalStorageKey][id]
+              ? 'Continue Recipe'
+              : 'Start Recipe'}
           </button>
         </>
       )
