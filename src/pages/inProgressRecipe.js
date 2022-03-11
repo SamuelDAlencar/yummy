@@ -22,6 +22,7 @@ export default function InProgressRecipe() {
     handleShare,
     copied,
     keyStr,
+    recipeType,
   } = useContext(detailedRecipeContext);
 
   const [checked, setChecked] = useState({});
@@ -65,9 +66,28 @@ export default function InProgressRecipe() {
     setIngredients([]);
     setMeasures([]);
     getDoneIngredients();
+    if (!localStorage.getItem('doneRecipes')) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
   }, []);
 
   const finishRecipe = () => {
+    const date = new Date();
+
+    localStorage.setItem('doneRecipes', JSON.stringify([
+      ...JSON.parse(localStorage.getItem('doneRecipes')),
+      {
+        id: recipe[`id${keyStr}`],
+        type: recipeType,
+        nationality: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: keyStr === 'Drink' && recipe.strAlcoholic,
+        name: recipe[`str${keyStr}`],
+        image: recipe[`str${keyStr}Thumb`],
+        doneDate: date,
+        tags: recipe.strTags,
+      },
+    ]));
     history.push('/done-recipes');
   };
 
