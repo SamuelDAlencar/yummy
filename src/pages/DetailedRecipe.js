@@ -24,6 +24,8 @@ export default function DetailedRecipe() {
     handleShare,
   } = useContext(detailedRecipeContext);
 
+  const keyStr = currPage === 'meals' ? 'Meal' : 'Drink';
+
   useEffect(() => {
     getRecomendations();
     getRecipe();
@@ -39,17 +41,13 @@ export default function DetailedRecipe() {
         <img
           alt="recipe-thumb"
           src={ recipe
-          && (currPage === 'meals'
-            ? recipe.strMealThumb
-            : recipe.strDrinkThumb) }
+          && recipe[`str${keyStr}Thumb`] }
           data-testid="recipe-photo"
           className="recipe-section__recipe-img"
         />
         <h1 data-testid="recipe-title">
           {recipe
-          && (currPage === 'meals'
-            ? recipe.strMeal
-            : recipe.strDrink)}
+          && recipe[`str${keyStr}`]}
         </h1>
         <button
           data-testid="share-btn"
