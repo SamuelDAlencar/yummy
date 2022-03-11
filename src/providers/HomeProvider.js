@@ -69,6 +69,7 @@ export default function HomeProvider({ children }) {
         attemptedSearch,
         apiType,
         redirected,
+        categories,
         setRedirected,
         setAttemptedSearch,
         searchRecipes,
@@ -76,7 +77,6 @@ export default function HomeProvider({ children }) {
         setRecipes,
         setApiType,
         fetchDefault,
-        categories,
         fetchDefaultCategories,
       } }
     >
