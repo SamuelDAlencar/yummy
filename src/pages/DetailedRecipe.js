@@ -22,6 +22,7 @@ export default function DetailedRecipe() {
     favorite,
     // setFavorite,
     handleShare,
+    copied,
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function DetailedRecipe() {
         >
           <img src={ whiteHeartIcon } alt="favorite-btn" />
         </button>
+        {copied && <p>Link copied!</p>}
         <h4 data-testid="recipe-category">
           {recipe && recipe.strCategory}
           {(recipe && currPage === 'drinks')

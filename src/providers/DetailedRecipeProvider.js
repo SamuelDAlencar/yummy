@@ -11,12 +11,14 @@ export default function DetailedRecipeProvider({ children }) {
   const { pathname } = history.location;
 
   const MAX_RECOMENDATIONS = 6;
+  const MESSAGE_TIMEOUT = 5000;
 
   const [recipe, setRecipe] = useState();
   const [recomendations, setRecomendations] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState([]);
+  const [copied, setCopied] = useState(false);
 
   const currPage = pathname.includes('foods') ? 'meals' : 'drinks';
   const apiType = pathname.includes('foods') ? 'themealdb' : 'thecocktaildb';
@@ -72,6 +74,10 @@ export default function DetailedRecipeProvider({ children }) {
 
   const handleShare = () => {
     clipboardCopy(`${window.location.origin}${pathname}`);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, MESSAGE_TIMEOUT);
   };
 
   return (
@@ -94,6 +100,8 @@ export default function DetailedRecipeProvider({ children }) {
         setFavorite,
         handleFavorite,
         handleShare,
+        copied,
+        setCopied,
       } }
     >
       {children}
