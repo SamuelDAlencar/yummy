@@ -8,8 +8,12 @@ export default function CardIngredient({ name, index, type }) {
     <div
       data-testid={ `${index}-ingredient-card` }
     >
-      <h1>{ name }</h1>
-      <img src={ `https://www.${type}.com/images/ingredients/${name}-Small.png` } alt={ name } />
+      <h1 data-testid={ `${index}-card-name` }>{ name }</h1>
+      <img
+        src={ `https://www.${type}.com/images/ingredients/${name}-Small.png` }
+        alt={ name }
+        data-testid={ `${index}-card-img` }
+      />
     </div>
   );
 }

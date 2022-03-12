@@ -37,7 +37,13 @@ export default function ExploreByNationalitie() {
         onChange={ handleChangeNation }
       >
         { nationalities.length > 0 && nationalities.map((o) => (
-          <option key={ o.strArea } value={ o.strArea }>{ o.strArea }</option>
+          <option
+            key={ o.strArea }
+            value={ o.strArea }
+            data-testid={ `${o.strArea}-option` }
+          >
+            { o.strArea }
+          </option>
         )) }
       </select>
       {filtredRecipes.length > 0 && filtredRecipes.map((recipe, i) => (

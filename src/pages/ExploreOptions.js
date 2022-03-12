@@ -41,7 +41,7 @@ export default function ExploreOptions() {
         data-testid="explore-surprise"
         onClick={ handleSurprise }
       >
-        Surprise Me!
+        Surprise me!
       </button>
       <Footer />
     </div>
