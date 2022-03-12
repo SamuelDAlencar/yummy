@@ -47,9 +47,8 @@ export default function Home() {
       prevWay = JSON.parse(prevWay);
       console.log(prevWay.filt);
       searchRecipes(prevWay.filt, prevWay.type, api);
+      localStorage.setItem('prevWay', '');
     } else { fetchDefault(api); }
-
-    localStorage.setItem('prevWay', '');
   }, [redirected]);
 
   useEffect(() => {
