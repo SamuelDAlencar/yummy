@@ -36,10 +36,10 @@ export default function Footer() {
         <img src={ drinkIcon } alt="meal icon" data-testid="drinks-bottom-btn" />
       </button>
       <button
-        onClick={ () => redirectPage() }
+        onClick={ () => history.push('/explore') }
         type="button"
       >
-        <img src={ exploreIcon } alt="meal icon" data-testid="explore-bottom-btn" />
+        <img src={ exploreIcon } alt="explore icon" data-testid="explore-bottom-btn" />
       </button>
       <button
         onClick={ () => redirectPage() }

@@ -28,6 +28,8 @@ export default function Home() {
     fetchDefaultCategories,
     categories,
     setRecipes,
+    searchValue,
+    searchType,
   } = useContext(homeContext);
 
   const {
@@ -39,8 +41,15 @@ export default function Home() {
       ? 'themealdb'
       : 'thecocktaildb';
 
-    fetchDefault(api);
     fetchDefaultCategories(api);
+    let prevWay = localStorage.getItem('prevWay');
+    if (prevWay) {
+      prevWay = JSON.parse(prevWay);
+      console.log(prevWay.filt);
+      searchRecipes(prevWay.filt, prevWay.type, api);
+    } else { fetchDefault(api); }
+
+    localStorage.setItem('prevWay', '');
   }, [redirected]);
 
   useEffect(() => {
@@ -153,7 +162,12 @@ export default function Home() {
           <button
             type="button"
             data-testid="exec-search-btn"
-            onClick={ searchRecipes }
+            onClick={ () => {
+              const api = pathname === '/foods'
+                ? 'themealdb'
+                : 'thecocktaildb';
+              searchRecipes(searchValue, searchType, api);
+            } }
           >
             Search
           </button>

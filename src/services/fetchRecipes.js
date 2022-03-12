@@ -1,4 +1,5 @@
 export default async function fetchRecipes(apiType, searchValue, searchType) {
+  console.log(apiType, searchValue, searchType);
   try {
     switch (searchType) {
     case 'Ingredient': {
@@ -22,6 +23,12 @@ export default async function fetchRecipes(apiType, searchValue, searchType) {
     }
     case 'Category': {
       const url = `https://www.${apiType}.com/api/json/v1/1/filter.php?c=${searchValue}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }
+    case 'Nationality': {
+      const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchValue}`;
       const response = await fetch(url);
       const data = await response.json();
       return data;

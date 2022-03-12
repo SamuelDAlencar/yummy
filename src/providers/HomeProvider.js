@@ -19,18 +19,19 @@ export default function HomeProvider({ children }) {
   const [redirected, setRedirected] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  const setRecipesAll = (arr) => {
-    setRecipes(arr.filter((o) => (
-      categories.some((obj) => obj.strCategory === o.strCategory)
-    )));
-  };
+  // const setRecipesAll = (arr) => {
+  //   setRecipes(arr.filter((o) => (
+  //     categories.some((obj) => obj.strCategory === o.strCategory)
+  //   )));
+  // };
 
-  const fetchDefault = async (api, filters) => {
+  const fetchDefault = async (api) => {
     const data = await fetchRecipes(api);
     const arr = Object.values(data)[0];
-    if (!filters) {
-      setRecipes(arr);
-    } else setRecipesAll(arr);
+    // if (!filters) {
+    //   setRecipes(arr);
+    // } else setRecipesAll(arr);
+    setRecipes(arr);
   };
 
   const fetchDefaultCategories = async (type) => {
@@ -38,11 +39,11 @@ export default function HomeProvider({ children }) {
     setCategories(categoriesReturn);
   };
 
-  const searchRecipes = async () => {
-    if (searchType === 'First letter' && searchValue.length > 1) {
+  const searchRecipes = async (value, type, api) => {
+    if (type === 'First letter' && value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
-    } else if (searchValue.length > 0) {
-      const apiReturn = await fetchRecipes(apiType, searchValue, searchType);
+    } else if (value.length > 0) {
+      const apiReturn = await fetchRecipes(api, value, type);
 
       if (apiReturn === undefined) {
         setRecipes(null);
@@ -69,6 +70,7 @@ export default function HomeProvider({ children }) {
         attemptedSearch,
         apiType,
         redirected,
+        categories,
         setRedirected,
         setAttemptedSearch,
         searchRecipes,
@@ -76,8 +78,9 @@ export default function HomeProvider({ children }) {
         setRecipes,
         setApiType,
         fetchDefault,
-        categories,
         fetchDefaultCategories,
+        searchType,
+        searchValue,
       } }
     >
       { children }
