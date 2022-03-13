@@ -1,5 +1,5 @@
 const fetchNationalities = async () => {
-  const url = 'https://themealdb.com/api/json/v1/1/list.php?a=list';
+  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   try {
     const request = await fetch(url);
     const response = await request.json();

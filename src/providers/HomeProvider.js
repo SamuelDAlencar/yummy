@@ -16,7 +16,6 @@ export default function HomeProvider({ children }) {
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [attemptedSearch, setAttemptedSearch] = useState(false);
-  const [redirected, setRedirected] = useState(false);
   const [categories, setCategories] = useState([]);
 
   // const setRecipesAll = (arr) => {
@@ -69,9 +68,7 @@ export default function HomeProvider({ children }) {
         recipes,
         attemptedSearch,
         apiType,
-        redirected,
         categories,
-        setRedirected,
         setAttemptedSearch,
         searchRecipes,
         handleInput,

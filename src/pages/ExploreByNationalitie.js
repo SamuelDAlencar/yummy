@@ -5,13 +5,13 @@ import Recipe from '../components/Recipe';
 
 export default function ExploreByNationalitie() {
   const [nationalities, setNationalities] = useState([]);
-  const [filtredRecipes, setFiltredRecipes] = useState([]);
   const { recipes, fetchDefault, searchRecipes } = useContext(homeContext);
+  const mgn = 12;
 
   const setOptNationalities = async () => {
-    let response = await fetchNationalities();
-    response = [{ strArea: 'All' }, ...response];
-    setNationalities(response);
+    const response = await fetchNationalities();
+    const x = [{ strArea: 'All' }, ...response];
+    setNationalities(x);
   };
 
   const handleChangeNation = ({ target: { value } }) => {
@@ -25,28 +25,24 @@ export default function ExploreByNationalitie() {
     fetchDefault('themealdb');
   }, []);
 
-  useEffect(() => {
-    const mgn = 12;
-    setFiltredRecipes(recipes.slice(0, mgn));
-  }, [recipes]);
-
   return (
     <div>
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        onChange={ handleChangeNation }
-      >
-        { nationalities.length > 0 && nationalities.map((o) => (
-          <option
-            key={ o.strArea }
-            value={ o.strArea }
-            data-testid={ `${o.strArea}-option` }
-          >
-            { o.strArea }
-          </option>
-        )) }
-      </select>
-      {filtredRecipes.length > 0 && filtredRecipes.map((recipe, i) => (
+
+      {nationalities.length > 0 && (
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          onChange={ handleChangeNation }
+        >
+          {nationalities.map((o) => (
+            <option
+              key={ o.strArea }
+              value={ o.strArea }
+              data-testid={ `${o.strArea}-option` }
+            >
+              {o.strArea}
+            </option>))}
+        </select>)}
+      {recipes.length > 0 && recipes.slice(0, mgn).map((recipe, i) => (
         <Recipe
           key={ recipe.idMeal }
           id={ recipe.idMeal }
@@ -54,7 +50,7 @@ export default function ExploreByNationalitie() {
           i={ i }
           type="/foods"
           keyStrType="Meal"
-        />)) }
+        />))}
     </div>
   );
 }

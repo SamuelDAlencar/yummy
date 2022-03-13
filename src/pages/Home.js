@@ -20,9 +20,9 @@ export default function Home() {
 
   const {
     handleInput,
+    // redirected,
     searchRecipes,
     recipes,
-    // redirected,
     attemptedSearch,
     fetchDefault,
     fetchDefaultCategories,
@@ -37,7 +37,7 @@ export default function Home() {
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
-    const api = pathname === '/foods'
+    const api = pathname.includes('/food')
       ? 'themealdb'
       : 'thecocktaildb';
 
@@ -45,11 +45,10 @@ export default function Home() {
     let prevWay = localStorage.getItem('prevWay');
     if (prevWay) {
       prevWay = JSON.parse(prevWay);
-      console.log(prevWay.filt);
       searchRecipes(prevWay.filt, prevWay.type, api);
       localStorage.setItem('prevWay', '');
     } else { fetchDefault(api); }
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (recipes && recipes.length === 1 && categoryCondition) {
