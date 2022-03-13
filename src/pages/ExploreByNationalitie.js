@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import homeContext from '../contexts/homeContext';
 import fetchNationalities from '../services/fetchNaionalities';
 import Recipe from '../components/Recipe';
+import Footer from '../components/Footer';
 
 export default function ExploreByNationalitie() {
   const [nationalities, setNationalities] = useState([]);
@@ -51,6 +52,7 @@ export default function ExploreByNationalitie() {
           type="/foods"
           keyStrType="Meal"
         />))}
+      <Footer />
     </div>
   );
 }
