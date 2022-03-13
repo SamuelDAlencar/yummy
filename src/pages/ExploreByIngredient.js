@@ -28,8 +28,7 @@ export default function ExploreByIngredient() {
           to={ `/${redirect}` }
           key={ i }
           onClick={ () => {
-            const filt = o[`strIngredient${complement}`]
-              .toLowerCase().replaceAll(' ', '_');
+            const filt = o[`strIngredient${complement}`];
             localStorage.setItem('prevWay', JSON.stringify({
               filt,
               type: 'Ingredient',

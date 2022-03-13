@@ -22,7 +22,7 @@ export default function Home() {
     handleInput,
     searchRecipes,
     recipes,
-    redirected,
+    // redirected,
     attemptedSearch,
     fetchDefault,
     fetchDefaultCategories,
@@ -49,7 +49,7 @@ export default function Home() {
       searchRecipes(prevWay.filt, prevWay.type, api);
       localStorage.setItem('prevWay', '');
     } else { fetchDefault(api); }
-  }, [redirected]);
+  }, []);
 
   useEffect(() => {
     if (recipes && recipes.length === 1 && categoryCondition) {
