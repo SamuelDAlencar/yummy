@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../css/inProgressRecipe.css';
+import FavoriteProvider from '../providers/FavoriteProvider';
+import ShareAndFav from '../components/ShareAndFav';
 
 export default function InProgressRecipe() {
   const history = useHistory();
@@ -18,11 +18,8 @@ export default function InProgressRecipe() {
     measures,
     ingredients,
     getRecipe,
-    setFavorite,
     setIngredients,
     setMeasures,
-    handleShare,
-    copied,
   } = useContext(detailedRecipeContext);
 
   const [checked, setChecked] = useState({});
@@ -106,7 +103,18 @@ export default function InProgressRecipe() {
           <h1 data-testid="recipe-title">
             { recipe[`str${KEY_STR}`]}
           </h1>
-          <button
+          <FavoriteProvider>
+            <ShareAndFav
+              id={ recipe[`id${KEY_STR}`] }
+              name={ recipe[`str${KEY_STR}`] }
+              type={ RECIPE_TYPE }
+              area={ recipe.strArea }
+              category={ recipe.strCategory }
+              alcoholicOrNot={ recipe.strAlcoholic }
+              image={ recipe[`str${KEY_STR}Thumb`] }
+            />
+          </FavoriteProvider>
+          {/* <button
             data-testid="share-btn"
             type="button"
             onClick={ handleShare }
@@ -119,8 +127,7 @@ export default function InProgressRecipe() {
             onClick={ () => handleFavorite(setFavorite) }
             src={ whiteHeartIcon }
             alt="favorite-btn"
-          />
-          {copied && <p>Link copied!</p>}
+          /> */}
           <h4 data-testid="recipe-category">
             {recipe.strCategory}
             { CURR_PAGE === 'drinks'

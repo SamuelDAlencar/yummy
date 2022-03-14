@@ -7,13 +7,14 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import favoriteContext from '../contexts/favoriteContext';
 import handleConditionalShare from '../helpers/handleConditionalShare';
 
-export default function ShareAndFav({ id, name, type, area, category,
+export default function ShareAndFav({ page, i, id, name, type, area, category,
   alcoholicOrNot, image }) {
   const { favorite, setFavorite } = useContext(favoriteContext);
   const [copied, setCopied] = useState();
   const MESSAGE_TIMEOUT = 5000;
   const { location: { pathname } } = useHistory();
   const { origin } = window.location;
+  console.log(id);
 
   const handleFavorite = (data) => {
     let newFavorite = [];
@@ -38,33 +39,46 @@ export default function ShareAndFav({ id, name, type, area, category,
   };
 
   return (
-    <div>
-      <input
-        data-testid="share-btn"
-        type="image"
-        onClick={ handleShare }
-        src={ shareIcon }
-        alt="share-btn"
-      />
-      <input
-        src={ (favorite.some((fav) => fav.id === id))
-          ? blackHeartIcon
-          : whiteHeartIcon }
-        alt="favorite-btn"
-        data-testid="favorite-btn"
-        type="image"
-        onClick={ () => handleFavorite({
-          id,
-          type,
-          nationality: area || '',
-          category,
-          alcoholicOrNot,
-          name,
-          image,
-        }) }
-      />
-      {copied && <p>Link copied!</p>}
-    </div>
+    page === '/done-recipes'
+      ? (
+        <div>
+          <input
+            data-testid={ `${i}-horizontal-share-btn` }
+            type="image"
+            onClick={ handleShare }
+            src={ shareIcon }
+            alt="share-btn"
+          />
+          {copied && <p>Link copied!</p>}
+        </div>)
+      : (
+        <div>
+          <input
+            data-testid="share-btn"
+            type="image"
+            onClick={ handleShare }
+            src={ shareIcon }
+            alt="share-btn"
+          />
+          <input
+            src={ (favorite.some((fav) => fav.id === id))
+              ? blackHeartIcon
+              : whiteHeartIcon }
+            alt="favorite-btn"
+            data-testid="favorite-btn"
+            type="image"
+            onClick={ () => handleFavorite({
+              id,
+              type,
+              nationality: area || '',
+              category,
+              alcoholicOrNot,
+              name,
+              image,
+            }) }
+          />
+          {copied && <p>Link copied!</p>}
+        </div>)
   );
 }
 

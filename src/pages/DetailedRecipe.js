@@ -61,6 +61,8 @@ export default function DetailedRecipe() {
             </h1>
             <FavoriteProvider>
               <ShareAndFav
+                page={ pathname }
+                i={ null }
                 id={ recipe[`id${KEY_STR}`] }
                 name={ recipe[`str${KEY_STR}`] }
                 type={ RECIPE_TYPE }

@@ -1,18 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
 import '../css/doneRecipes.css';
-import detailedRecipeContext from '../contexts/detailedRecipeContext';
+import ShareAndFav from '../components/ShareAndFav';
+import FavoriteProvider from '../providers/FavoriteProvider';
 
 export default function DoneRecipes() {
   const history = useHistory();
   const { pathname } = history.location;
-  const { origin } = window.location;
-
-  const {
-    handleShare,
-    copied,
-  } = useContext(detailedRecipeContext);
 
   const [doneRecipes, setDoneRecipes] = useState(
     JSON.parse(localStorage.getItem('doneRecipes')),
@@ -125,17 +119,19 @@ export default function DoneRecipes() {
                   </span>
                 ))}
               </>)}
-            <input
-              data-testid={ `${i}-horizontal-share-btn` }
-              type="image"
-              onClick={ () => handleShare(origin, pathname,
-                recipe.type === 'food'
-                  ? '/foods'
-                  : '/drinks', recipe.id) }
-              src={ shareIcon }
-              alt="share-btn"
-            />
-            {copied && <p>Link copied!</p>}
+            <FavoriteProvider>
+              <ShareAndFav
+                page={ pathname }
+                i={ i }
+                id={ recipe.id }
+                name={ recipe.name }
+                type={ recipe.type }
+                area={ recipe.nationality }
+                category={ recipe.category }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+                image={ recipe.image }
+              />
+            </FavoriteProvider>
           </section>);
       })}
     </>
