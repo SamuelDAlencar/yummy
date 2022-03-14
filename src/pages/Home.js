@@ -20,28 +20,35 @@ export default function Home() {
 
   const {
     handleInput,
+    // redirected,
     searchRecipes,
     recipes,
-    redirected,
     attemptedSearch,
     fetchDefault,
     fetchDefaultCategories,
     categories,
     setRecipes,
+    searchValue,
+    searchType,
   } = useContext(homeContext);
 
   const {
-    keyStr,
+    KEY_STR,
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
-    const api = pathname === '/foods'
+    const api = pathname.includes('/food')
       ? 'themealdb'
       : 'thecocktaildb';
 
-    fetchDefault(api);
     fetchDefaultCategories(api);
-  }, [redirected]);
+    let prevWay = localStorage.getItem('prevWay');
+    if (prevWay) {
+      prevWay = JSON.parse(prevWay);
+      searchRecipes(prevWay.filt, prevWay.type, api);
+      localStorage.setItem('prevWay', '');
+    } else { fetchDefault(api); }
+  }, [pathname]);
 
   useEffect(() => {
     if (recipes && recipes.length === 1 && categoryCondition) {
@@ -153,7 +160,12 @@ export default function Home() {
           <button
             type="button"
             data-testid="exec-search-btn"
-            onClick={ searchRecipes }
+            onClick={ () => {
+              const api = pathname === '/foods'
+                ? 'themealdb'
+                : 'thecocktaildb';
+              searchRecipes(searchValue, searchType, api);
+            } }
           >
             Search
           </button>
@@ -166,7 +178,7 @@ export default function Home() {
             data={ recipe }
             i={ i }
             type={ pathname }
-            keyStrType={ keyStr }
+            keyStrType={ KEY_STR }
           />)}
       <Footer />
     </>

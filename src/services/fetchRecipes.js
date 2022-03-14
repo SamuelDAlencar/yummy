@@ -3,6 +3,7 @@ export default async function fetchRecipes(apiType, searchValue, searchType) {
     switch (searchType) {
     case 'Ingredient': {
       const url = `https://www.${apiType}.com/api/json/v1/1/filter.php?i=${searchValue}`;
+      console.log(url);
       const response = await fetch(url);
       const data = await response.json();
       return data;
@@ -11,7 +12,6 @@ export default async function fetchRecipes(apiType, searchValue, searchType) {
       const url = `https://www.${apiType}.com/api/json/v1/1/search.php?s=${searchValue}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
       return data;
     }
     case 'First letter': {
@@ -22,6 +22,13 @@ export default async function fetchRecipes(apiType, searchValue, searchType) {
     }
     case 'Category': {
       const url = `https://www.${apiType}.com/api/json/v1/1/filter.php?c=${searchValue}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }
+    case 'Nationality': {
+      const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchValue}`;
+      console.log(url);
       const response = await fetch(url);
       const data = await response.json();
       return data;

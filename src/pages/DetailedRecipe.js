@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
 import Recipe from '../components/Recipe';
 import '../css/detailedRecipe.css';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import Loading from '../components/Loading';
 import findItem from '../helpers/findItemInLocalStorage';
+import ShareAndFav from '../components/ShareAndFav';
+import FavoriteProvider from '../providers/FavoriteProvider';
 
 export default function DetailedRecipe() {
   const history = useHistory();
@@ -13,7 +14,12 @@ export default function DetailedRecipe() {
 
   const {
     MAX_RECOMENDATIONS,
-    currPage,
+    CURR_PAGE,
+    CURR_LS_KEY,
+    INV_URL_TYPE,
+    KEY_STR,
+    INV_KEY_STR,
+    RECIPE_TYPE,
     recipe,
     recomendations,
     ingredients,
@@ -23,17 +29,7 @@ export default function DetailedRecipe() {
     getRecipe,
     getRecomendations,
     startRecipeButton,
-    heartIcon,
-    getFavoriteRecipes,
-    handleShare,
     addStorageStructure,
-    handleFavorite,
-    copied,
-    keyStr,
-    recipeType,
-    invertedKeyStr,
-    invertedUrlType,
-    currLocalStorageKey,
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
@@ -41,11 +37,10 @@ export default function DetailedRecipe() {
     getRecipe();
     setIngredients([]);
     setMeasures([]);
-    getFavoriteRecipes();
     addStorageStructure();
   }, []);
 
-  const isCurrPageDrinks = currPage === 'drinks';
+  const isCurrPageDrinks = CURR_PAGE === 'drinks';
   const id = pathname.replace(/\D/g, '');
 
   return (
@@ -57,36 +52,26 @@ export default function DetailedRecipe() {
           >
             <img
               alt="recipe-thumb"
-              src={ recipe[`str${keyStr}Thumb`] }
+              src={ recipe[`str${KEY_STR}Thumb`] }
               data-testid="recipe-photo"
               className="recipe-section__recipe-img"
             />
             <h1 data-testid="recipe-title">
-              {recipe[`str${keyStr}`]}
+              {recipe[`str${KEY_STR}`]}
             </h1>
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ handleShare }
-            >
-              <img src={ shareIcon } alt="share-btn" />
-            </button>
-            <input
-              src={ heartIcon }
-              alt="favorite-btn"
-              data-testid="favorite-btn"
-              type="image"
-              onClick={ () => handleFavorite({
-                id: recipe[`id${keyStr}`],
-                type: recipeType,
-                nationality: recipe.strArea ? recipe.strArea : '',
-                category: recipe.strCategory,
-                alcoholicOrNot: isCurrPageDrinks ? recipe.strAlcoholic : '',
-                name: recipe[`str${keyStr}`],
-                image: recipe[`str${keyStr}Thumb`],
-              }) }
-            />
-            {copied && <p>Link copied!</p>}
+            <FavoriteProvider>
+              <ShareAndFav
+                page={ pathname }
+                i={ null }
+                id={ recipe[`id${KEY_STR}`] }
+                name={ recipe[`str${KEY_STR}`] }
+                type={ RECIPE_TYPE }
+                area={ recipe.strArea }
+                category={ recipe.strCategory }
+                alcoholicOrNot={ recipe.strAlcoholic }
+                image={ recipe[`str${KEY_STR}Thumb`] }
+              />
+            </FavoriteProvider>
             <h4 data-testid="recipe-category">
               {recipe.strCategory}
               {isCurrPageDrinks
@@ -115,12 +100,12 @@ export default function DetailedRecipe() {
                 className="recomendation-card"
               >
                 <Recipe
-                  id={ recomendation[`id${invertedKeyStr}`] }
+                  id={ recomendation[`id${INV_KEY_STR}`] }
                   data={ recomendation }
                   i={ i }
-                  type={ invertedUrlType }
+                  type={ INV_URL_TYPE }
                   cardType="recomendation"
-                  keyStrType={ invertedKeyStr }
+                  keyStrType={ INV_KEY_STR }
                 />
               </div>)))}
             </section>
@@ -131,7 +116,7 @@ export default function DetailedRecipe() {
               Tutorial
             </a>
           </section>
-          {!findItem('doneRecipes', 'id', id)
+          {localStorage.getItem('doneRecipes') && (!findItem('doneRecipes', 'id', id)
                 && (
                   <button
                     data-testid="start-recipe-btn"
@@ -141,11 +126,11 @@ export default function DetailedRecipe() {
                   >
                     {
                       JSON.parse(localStorage
-                        .getItem('inProgressRecipes'))[currLocalStorageKey][id]
+                        .getItem('inProgressRecipes'))[CURR_LS_KEY][id]
                         ? 'Continue Recipe'
                         : 'Start Recipe'
                     }
-                  </button>)}
+                  </button>))}
         </>
       )
       : <Loading />
