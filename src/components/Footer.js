@@ -1,28 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import mealIcon from '../images/mealIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
-import homeContext from '../contexts/homeContext';
 
 export default function Footer() {
   const history = useHistory();
-  const { pathname } = history.location;
+  // const { pathname } = history.location;
 
-  const {
-    redirected,
-    setRedirected,
-  } = useContext(homeContext);
+  // const {
+  //   redirected,
+  //   setRedirected,
+  // } = useContext(homeContext);
 
-  const redirectPage = () => {
-    history.push(
-      pathname === '/foods'
-        ? '/drinks'
-        : '/foods',
-    );
+  // const redirectPage = () => {
+  //   history.push(
+  //     pathname === '/foods'
+  //       ? '/drinks'
+  //       : '/foods',
+  // //   );
 
-    setRedirected(!redirected);
-  };
+  //   setRedirected(!redirected);
+  // };
 
   return (
     <footer
@@ -30,19 +29,19 @@ export default function Footer() {
       className="footer"
     >
       <button
-        onClick={ () => redirectPage() }
+        onClick={ () => history.push('/drinks') }
         type="button"
       >
         <img src={ drinkIcon } alt="meal icon" data-testid="drinks-bottom-btn" />
       </button>
       <button
-        onClick={ () => redirectPage() }
+        onClick={ () => history.push('/explore') }
         type="button"
       >
-        <img src={ exploreIcon } alt="meal icon" data-testid="explore-bottom-btn" />
+        <img src={ exploreIcon } alt="explore icon" data-testid="explore-bottom-btn" />
       </button>
       <button
-        onClick={ () => redirectPage() }
+        onClick={ () => history.push('/foods') }
         type="button"
       >
         <img src={ mealIcon } alt="meal icon" data-testid="food-bottom-btn" />

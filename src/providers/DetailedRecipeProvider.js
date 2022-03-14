@@ -5,16 +5,16 @@ import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import addStorageStructure from '../helpers/addStorageStructure';
-import toggleHeartIcon from '../helpers/toggleHeartIcon';
-import handleConditionalShare from '../helpers/handleConditionalShare';
-import addNewFavorite from '../helpers/addNewFavorite';
+// import toggleHeartIcon from '../helpers/toggleHeartIcon';
+// import handleConditionalShare from '../helpers/handleConditionalShare';
+// import addNewFavorite from '../helpers/addNewFavorite';
 
 export default function DetailedRecipeProvider({ children }) {
   const history = useHistory();
   const { pathname } = history.location;
 
   const MAX_RECOMENDATIONS = 6;
-  const MESSAGE_TIMEOUT = 5000;
+
   const [
     CURR_PAGE,
     INV_CURR_PAGE,
@@ -53,8 +53,6 @@ export default function DetailedRecipeProvider({ children }) {
   const [recomendations, setRecomendations] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
-  const [favorite, setFavorite] = useState([]);
-  const [copied, setCopied] = useState(false);
 
   const getRecipe = async () => {
     const id = pathname.replace(/\D/g, '');
@@ -103,28 +101,7 @@ export default function DetailedRecipeProvider({ children }) {
     history.push(`${pathname}/in-progress`);
   };
 
-  const handleFavorite = (data) => {
-    const newFavorite = addNewFavorite(data, favorite, recipe, KEY_STR);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
-    setFavorite(newFavorite);
-  };
-
-  const handleShare = (origin, path, type, id) => {
-    handleConditionalShare(origin, path, type, id);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, MESSAGE_TIMEOUT);
-  };
-
-  const getFavoriteRecipes = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes) {
-      setFavorite(favoriteRecipes);
-    }
-  };
-
-  const heartIcon = toggleHeartIcon(favorite, recipe, KEY_STR);
+  // const heartIcon = toggleHeartIcon(favorite, recipe, KEY_STR);
 
   return (
     <detailedRecipeContext.Provider
@@ -142,20 +119,12 @@ export default function DetailedRecipeProvider({ children }) {
         recomendations,
         ingredients,
         measures,
-        copied,
-        favorite,
-        heartIcon,
-        addStorageStructure,
-        getFavoriteRecipes,
         setIngredients,
+        addStorageStructure,
         setMeasures,
         getRecipe,
         getRecomendations,
         startRecipeButton,
-        setFavorite,
-        handleFavorite,
-        handleShare,
-        setCopied,
       } }
     >
       {children}
