@@ -11,18 +11,18 @@ export default function InProgressRecipe() {
   const id = pathname.replace(/\D/g, '');
 
   const {
+    CURR_PAGE,
+    RECIPE_TYPE,
+    KEY_STR,
     recipe,
     measures,
     ingredients,
-    currPage,
     getRecipe,
     setFavorite,
     setIngredients,
     setMeasures,
     handleShare,
     copied,
-    keyStr,
-    recipeType,
   } = useContext(detailedRecipeContext);
 
   const [checked, setChecked] = useState({});
@@ -77,15 +77,15 @@ export default function InProgressRecipe() {
     localStorage.setItem('doneRecipes', JSON.stringify([
       ...JSON.parse(localStorage.getItem('doneRecipes')),
       {
-        id: recipe[`id${keyStr}`],
-        type: recipeType,
+        id: recipe[`id${KEY_STR}`],
+        type: RECIPE_TYPE,
         nationality: recipe.strArea,
         category: recipe.strCategory,
-        alcoholicOrNot: keyStr === 'Drink' && recipe.strAlcoholic,
-        name: recipe[`str${keyStr}`],
-        image: recipe[`str${keyStr}Thumb`],
+        alcoholicOrNot: KEY_STR === 'Drink' && recipe.strAlcoholic,
+        name: recipe[`str${KEY_STR}`],
+        image: recipe[`str${KEY_STR}Thumb`],
         doneDate: date,
-        tags: recipe.strTags,
+        tags: recipe.strTags && recipe.strTags.split(','),
       },
     ]));
     history.push('/done-recipes');
@@ -99,12 +99,12 @@ export default function InProgressRecipe() {
         >
           <img
             alt="recipe-thumb"
-            src={ recipe[`str${keyStr}Thumb`] }
+            src={ recipe[`str${KEY_STR}Thumb`] }
             data-testid="recipe-photo"
             className="recipe-section__recipe-img"
           />
           <h1 data-testid="recipe-title">
-            { recipe[`str${keyStr}`]}
+            { recipe[`str${KEY_STR}`]}
           </h1>
           <button
             data-testid="share-btn"
@@ -113,17 +113,17 @@ export default function InProgressRecipe() {
           >
             <img src={ shareIcon } alt="share-btn" />
           </button>
-          <button
+          <input
             data-testid="favorite-btn"
-            type="button"
+            type="image"
             onClick={ () => handleFavorite(setFavorite) }
-          >
-            <img src={ whiteHeartIcon } alt="favorite-btn" />
-          </button>
+            src={ whiteHeartIcon }
+            alt="favorite-btn"
+          />
           {copied && <p>Link copied!</p>}
           <h4 data-testid="recipe-category">
             {recipe.strCategory}
-            { currPage === 'drinks'
+            { CURR_PAGE === 'drinks'
               && ` - ${recipe.strAlcoholic}`}
           </h4>
           <h2>Ingredients</h2>
@@ -152,10 +152,10 @@ export default function InProgressRecipe() {
             type="button"
             data-testid="finish-recipe-btn"
             onClick={ () => finishRecipe() }
-            disabled={
+            disabled={ checked && (
               Object.keys(checked).length !== ingredients.length
           || Object.values(checked).some((check) => check === false)
-            }
+            ) }
           >
             Finish Recipe
           </button>

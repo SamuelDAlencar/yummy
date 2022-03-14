@@ -31,7 +31,7 @@ export default function Home() {
   } = useContext(homeContext);
 
   const {
-    keyStr,
+    KEY_STR,
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
@@ -166,7 +166,7 @@ export default function Home() {
             data={ recipe }
             i={ i }
             type={ pathname }
-            keyStrType={ keyStr }
+            keyStrType={ KEY_STR }
           />)}
       <Footer />
     </>
