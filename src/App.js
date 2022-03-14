@@ -25,8 +25,9 @@ export default function App() {
           <Route exact path="/foods/:id/in-progress" component={ InProgressRecipe } />
           <Route exact path="/drinks/:id/in-progress" component={ InProgressRecipe } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
+          <Route exact path="/profile" component={ Profile } />
         </DetailedRecipeProvider>
-        <Route exact path="/profile" component={ Profile } />
+
       </Switch>
     </HomeProvider>
   );
