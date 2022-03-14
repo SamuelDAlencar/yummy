@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import Recipe from '../components/Recipe';
 import '../css/detailedRecipe.css';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import Loading from '../components/Loading';
+import ShareAndFav from '../components/ShareAndFav';
+import FavoriteProvider from '../providers/FavoriteProvider';
 
 export default function DetailedRecipe() {
   const {
     MAX_RECOMENDATIONS,
     currPage,
     recipe,
+    recipeType,
     recomendations,
     ingredients,
     measures,
@@ -20,13 +20,7 @@ export default function DetailedRecipe() {
     getRecipe,
     getRecomendations,
     startRecipeButton,
-    favorite,
-    getFavoriteRecipes,
-    handleShare,
-    handleFavorite,
-    copied,
     keyStr,
-    recipeType,
     invertedKeyStr,
     invertedUrlType,
   } = useContext(detailedRecipeContext);
@@ -36,7 +30,6 @@ export default function DetailedRecipe() {
     getRecipe();
     setIngredients([]);
     setMeasures([]);
-    getFavoriteRecipes();
 
     if (!localStorage.getItem('inProgressRecipes')) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
@@ -64,31 +57,17 @@ export default function DetailedRecipe() {
             <h1 data-testid="recipe-title">
               {recipe[`str${keyStr}`]}
             </h1>
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ handleShare }
-            >
-              <img src={ shareIcon } alt="share-btn" />
-            </button>
-            <input
-              src={ (favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))
-                ? blackHeartIcon
-                : whiteHeartIcon }
-              alt="favorite-btn"
-              data-testid="favorite-btn"
-              type="image"
-              onClick={ () => handleFavorite({
-                id: recipe[`id${keyStr}`],
-                type: recipeType,
-                nationality: recipe.strArea ? recipe.strArea : '',
-                category: recipe.strCategory,
-                alcoholicOrNot: isCurrPageDrinks ? recipe.strAlcoholic : '',
-                name: recipe[`str${keyStr}`],
-                image: recipe[`str${keyStr}Thumb`],
-              }) }
-            />
-            {copied && <p>Link copied!</p>}
+            <FavoriteProvider>
+              <ShareAndFav
+                id={ recipe[`id${keyStr}`] }
+                name={ recipe[`str${keyStr}`] }
+                type={ recipeType }
+                area={ recipe.strArea }
+                category={ recipe.strCategory }
+                alcoholicOrNot={ recipe.strAlcoholic }
+                image={ recipe[`str${keyStr}Thumb`] }
+              />
+            </FavoriteProvider>
             <h4 data-testid="recipe-category">
               {recipe.strCategory}
               {isCurrPageDrinks

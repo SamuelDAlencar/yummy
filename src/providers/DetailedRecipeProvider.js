@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import clipboardCopy from 'clipboard-copy';
 import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
@@ -11,14 +10,11 @@ export default function DetailedRecipeProvider({ children }) {
   const { pathname } = history.location;
 
   const MAX_RECOMENDATIONS = 6;
-  const MESSAGE_TIMEOUT = 5000;
 
   const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState();
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
-  const [favorite, setFavorite] = useState([]);
-  const [copied, setCopied] = useState(false);
 
   const [
     currPage,
@@ -98,35 +94,6 @@ export default function DetailedRecipeProvider({ children }) {
     history.push(`${pathname}/in-progress`);
   };
 
-  const handleFavorite = (data) => {
-    let newFavorite = [];
-    if (!(favorite.some((fav) => fav.id === recipe[`id${keyStr}`]))) {
-      newFavorite = [
-        ...favorite,
-        data,
-      ];
-    } else {
-      newFavorite = favorite.filter((fav) => fav.id !== recipe[`id${keyStr}`]);
-    }
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
-    setFavorite(newFavorite);
-  };
-
-  const handleShare = () => {
-    clipboardCopy(`${window.location.origin}${pathname}`);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, MESSAGE_TIMEOUT);
-  };
-
-  const getFavoriteRecipes = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes) {
-      setFavorite(favoriteRecipes);
-    }
-  };
-
   return (
     <detailedRecipeContext.Provider
       value={ {
@@ -138,22 +105,15 @@ export default function DetailedRecipeProvider({ children }) {
         recomendations,
         ingredients,
         measures,
-        copied,
-        favorite,
         keyStr,
         recipeType,
         invertedKeyStr,
         invertedUrlType,
-        getFavoriteRecipes,
         setIngredients,
         setMeasures,
         getRecipe,
         getRecomendations,
         startRecipeButton,
-        setFavorite,
-        handleFavorite,
-        handleShare,
-        setCopied,
       } }
     >
       {children}
