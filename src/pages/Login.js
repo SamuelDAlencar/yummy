@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import profileIcon from '../images/profileIcon.svg';
+import key from '../images/key.svg';
+import '../css/login.css';
 
 export default function Login({ history }) {
   const [login, setLogin] = useState({ email: '', password: '' });
@@ -27,36 +30,65 @@ export default function Login({ history }) {
   };
 
   return (
-    <div>
-      <label htmlFor="email">
-        <input
-          type="text"
-          data-testid="email-input"
-          name="email"
-          value={ login.email }
-          id="email"
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <label htmlFor="password">
-        <input
-          type="password"
-          data-testid="password-input"
-          name="password"
-          value={ login.password }
-          id="password"
-          onChange={ (e) => handleChange(e) }
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ validator }
-        onClick={ handleClick }
-      >
-        entrar
-      </button>
-    </div>
+    <main className="login-main">
+      <h3 className="login-main__app-h1">Nome/logo do app</h3>
+      <div className="login-div-image">
+        <section className="login-div_section">
+          <label
+            className="login-label"
+            htmlFor="email"
+          >
+            <img
+              className="profile-img"
+              alt="input_icon"
+              src={ profileIcon }
+            />
+            <input
+              placeholder="Email"
+              className="login-label__email-input login-label__input"
+              type="text"
+              data-testid="email-input"
+              name="email"
+              value={ login.email }
+              id="email"
+              onChange={ (e) => handleChange(e) }
+              autoComplete="off"
+            />
+          </label>
+          <label
+            className="login-label"
+            htmlFor="password"
+          >
+            <img
+              className="key-img"
+              alt="input_icon"
+              src={ key }
+            />
+            <input
+              placeholder="Password"
+              className="login-label__password-input login-label__input"
+              type="password"
+              data-testid="password-input"
+              name="password"
+              value={ login.password }
+              id="password"
+              onChange={ (e) => handleChange(e) }
+              autoComplete="off"
+            />
+          </label>
+          <button
+            className="login-button"
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={ validator }
+            onClick={ handleClick }
+          >
+            Log-In
+          </button>
+        </section>
+      </div>
+    </main>
+
   );
 }
 Login.propTypes = {
