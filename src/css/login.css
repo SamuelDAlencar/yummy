@@ -1,22 +1,20 @@
 .login-main {
-  background: url('../images/login_wallpaper.jpg') no-repeat;
-  background-color: #e60965;
+  background: url('../images/login_wallpaper3.jpg') no-repeat fixed;
   background-size: cover;
-  height: 120vh;
+  height: 100vh;
   width: 100%;
 }
 
-.login-main__app-h1 {
-  color: #fbe5e5;
-  padding: 8% 0;
-  text-align: center;
-  transition: all 0.1s ease-in-out 0s;
-  width: 100%;
+.logo {
+  background-color: transparent;
+  height: 60%;
+  width: 100vw;
 }
 
 .login-title {
   align-self: baseline;
   color: #e60965;
+  font-size: 200%;
   margin: 5%;
 }
 
@@ -47,7 +45,7 @@
 }
 
 .login-label:first-of-type {
-  margin: 10% 0;
+  margin: 11% 0;
 }
 
 .profile-img, .key-img {
@@ -66,8 +64,9 @@
   border-bottom: 1px solid #f94892;
   cursor: pointer;
   font: inherit;
+  margin: 0;
   opacity: 0.9;
-  padding: 0.6em ! important;
+  padding: 0.6em;
   transition: all 0.2s ease-in-out 0s;
 }
 
@@ -126,7 +125,7 @@
   bottom: 0;
   color: white;
   cursor: pointer;
-  font-size: 130%;
+  font-size: 150%;
   padding: 5% 20%;
   position: fixed;
   transition: all 0.2s ease-in-out 0s;

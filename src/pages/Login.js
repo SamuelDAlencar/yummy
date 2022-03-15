@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import profileIcon from '../images/profileIcon.svg';
 import profile from '../images/profile.png';
 import key2 from '../images/key2.png';
+import background from '../images/background.png';
 import '../css/login.css';
 
 export default function Login({ history }) {
@@ -33,7 +33,11 @@ export default function Login({ history }) {
 
   return (
     <main className="login-main">
-      {/* <h3 className="login-main__app-h1">Nome/logo do app</h3> */}
+      <img
+        alt="logo"
+        src={ background }
+        className="logo"
+      />
       <div className="login-div-image">
         <section className="login-div_section">
           <h2 className="login-title">Login</h2>
@@ -95,7 +99,7 @@ export default function Login({ history }) {
             disabled={ validator }
             onClick={ handleClick }
           >
-            Log-In
+            Get started!
           </button>
         </section>
       </div>

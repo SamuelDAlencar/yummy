@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from 'react-router-dom';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Home from './pages/Home';
