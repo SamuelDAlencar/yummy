@@ -3,6 +3,7 @@ import homeContext from '../contexts/homeContext';
 import fetchNationalities from '../services/fetchNaionalities';
 import Recipe from '../components/Recipe';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 export default function ExploreByNationalitie() {
   const [nationalities, setNationalities] = useState([]);
@@ -28,7 +29,7 @@ export default function ExploreByNationalitie() {
 
   return (
     <div>
-
+      <Header namePage="Explore Nationalities" />
       {nationalities.length > 0 && (
         <select
           data-testid="explore-by-nationality-dropdown"

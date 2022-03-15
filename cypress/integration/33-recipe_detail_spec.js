@@ -263,6 +263,7 @@ describe('39 - Implemente a solução de forma que caso a receita já tenha sido
       },
     });
 
+
     cy.get('[data-testid="start-recipe-btn"]').should('not.exist');
   });
 
@@ -282,6 +283,7 @@ describe('39 - Implemente a solução de forma que caso a receita já tenha sido
         }];
         localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
         win.fetch = fetchMock;
+        console.log(localStorage.getItem('doneRecipes'))
       },
     });
 
@@ -300,10 +302,13 @@ describe('40 - Implemente a solução de modo que caso a receita tenha sido inic
         };
         localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
         win.fetch = fetchMock;
+        console.log(localStorage.getItem('inProgressRecipes'))
       },
     });
 
+
     cy.get('[data-testid="start-recipe-btn"]').contains('Continue Recipe');
+
   });
 
   it('Verifica botão de "Continue Recipe" na tela de detalhes de uma bebida', () => {

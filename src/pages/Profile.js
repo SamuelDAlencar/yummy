@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 export default function Profile() {
-  const getEmailLogin = JSON.parse(localStorage.getItem('user')).email;
+  const [email, setEmail] = useState('userlogin@gmail.com');
   const history = useHistory();
 
   const handleLocalStorage = () => {
@@ -11,10 +12,15 @@ export default function Profile() {
     localStorage.clear();
   };
 
+  useEffect(() => {
+    const getEmailLogin = JSON.parse(localStorage.getItem('user'));
+    if (getEmailLogin) setEmail(getEmailLogin.email);
+  }, []);
+
   return (
     <>
-      <h1 data-testid="page-title">Profile</h1>
-      <h2 data-testid="profile-email">{ getEmailLogin }</h2>
+      <Header namePage="Profile" />
+      <h2 data-testid="profile-email">{ email }</h2>
       <button
         type="button"
         data-testid="profile-done-btn"

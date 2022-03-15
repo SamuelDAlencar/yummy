@@ -14,13 +14,12 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
   const MESSAGE_TIMEOUT = 5000;
   const { location: { pathname } } = useHistory();
   const { origin } = window.location;
-  console.log(id);
 
   const handleFavorite = (data) => {
     let newFavorite = [];
     if (!(favorite.some((fav) => fav.id === id))) {
       newFavorite = [
-        ...newFavorite,
+        ...favorite,
         data,
       ];
     } else {
@@ -54,7 +53,8 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
       : (
         <div>
           <input
-            data-testid="share-btn"
+            data-testid={ page === '/favorite-recipes' ? `${i}-horizontal-share-btn`
+              : 'share-btn' }
             type="image"
             onClick={ handleShare }
             src={ shareIcon }
@@ -65,14 +65,17 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
               ? blackHeartIcon
               : whiteHeartIcon }
             alt="favorite-btn"
-            data-testid="favorite-btn"
+            data-testid={
+              page === '/favorite-recipes'
+                ? `${i}-horizontal-favorite-btn` : 'favorite-btn'
+            }
             type="image"
             onClick={ () => handleFavorite({
               id,
               type,
               nationality: area || '',
               category,
-              alcoholicOrNot,
+              alcoholicOrNot: alcoholicOrNot || '',
               name,
               image,
             }) }
