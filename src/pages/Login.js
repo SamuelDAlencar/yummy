@@ -33,7 +33,7 @@ export default function Login({ history }) {
 
   return (
     <main className="login-main">
-      <h3 className="login-main__app-h1">Nome/logo do app</h3>
+      {/* <h3 className="login-main__app-h1">Nome/logo do app</h3> */}
       <div className="login-div-image">
         <section className="login-div_section">
           <h2 className="login-title">Login</h2>
