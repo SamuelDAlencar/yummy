@@ -1,0 +1,23 @@
+.loading-section {
+  align-items: center;
+  background-size: cover;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+.loading-h1 {
+  font-size: 300%;
+  margin-top: 40%;
+  text-align: center;
+}
+
+.loading-img {
+  background-color: transparent;
+  margin: 50% auto;
+  text-align: center;
+}
