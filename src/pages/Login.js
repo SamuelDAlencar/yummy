@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import profileIcon from '../images/profileIcon.svg';
-import key from '../images/key.svg';
+// import profileIcon from '../images/profileIcon.svg';
+import profile from '../images/profile.png';
+import key2 from '../images/key2.png';
 import '../css/login.css';
 
 export default function Login({ history }) {
@@ -35,6 +36,7 @@ export default function Login({ history }) {
       <h3 className="login-main__app-h1">Nome/logo do app</h3>
       <div className="login-div-image">
         <section className="login-div_section">
+          <h2 className="login-title">Login</h2>
           <label
             className="login-label"
             htmlFor="email"
@@ -42,7 +44,7 @@ export default function Login({ history }) {
             <img
               className="profile-img"
               alt="input_icon"
-              src={ profileIcon }
+              src={ profile }
             />
             <input
               placeholder="Email"
@@ -63,7 +65,7 @@ export default function Login({ history }) {
             <img
               className="key-img"
               alt="input_icon"
-              src={ key }
+              src={ key2 }
             />
             <input
               placeholder="Password"
