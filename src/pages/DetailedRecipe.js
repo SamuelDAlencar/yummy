@@ -1,21 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Recipe from '../components/Recipe';
 import '../css/detailedRecipe.css';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import Loading from '../components/Loading';
-import findItem from '../helpers/findItemInLocalStorage';
+import findItemDone, { findItemProg } from '../helpers/findItemInLocalStorage';
 import ShareAndFav from '../components/ShareAndFav';
 import FavoriteProvider from '../providers/FavoriteProvider';
 
 export default function DetailedRecipe() {
   const history = useHistory();
   const { pathname } = history.location;
+  const [isDone, setDone] = useState(false);
+  const [isProgress, setProgress] = useState(false);
 
   const {
     MAX_RECOMENDATIONS,
     CURR_PAGE,
-    CURR_LS_KEY,
     INV_URL_TYPE,
     KEY_STR,
     INV_KEY_STR,
@@ -33,6 +34,8 @@ export default function DetailedRecipe() {
   } = useContext(detailedRecipeContext);
 
   useEffect(() => {
+    setDone(findItemDone(pathname));
+    setProgress(findItemProg(pathname));
     getRecomendations();
     getRecipe();
     setIngredients([]);
@@ -41,7 +44,6 @@ export default function DetailedRecipe() {
   }, []);
 
   const isCurrPageDrinks = CURR_PAGE === 'drinks';
-  const id = pathname.replace(/\D/g, '');
 
   return (
     (recipe && recomendations)
@@ -91,23 +93,21 @@ export default function DetailedRecipe() {
             <p data-testid="instructions">{recipe.strInstructions}</p>
             <h1>Recomendations</h1>
             <section className="recomendations-section">
-              {recomendations.map((recomendation, i) => (
-                i < MAX_RECOMENDATIONS
-            && (
-              <div
-                key={ `recomendation-${i}` }
-                data-testid={ `${i}-recomendation-card` }
-                className="recomendation-card"
-              >
-                <Recipe
-                  id={ recomendation[`id${INV_KEY_STR}`] }
-                  data={ recomendation }
-                  i={ i }
-                  type={ INV_URL_TYPE }
-                  cardType="recomendation"
-                  keyStrType={ INV_KEY_STR }
-                />
-              </div>)))}
+              {recomendations.slice(0, MAX_RECOMENDATIONS).map((recomendation, i) => (
+                <div
+                  key={ `recomendation-${i}` }
+                  data-testid={ `${i}-recomendation-card` }
+                  className="recomendation-card"
+                >
+                  <Recipe
+                    id={ recomendation[`id${INV_KEY_STR}`] }
+                    data={ recomendation }
+                    i={ i }
+                    type={ INV_URL_TYPE }
+                    cardType="recomendation"
+                    keyStrType={ INV_KEY_STR }
+                  />
+                </div>))}
             </section>
             <a
               href={ recipe.strYoutube }
@@ -116,21 +116,16 @@ export default function DetailedRecipe() {
               Tutorial
             </a>
           </section>
-          {localStorage.getItem('doneRecipes') && (!findItem('doneRecipes', 'id', id)
-                && (
-                  <button
-                    data-testid="start-recipe-btn"
-                    className="recipe-section__start-button"
-                    type="button"
-                    onClick={ () => startRecipeButton() }
-                  >
-                    {
-                      JSON.parse(localStorage
-                        .getItem('inProgressRecipes'))[CURR_LS_KEY][id]
-                        ? 'Continue Recipe'
-                        : 'Start Recipe'
-                    }
-                  </button>))}
+          { (!isDone) && (
+            <button
+              data-testid="start-recipe-btn"
+              className="recipe-section__start-button"
+              type="button"
+              onClick={ () => startRecipeButton() }
+            >
+              { isProgress ? 'Continue Recipe' : 'Start Recipe' }
+            </button>
+          ) }
         </>
       )
       : <Loading />

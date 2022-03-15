@@ -104,7 +104,11 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header
+        namePage={
+          pathname.substring(1).charAt(0).toUpperCase() + pathname.substring(2)
+        }
+      />
       <section>
         <section>
           { recipes && categories.length > 0 && categories.map((o) => (
@@ -171,15 +175,15 @@ export default function Home() {
           </button>
         </section>
       </section>
-      {recipes && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
-          && <Recipe
-            key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
-            id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
-            data={ recipe }
-            i={ i }
-            type={ pathname }
-            keyStrType={ KEY_STR }
-          />)}
+      {recipes && recipes.slice(0, INITIAL_RECIPES_AMOUNT).map((recipe, i) => (
+        <Recipe
+          key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
+          id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
+          data={ recipe }
+          i={ i }
+          type={ pathname }
+          keyStrType={ KEY_STR }
+        />))}
       <Footer />
     </>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import CardIngredient from '../components/CardIngredient';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import fetchIngredients from '../services/fetchIngredients';
 
 export default function ExploreByIngredient() {
@@ -23,6 +24,7 @@ export default function ExploreByIngredient() {
 
   return (
     <div>
+      <Header namePage="Explore Ingredients" />
       { ingredients.length > 0 && ingredients.map((o, i) => (
         <Link
           to={ `/${redirect}` }

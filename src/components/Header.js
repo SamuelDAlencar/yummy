@@ -5,12 +5,10 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import homeContext from '../contexts/homeContext';
 
-export default function Header() {
+export default function Header({ namePage }) {
   const [toggleInput, setToggleInput] = useState();
   const history = useHistory();
-  const { location: { pathname } } = history;
-  let namePage = pathname.substring(1);
-  namePage = namePage.charAt(0).toUpperCase() + namePage.substring(1);
+
   const {
     handleInput,
   } = useContext(homeContext);
@@ -38,13 +36,14 @@ export default function Header() {
                  onChange={ handleInput }
                />
              </label>)}
-      <button
-        type="button"
-        id="search-top-btn"
-        onClick={ () => setToggleInput(!toggleInput) }
-      >
-        <img src={ searchIcon } alt="search-top-btn" data-testid="search-top-btn" />
-      </button>
+      { (namePage === 'Foods' || namePage === 'Drinks' || namePage.includes('Natio')) && (
+        <button
+          type="button"
+          id="search-top-btn"
+          onClick={ () => setToggleInput(!toggleInput) }
+        >
+          <img src={ searchIcon } alt="search-top-btn" data-testid="search-top-btn" />
+        </button>)}
     </header>
   );
 }

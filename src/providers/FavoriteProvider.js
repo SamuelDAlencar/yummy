@@ -4,6 +4,7 @@ import favoriteContext from '../contexts/favoriteContext';
 
 export default function FavoriteProvider({ children }) {
   const [favorite, setFavorite] = useState([]);
+  const [filteredType, setFiltredType] = useState('All');
 
   const getFavoriteRecipes = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -17,8 +18,15 @@ export default function FavoriteProvider({ children }) {
   }, []);
 
   return (
-    <favoriteContext.Provider value={ { favorite, setFavorite } }>
-      { children }
+    <favoriteContext.Provider
+      value={ {
+        favorite,
+        setFavorite,
+        filteredType,
+        setFiltredType,
+      } }
+    >
+      {children}
     </favoriteContext.Provider>
   );
 }

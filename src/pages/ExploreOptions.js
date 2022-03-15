@@ -1,14 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import fetchRandomRecipe from '../services/FetchRandomRecipe';
 
 export default function ExploreOptions() {
   const history = useHistory();
   const { location: { pathname } } = history;
+  const relativePath = pathname.split('/')[2];
 
   const handleSurprise = async () => {
-    const relativePath = pathname.split('/')[2];
     const api = relativePath === 'foods'
       ? 'themealdb'
       : 'thecocktaildb';
@@ -19,6 +20,12 @@ export default function ExploreOptions() {
 
   return (
     <div>
+      <Header
+        namePage={
+          `Explore ${
+            relativePath.charAt(0).toUpperCase() + relativePath.substring(1)}`
+        }
+      />
       <button
         type="button"
         data-testid="explore-by-ingredient"

@@ -15,22 +15,39 @@ import Explore from './pages/Explore';
 import ExploreOptions from './pages/ExploreOptions';
 import ExploreByIngredient from './pages/ExploreByIngredient';
 import ExploreByNationalitie from './pages/ExploreByNationalitie';
+import NotFound from './components/NotFound';
+import FavoriteProvider from './providers/FavoriteProvider';
+import Favorites from './pages/Favorites';
 
 export default function App() {
   return (
     <HomeProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/profile" component={ Profile } />
         <Route exact path="/explore" component={ Explore } />
         <Route exact path="/explore/:id" component={ ExploreOptions } />
         <Route exact path="/explore/:id/ingredients" component={ ExploreByIngredient } />
         <Route
           exact
-          path="/explore/:id/nationalities"
+          path="/explore/foods/nationalities"
           component={ ExploreByNationalitie }
         />
+        <Route
+          exact
+          path="/explore/drinks/nationalities"
+          component={ NotFound }
+        />
+        <Route
+          exact
+          path="/favorite-recipes"
+          render={ () => (
+            <FavoriteProvider>
+              <Favorites />
+            </FavoriteProvider>
+          ) }
+        />
         <DetailedRecipeProvider>
+          <Route exact path="/profile" component={ Profile } />
           <Route exact path="/foods" component={ Home } />
           <Route exact path="/drinks" component={ Home } />
           <Route exact path="/foods/:id" component={ DetailedRecipe } />
