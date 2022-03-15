@@ -1,11 +1,12 @@
 .login-main {
-  background-color: #ffa1c9;
+  background-color: #e60965;
   height: 100vh;
   width: 100%;
 }
 
 .login-main__app-h1 {
-  padding: 5% 0;
+  color: #fbe5e5;
+  padding: 8% 0;
   text-align: center;
   transition: all 0.1s ease-in-out 0s;
   width: 100%;
@@ -45,7 +46,7 @@
 
 .profile-img, .key-img {
   background-color: #fbe5e5;
-  border-bottom: 1px solid #e60965;
+  border-bottom: 4px solid #f94892;
   border-radius: 50px 0 0 50px;
   border-right: 1px solid rgb(179, 179, 179);
   opacity: 0.9;
@@ -53,10 +54,30 @@
   width: 20%;
 }
 
+.password-visibility {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url('https://img.icons8.com/material-outlined/24/000000/closed-eye.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  cursor: pointer;
+  font: inherit;
+  margin: 20px 0 0 10px;
+  opacity: calc(0.8);
+  padding: 1em;
+}
+
+.password-visibility:checked {
+  background-image: url('https://img.icons8.com/material-outlined/24/000000/visible--v1.png');
+  background-size: 70%;
+  cursor: pointer;
+}
+
 .login-label__email-input, .login-label__password-input {
   background-color: #fbe5e5;
   border: 0;
-  border-bottom: 1px solid #e60965;
+  border-bottom: 2px solid #f94892;
   border-radius: 0 50px 50px 0;
   color: rgb(46, 46, 46);
   font-size: 80%;
@@ -70,7 +91,7 @@
 .login-label__input:focus {
   background: none;
   background-color: #fbe5e5;
-  border-bottom: 3px solid #e60965;
+  border-bottom: 4px solid #f94892;
   color: rgb(32, 32, 32);
   outline: none;
   text-decoration: none;

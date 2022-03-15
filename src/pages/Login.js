@@ -7,6 +7,7 @@ import '../css/login.css';
 export default function Login({ history }) {
   const [login, setLogin] = useState({ email: '', password: '' });
   const [validator, setValidator] = useState(true);
+  const [passwordVisibility, setPassVisibility] = useState(false);
 
   useEffect(() => {
     const { email, password } = login;
@@ -67,13 +68,22 @@ export default function Login({ history }) {
             <input
               placeholder="Password"
               className="login-label__password-input login-label__input"
-              type="password"
+              type={ passwordVisibility
+                ? 'text'
+                : 'password' }
               data-testid="password-input"
               name="password"
               value={ login.password }
               id="password"
               onChange={ (e) => handleChange(e) }
               autoComplete="off"
+            />
+            <input
+              type="checkbox"
+              className="password-visibility"
+              onClick={
+                () => setPassVisibility((prevState) => !prevState)
+              }
             />
           </label>
           <button

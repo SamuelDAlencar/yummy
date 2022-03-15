@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
