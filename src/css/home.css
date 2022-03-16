@@ -1,26 +1,67 @@
-.header, .footer, .searchFilters-section {
+.searchFilters-section {
   align-items: center;
   display: flex;
-  justify-content: space-between;
-  padding: 2%;
+  justify-content: space-around;
   width: 100%;
 }
 
-.header {
-  border-bottom: 1px solid black;
+.categories-filters {
+  margin-top: 2%;
+  padding-top: 2%;
 }
 
-.footer {
-  background-color: white;
-  border-top: 1px solid black;
-  bottom: 0;
-  position: fixed;
+.searchby-title, .filter-title {
+  border-top: 1px solid silver;
+  margin: 0 0 3%;
+  padding-top: 3%;
 }
 
-.searchFilters-section {
-  border-bottom: 1px solid black;
+.home-section {
+  border-bottom: 1px solid silver;
+  padding: 10px;
+
+}
+
+.home-button {
+  background-color: #f94892;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  margin: 1%;
+  padding: 8px;
+}
+
+.recipes-section {
+  margin-bottom: 100px;
+}
+
+.recipe-section {
+  background: white;
+  border-bottom: 1px solid silver;
+  color: rgb(39, 39, 39);
+  display: flex;
+  margin: 3%;
+  padding: 5%;
+}
+
+.line-breaker-hr {
+  color: black;
+  width: 50%;
+}
+
+.recipe-info {
+  margin: 0 0 0 5%;
+}
+
+.ingredients-p {
+  color: rgb(97, 97, 97);
+}
+
+.recipe-section__recipe-title {
+  color: rgb(39, 39, 39);
 }
 
 .recipe-section__recipe-img {
-  width: 100%;
+  border-radius: 15px;
+  width: 50%;
 }

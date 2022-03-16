@@ -8,6 +8,8 @@ import homeContext from '../contexts/homeContext';
 export default function Header({ namePage }) {
   const [toggleInput, setToggleInput] = useState();
   const history = useHistory();
+  const INACTIVE = 'footer-button';
+  const ACTIVE = 'activePage-footer-button';
 
   const {
     handleInput,
@@ -19,6 +21,7 @@ export default function Header({ namePage }) {
         type="button"
         id="profile-top-btn"
         onClick={ () => history.push('/profile') }
+        className={ INACTIVE }
       >
         <img
           src={ profileIcon }
@@ -26,7 +29,12 @@ export default function Header({ namePage }) {
           alt="profile-top-btn"
         />
       </button>
-      <h2 data-testid="page-title">{ namePage }</h2>
+      <h2
+        data-testid="page-title"
+        className="header-h1"
+      >
+        { namePage }
+      </h2>
       { toggleInput
            && (
              <label htmlFor="search-input">
@@ -34,6 +42,7 @@ export default function Header({ namePage }) {
                  data-testid="search-input"
                  id="search-input"
                  onChange={ handleInput }
+                 className="header__search-input"
                />
              </label>)}
       { (namePage === 'Foods' || namePage === 'Drinks' || namePage.includes('Natio')) && (
@@ -41,6 +50,7 @@ export default function Header({ namePage }) {
           type="button"
           id="search-top-btn"
           onClick={ () => setToggleInput(!toggleInput) }
+          className={ toggleInput ? ACTIVE : INACTIVE }
         >
           <img src={ searchIcon } alt="search-top-btn" data-testid="search-top-btn" />
         </button>)}

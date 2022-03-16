@@ -1,9 +1,24 @@
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    Object.entries(data).forEach((entrie) => {
+      if (entrie[0]
+        .includes('strIngredient')
+          && entrie[1] !== ''
+          && entrie[1] !== null) {
+        setIngredients((prevState) => [
+          ...prevState,
+          { [entrie[0]]: entrie[1] },
+        ]);
+      }
+    });
+  }, []);
 
   return (
     <section
@@ -24,19 +39,30 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
           ? 'recomendation-section__recipe-img'
           : 'recipe-section__recipe-img' }
       />
-      { cardType === 'recomendation'
-        ? (
-          <h4
-            data-testid={ `${i}-recomendation-title` }
-          >
-            {data[`str${keyStrType}`]}
-          </h4>)
-        : (
-          <h4
-            data-testid={ `${i}-card-name` }
-          >
-            {data[`str${keyStrType}`]}
-          </h4>)}
+      <section
+        className="recipe-info"
+      >
+        { cardType === 'recomendation'
+          ? (
+            <h2
+              data-testid={ `${i}-recomendation-title` }
+              className="recomendation-section__recomendation-title"
+            >
+              {data[`str${keyStrType}`]}
+            </h2>)
+          : (
+            <h2
+              data-testid={ `${i}-card-name` }
+              className="recipe-section__recipe-title"
+            >
+              {data[`str${keyStrType}`]}
+            </h2>)}
+        <p className="ingredients-p">
+          Ingredients:
+          {' '}
+          <b>{ingredients && ingredients.length}</b>
+        </p>
+      </section>
     </section>
   );
 }

@@ -1,68 +1,77 @@
-.meals {
+.header, .footer {
   align-items: center;
-  background: #0fa36b;
-  color: #464646;
   display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  justify-content: center;
+  justify-content: space-around;
+  transition: all 0.2s ease-in-out 0s;
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.header {
+  color: #f94892;
+  font-size: 120%;
+  transition: all 0.2s ease-in-out 0s;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.header-h1 {
+  font-style: italic;
+  margin: 0 auto;
+  padding-bottom: 2px;
+  transition: all 0.2s ease-in-out 0s;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+.header__search-input {
+  border: 1px solid #f94892;
+  outline: none;
+  padding: 5%;
+  transition: all 0.2s ease-in-out 0s;
+  width: 90%;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+.header__search-input:-webkit-autofill, .header__search-input:-webkit-autofill:hover {
+  border: 1px solid #f94892;
+  outline: none;
+  padding: 5%;
+  transition: all 0.2s ease-in-out 0s;
+  width: 90%;
 }
 
-@keyframes clink {
+.header__search-input:-webkit-autofill:focus {
+  border: 1px solid #f94892;
+  outline: none;
+  padding: 5%;
+  transition: all 0.2s ease-in-out 0s;
+  width: 90%;
+}
 
-  0% {
-    transform: rotate(-10deg);
-  }
+.header__search-input:-webkit-autofill:active {
+  border: 1px solid #f94892;
+  outline: none;
+  padding: 5%;
+  transition: all 0.2s ease-in-out 0s;
+  width: 90%;
+}
 
-  50% {
-    transform: rotate(20deg);
-  }
+.footer {
+  background-color: white;
+  border-radius: 50px 50px 0 0;
+  border-top: 1px solid rgb(90, 90, 90);
+  bottom: 0;
+  padding-top: 2%;
+  position: fixed;
+  transition: all 0.2s ease-in-out 0s;
+}
 
-  100% {
-    transform: rotate(-10deg);
-  }
+.footer-button {
+  background-color: inherit;
+  border: none;
+  padding: 3%;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.activePage-footer-button {
+  background-color: inherit;
+  border: 0;
+  border-bottom: 3px solid #f94892;
+  padding: 3%;
+  transition: all 0.2s ease-in-out 0s;
 }

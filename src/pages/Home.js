@@ -14,13 +14,11 @@ export default function Home() {
   const { location: { pathname } } = useHistory();
   const [categoryControl, setCategoryControl] = useState('');
   const [categoryCondition, setCategoryCondition] = useState(true);
-  // const [controlAllCategory, setControlAllCategory] = useState(true);
 
   const INITIAL_RECIPES_AMOUNT = 12;
 
   const {
     handleInput,
-    // redirected,
     searchRecipes,
     recipes,
     attemptedSearch,
@@ -67,25 +65,8 @@ export default function Home() {
     }
   }, [attemptedSearch]);
 
-  // const setRecipesAllHome = () => {
-  //   setRecipes(recipes.filter((o) => (
-  //     categories.some((obj) => obj.strCategory === o.strCategory)
-  //   )));
-  // };
-
   const handleClickAllCategory = () => {
     const api = pathname === '/foods' ? 'themealdb' : 'thecocktaildb';
-    // if (!categoryControl && controlAllCategory) {
-    //   setRecipesAllHome();
-    //   setControlAllCategory(false);
-    // } else if (controlAllCategory) {
-    //   fetchDefault(api, true);
-    //   setControlAllCategory(false);
-    // } else {
-    //   fetchDefault(api);
-    //   setControlAllCategory(true);
-    // }
-    // setCategoryControl('');
     fetchDefault(api);
   };
 
@@ -109,27 +90,8 @@ export default function Home() {
           pathname.substring(1).charAt(0).toUpperCase() + pathname.substring(2)
         }
       />
-      <section>
-        <section>
-          { recipes && categories.length > 0 && categories.map((o) => (
-            <button
-              type="button"
-              id={ o.strCategory }
-              data-testid={ `${o.strCategory}-category-filter` }
-              key={ o.strCategory }
-              onClick={ handleClickCategory }
-            >
-              {o.strCategory}
-            </button>
-          )) }
-          <button
-            type="button"
-            data-testid="All-category-filter"
-            onClick={ handleClickAllCategory }
-          >
-            All Categories
-          </button>
-        </section>
+      <section className="home-section">
+        <h4 className="searchby-title">Search By:</h4>
         <section className="searchFilters-section">
           <label htmlFor="Ingredient">
             Ingredient
@@ -139,6 +101,7 @@ export default function Home() {
               id="Ingredient"
               data-testid="ingredient-search-radio"
               onClick={ handleInput }
+              className="filter-options-input"
             />
           </label>
           <label htmlFor="Name">
@@ -149,6 +112,7 @@ export default function Home() {
               id="Name"
               data-testid="name-search-radio"
               onClick={ handleInput }
+              className="filter-options-input"
             />
           </label>
           <label htmlFor="First letter">
@@ -159,6 +123,7 @@ export default function Home() {
               id="First letter"
               data-testid="first-letter-search-radio"
               onClick={ handleInput }
+              className="filter-options-input"
             />
           </label>
           <button
@@ -170,20 +135,47 @@ export default function Home() {
                 : 'thecocktaildb';
               searchRecipes(searchValue, searchType, api);
             } }
+            className="home-button"
           >
             Search
           </button>
         </section>
+        <section className="categories-filters">
+          <h4 className="filter-title">Categories:</h4>
+          { recipes && categories.length > 0 && categories.map((o) => (
+            <button
+              type="button"
+              id={ o.strCategory }
+              data-testid={ `${o.strCategory}-category-filter` }
+              key={ o.strCategory }
+              onClick={ handleClickCategory }
+              className="home-button"
+            >
+              {o.strCategory}
+            </button>
+          )) }
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ handleClickAllCategory }
+            className="home-button"
+          >
+            All Categories
+          </button>
+        </section>
       </section>
-      {recipes && recipes.slice(0, INITIAL_RECIPES_AMOUNT).map((recipe, i) => (
-        <Recipe
-          key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
-          id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
-          data={ recipe }
-          i={ i }
-          type={ pathname }
-          keyStrType={ KEY_STR }
-        />))}
+      <section className="recipes-section">
+        {recipes && recipes.slice(0, INITIAL_RECIPES_AMOUNT).map((recipe, i) => (
+          <Recipe
+            key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
+            id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
+            data={ recipe }
+            i={ i }
+            type={ pathname }
+            keyStrType={ KEY_STR }
+          />
+        ))}
+      </section>
       <Footer />
     </>
   );
