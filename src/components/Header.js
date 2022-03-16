@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
@@ -6,7 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 import homeContext from '../contexts/homeContext';
 
 export default function Header({ namePage }) {
-  const [toggleInput, setToggleInput] = useState();
+  const { toggleInput, setToggleInput } = useContext(homeContext);
   const history = useHistory();
   const INACTIVE = 'header-button';
   const ACTIVE = 'activePage-header-button';

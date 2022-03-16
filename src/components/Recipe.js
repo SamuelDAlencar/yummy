@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
-import loader from '../images/loader.gif';
 import homeContext from '../contexts/homeContext';
+import LoadingRecipe from './LoadingRecipe';
 
 export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
@@ -82,14 +82,7 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
               </p>
             </section>
           </>)
-        : (
-          <img
-            style={ {
-              margin: '0',
-              width: '50%' } }
-            alt="loader"
-            src={ loader }
-          />)}
+        : <LoadingRecipe />}
     </section>
   );
 }

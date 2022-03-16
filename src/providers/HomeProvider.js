@@ -13,6 +13,7 @@ export default function HomeProvider({ children }) {
     pathname === '/foods' ? 'themealdb' : 'thecocktaildb',
   );
   const [searchType, setSearchType] = useState();
+  const [toggleInput, setToggleInput] = useState();
   const [searchValue, setSearchValue] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [attemptedSearch, setAttemptedSearch] = useState(false);
@@ -33,6 +34,7 @@ export default function HomeProvider({ children }) {
   };
 
   const searchRecipes = async (value, type, api) => {
+    setToggleInput(false);
     if (type === 'First letter' && value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (value.length > 0) {
@@ -67,6 +69,8 @@ export default function HomeProvider({ children }) {
         categories,
         searchType,
         searchValue,
+        toggleInput,
+        setToggleInput,
         setLoading,
         setAttemptedSearch,
         searchRecipes,

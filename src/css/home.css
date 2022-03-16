@@ -1,8 +1,24 @@
+.search-section {
+  padding-bottom: 20px;
+}
+
 .searchFilters-section {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   justify-content: space-around;
   width: 100%;
+}
+
+.searchFilters-section label {
+  align-items: center;
+  border: 0;
+  border-right: 1px solid silver;
+  display: flex;
+  padding-right: 8px;
+}
+
+.searchFilters-section label:last-of-type {
+  border: 0;
 }
 
 .categories-filters {
@@ -12,12 +28,19 @@
   padding: 3%;
 }
 
-.searchby-title, .filter-title {
+.searchby-title {
   margin: 0 0 3%;
   padding-top: 3%;
 }
 
+.filter-title {
+  border-top: 1px solid silver;
+  margin: 0;
+  padding-top: 7%;
+}
+
 .home-section {
+  margin-bottom: 20px;
   padding: 10px;
 }
 
@@ -33,10 +56,53 @@
   transition: all 0.1s ease-in-out 0s;
 }
 
+.search-button {
+  background-color: #f94892;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 5px 5px 15px #bebebe;
+  color: white;
+  font-size: 90%;
+  margin: 0 0 2%;
+  padding: 20px;
+  transition: all 0.1s ease-in-out 0s;
+  width: 100%;
+}
+
 .home-button:hover {
   background-color: #c03971;
   font-size: 100%;
   padding: 12px;
+}
+
+.filter-options-input {
+  appearance: none;
+  background-color: white;
+  border: 0.15em solid #c03971;
+  border-radius: 50%;
+  color: #c03971;
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  height: 1.15em;
+  margin: 1px 5px;
+  place-content: center;
+  width: 1.15em;
+}
+
+.filter-options-input:before {
+  background-color: #c03971;
+  border-radius: 50%;
+  box-shadow: inset 1em 1em var(#c03971);
+  content: '';
+  height: 17px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  width: 17px;
+}
+
+.filter-options-input:checked:before {
+  transform: scale(1);
 }
 
 .recipes-section {
@@ -79,22 +145,18 @@
   width: 50%;
 }
 
-/* ::-webkit-scrollbar {
-  width: 1px;
+::-webkit-scrollbar {
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
-  width: 1px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #f94892;
-  transition: 5s;
-  width: 1px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #f94892;
-  width: 1px;
-} */
+}

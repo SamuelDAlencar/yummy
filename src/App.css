@@ -6,10 +6,10 @@
 }
 
 .header {
-  border-bottom: 1px solid silver;
   color: #f94892;
   flex-direction: column;
   font-size: 120%;
+  padding-top: 15px;
   transition: all 0.2s ease-in-out 0s;
 }
 
@@ -30,12 +30,13 @@
 
 .header__search-input {
   border: 1px solid #f94892;
-  font-size: 95%;
-  margin: 5% auto;
+  border-radius: 3px;
+  font-size: 80%;
+  margin: 5% auto 1%;
   outline: none;
-  padding: 3%;
+  padding: 12px 20px;
   transition: all 0.2s ease-in-out 0s;
-  width: 80%;
+  width: 70%;
 }
 
 .header__search-input:-webkit-autofill, .header__search-input:-webkit-autofill:hover {
@@ -69,7 +70,7 @@
 .header-button {
   background-color: inherit;
   border: none;
-  padding: 3%;
+  padding: 1% 5%;
   transition: all 0.2s ease-in-out 0s;
 }
 
@@ -77,25 +78,31 @@
   background-color: inherit;
   border: none;
   border-radius: 50%;
+  font-size: 75%;
   padding: 1%;
   transition: all 0.2s ease-in-out 0s;
   width: 20%;
 }
 
+.footer-button img, .activePage-footer-button img {
+  width: 55%;
+}
+
 .activePage-footer-button {
   background-color: inherit;
   border: 0;
-  border-bottom: 3px solid #f94892;
+  border-bottom: 1px solid #f94892;
   border-radius: 50% 50% 0 0;
   color: #f94892;
+  font-size: 75%;
   transition: all 0.2s ease-in-out 0s;
-  width: 20%;
+  width: 22%;
 }
 
 .activePage-header-button {
   background-color: inherit;
   border: 0;
   border-bottom: 3px solid #f94892;
-  padding: 3%;
+  padding: 1% 5%;
   transition: all 0.2s ease-in-out 0s;
 }

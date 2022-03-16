@@ -1,6 +1,5 @@
 .loading-section {
   align-items: center;
-  background-color: #fbe5e5;
   background-size: cover;
   bottom: 0;
   display: flex;
@@ -18,7 +17,6 @@
 }
 
 .loading-img {
-  background-color: #fbe5e5;
   margin: 50% auto;
   text-align: center;
 }

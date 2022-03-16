@@ -28,6 +28,7 @@ export default function Home() {
     setRecipes,
     searchValue,
     searchType,
+    toggleInput,
   } = useContext(homeContext);
 
   const {
@@ -97,55 +98,59 @@ export default function Home() {
         }
       />
       <section className="home-section">
-        <h3 className="searchby-title">Search By:</h3>
-        <section className="searchFilters-section">
-          <label htmlFor="Ingredient">
-            Ingredient
-            <input
-              name="filter-radio"
-              type="radio"
-              id="Ingredient"
-              data-testid="ingredient-search-radio"
-              onClick={ handleInput }
-              className="filter-options-input"
-            />
-          </label>
-          <label htmlFor="Name">
-            Name
-            <input
-              name="filter-radio"
-              type="radio"
-              id="Name"
-              data-testid="name-search-radio"
-              onClick={ handleInput }
-              className="filter-options-input"
-            />
-          </label>
-          <label htmlFor="First letter">
-            First letter
-            <input
-              name="filter-radio"
-              type="radio"
-              id="First letter"
-              data-testid="first-letter-search-radio"
-              onClick={ handleInput }
-              className="filter-options-input"
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="exec-search-btn"
-            onClick={ () => {
-              const api = pathname === '/foods'
-                ? 'themealdb'
-                : 'thecocktaildb';
-              searchRecipes(searchValue, searchType, api);
-            } }
-            className="home-button"
-          >
-            Search
-          </button>
-        </section>
+        {toggleInput && (
+          <section className="search-section">
+            <h3 className="searchby-title">
+              <button
+                type="button"
+                data-testid="exec-search-btn"
+                onClick={ () => {
+                  const api = pathname === '/foods'
+                    ? 'themealdb'
+                    : 'thecocktaildb';
+                  searchRecipes(searchValue, searchType, api);
+                } }
+                className="search-button"
+              >
+                <b>Search by:</b>
+              </button>
+            </h3>
+            <section className="searchFilters-section">
+              <label htmlFor="Ingredient">
+                <input
+                  name="filter-radio"
+                  type="radio"
+                  id="Ingredient"
+                  data-testid="ingredient-search-radio"
+                  onClick={ handleInput }
+                  className="filter-options-input"
+                />
+                Ingredient
+              </label>
+              <label htmlFor="Name">
+                <input
+                  name="filter-radio"
+                  type="radio"
+                  id="Name"
+                  data-testid="name-search-radio"
+                  onClick={ handleInput }
+                  className="filter-options-input"
+                />
+                Name
+              </label>
+              <label htmlFor="First letter">
+                <input
+                  name="filter-radio"
+                  type="radio"
+                  id="First letter"
+                  data-testid="first-letter-search-radio"
+                  onClick={ handleInput }
+                  className="filter-options-input"
+                />
+                First letter
+              </label>
+            </section>
+          </section>)}
         <h3 className="filter-title">Categories:</h3>
         <section className="categories-filters">
           <button
