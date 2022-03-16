@@ -25,6 +25,7 @@ export default function Footer() {
         }
       >
         <img src={ drinkIcon } alt="meal icon" data-testid="drinks-bottom-btn" />
+        Drinks
       </button>
       <button
         onClick={ () => history.push('/explore') }
@@ -36,6 +37,7 @@ export default function Footer() {
         }
       >
         <img src={ exploreIcon } alt="explore icon" data-testid="explore-bottom-btn" />
+        Explore
       </button>
       <button
         onClick={ () => history.push('/foods') }
@@ -47,6 +49,7 @@ export default function Footer() {
         }
       >
         <img src={ mealIcon } alt="meal icon" data-testid="food-bottom-btn" />
+        Foods
       </button>
     </footer>
   );

@@ -17,23 +17,17 @@ export default function HomeProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [attemptedSearch, setAttemptedSearch] = useState(false);
   const [categories, setCategories] = useState([]);
-
-  // const setRecipesAll = (arr) => {
-  //   setRecipes(arr.filter((o) => (
-  //     categories.some((obj) => obj.strCategory === o.strCategory)
-  //   )));
-  // };
+  const [loading, setLoading] = useState(false);
 
   const fetchDefault = async (api) => {
+    setLoading(true);
     const data = await fetchRecipes(api);
     const arr = Object.values(data)[0];
-    // if (!filters) {
-    //   setRecipes(arr);
-    // } else setRecipesAll(arr);
     setRecipes(arr);
   };
 
   const fetchDefaultCategories = async (type) => {
+    setLoading(true);
     const categoriesReturn = await fetchCategories(type);
     setCategories(categoriesReturn);
   };
@@ -42,6 +36,7 @@ export default function HomeProvider({ children }) {
     if (type === 'First letter' && value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (value.length > 0) {
+      setLoading(true);
       const apiReturn = await fetchRecipes(api, value, type);
 
       if (apiReturn === undefined) {
@@ -65,10 +60,14 @@ export default function HomeProvider({ children }) {
   return (
     <homeContext.Provider
       value={ {
+        loading,
         recipes,
         attemptedSearch,
         apiType,
         categories,
+        searchType,
+        searchValue,
+        setLoading,
         setAttemptedSearch,
         searchRecipes,
         handleInput,
@@ -76,8 +75,6 @@ export default function HomeProvider({ children }) {
         setApiType,
         fetchDefault,
         fetchDefaultCategories,
-        searchType,
-        searchValue,
       } }
     >
       { children }

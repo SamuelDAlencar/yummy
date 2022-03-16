@@ -7,7 +7,6 @@ import Recipe from '../components/Recipe';
 import '../css/home.css';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
-// import Loading from '../components/Loading';
 
 export default function Home() {
   const history = useHistory();
@@ -18,6 +17,7 @@ export default function Home() {
   const INITIAL_RECIPES_AMOUNT = 12;
 
   const {
+    setLoading,
     handleInput,
     searchRecipes,
     recipes,
@@ -34,6 +34,8 @@ export default function Home() {
     KEY_STR,
   } = useContext(detailedRecipeContext);
 
+  useEffect(() => setLoading(true), [recipes]);
+
   useEffect(() => {
     const api = pathname.includes('/food')
       ? 'themealdb'
@@ -46,6 +48,7 @@ export default function Home() {
       searchRecipes(prevWay.filt, prevWay.type, api);
       localStorage.setItem('prevWay', '');
     } else { fetchDefault(api); }
+    setLoading(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -57,6 +60,7 @@ export default function Home() {
       }
     }
     if (!categoryCondition) setCategoryCondition(true);
+    setLoading(false);
   }, [recipes]);
 
   useEffect(() => {
@@ -66,11 +70,13 @@ export default function Home() {
   }, [attemptedSearch]);
 
   const handleClickAllCategory = () => {
+    setLoading(true);
     const api = pathname === '/foods' ? 'themealdb' : 'thecocktaildb';
     fetchDefault(api);
   };
 
   const handleClickCategory = async ({ target: { id } }) => {
+    setLoading(true);
     setCategoryCondition(false);
     const api = pathname === '/foods' ? 'themealdb' : 'thecocktaildb';
     if (categoryControl !== id) {
@@ -91,7 +97,7 @@ export default function Home() {
         }
       />
       <section className="home-section">
-        <h4 className="searchby-title">Search By:</h4>
+        <h3 className="searchby-title">Search By:</h3>
         <section className="searchFilters-section">
           <label htmlFor="Ingredient">
             Ingredient
@@ -140,8 +146,16 @@ export default function Home() {
             Search
           </button>
         </section>
+        <h3 className="filter-title">Categories:</h3>
         <section className="categories-filters">
-          <h4 className="filter-title">Categories:</h4>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ handleClickAllCategory }
+            className="home-button"
+          >
+            All Categories
+          </button>
           { recipes && categories.length > 0 && categories.map((o) => (
             <button
               type="button"
@@ -154,14 +168,6 @@ export default function Home() {
               {o.strCategory}
             </button>
           )) }
-          <button
-            type="button"
-            data-testid="All-category-filter"
-            onClick={ handleClickAllCategory }
-            className="home-button"
-          >
-            All Categories
-          </button>
         </section>
       </section>
       <section className="recipes-section">

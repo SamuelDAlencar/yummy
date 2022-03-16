@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import loader from '../images/loader.gif';
+import homeContext from '../contexts/homeContext';
 
 export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
   const [ingredients, setIngredients] = useState([]);
+  const { loading } = useContext(homeContext);
 
   useEffect(() => {
     Object.entries(data).forEach((entrie) => {
@@ -31,38 +34,62 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
         ? 'recomendation-section'
         : 'recipe-section' }
     >
-      <img
-        data-testid={ `${i}-card-img` }
-        src={ data[`str${keyStrType}Thumb`] }
-        alt={ `${type}_thumb` }
-        className={ cardType === 'recomendation'
-          ? 'recomendation-section__recipe-img'
-          : 'recipe-section__recipe-img' }
-      />
-      <section
-        className="recipe-info"
-      >
-        { cardType === 'recomendation'
-          ? (
-            <h2
-              data-testid={ `${i}-recomendation-title` }
-              className="recomendation-section__recomendation-title"
+      {(!loading && data[`str${keyStrType}Thumb`])
+        ? (
+          <>
+            <img
+              data-testid={ `${i}-card-img` }
+              src={ data[`str${keyStrType}Thumb`] }
+              alt={ `${type}_thumb` }
+              className={ cardType === 'recomendation'
+                ? 'recomendation-section__recipe-img'
+                : 'recipe-section__recipe-img' }
+            />
+            <section
+              className="recipe-info"
             >
-              {data[`str${keyStrType}`]}
-            </h2>)
-          : (
-            <h2
-              data-testid={ `${i}-card-name` }
-              className="recipe-section__recipe-title"
-            >
-              {data[`str${keyStrType}`]}
-            </h2>)}
-        <p className="ingredients-p">
-          Ingredients:
-          {' '}
-          <b>{ingredients && ingredients.length}</b>
-        </p>
-      </section>
+              {cardType === 'recomendation'
+                ? (
+                  <h3
+                    data-testid={ `${i}-recomendation-title` }
+                    className="recomendation-section__recomendation-title"
+                  >
+                    {data[`str${keyStrType}`]}
+                  </h3>)
+                : (
+                  <h3
+                    data-testid={ `${i}-card-name` }
+                    className="recipe-section__recipe-title"
+                  >
+                    {data[`str${keyStrType}`]}
+                  </h3>)}
+              { (ingredients && data.strArea)
+              && (
+                <p className="info-p">
+                  Nationality:
+                  {' '}
+                  <b>{ingredients && data.strArea}</b>
+                </p>)}
+              <p className="info-p">
+                Category:
+                {' '}
+                <b>{ingredients && data.strCategory}</b>
+              </p>
+              <p className="info-p">
+                Ingredients:
+                {' '}
+                <b>{ingredients && ingredients.length}</b>
+              </p>
+            </section>
+          </>)
+        : (
+          <img
+            style={ {
+              margin: '0',
+              width: '50%' } }
+            alt="loader"
+            src={ loader }
+          />)}
     </section>
   );
 }
