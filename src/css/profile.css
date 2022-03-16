@@ -1,0 +1,18 @@
+.container-button {
+  background-color: #e60965;
+  display: block;
+  border: 0;
+  bottom: 0;
+  color: white;
+  cursor: pointer;
+  font-size: 150%;
+  padding: 5% 20%;
+  transition: all 0.2s ease-in-out 0s;
+  width: 100%;
+  text-align: center;
+}
+
+.profile {
+  display: flex;
+  
+}
