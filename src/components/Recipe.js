@@ -57,7 +57,7 @@ export default function Recipe({
               </h3>
               {type === '/foods'
                 ? (
-                  <p className={ `${cardType}Title-h3` }>
+                  <p className={ `${cardType}Info-p` }>
                     Nationality:
                     {' '}
                     <b>{data.strArea}</b>
