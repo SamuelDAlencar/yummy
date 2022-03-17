@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import __perfil from '../images/__perfil.svg';
+import __lupa from '../images/__lupa.svg';
+import __lupaRosa from '../images/__lupaRosa.svg';
 import homeContext from '../contexts/homeContext';
 
 export default function Header({ namePage }) {
   const { toggleInput, setToggleInput } = useContext(homeContext);
   const history = useHistory();
-  const INACTIVE = 'header-button';
-  const ACTIVE = 'activePage-header-button';
 
   const {
     handleInput,
@@ -22,10 +21,10 @@ export default function Header({ namePage }) {
           type="button"
           id="profile-top-btn"
           onClick={ () => history.push('/profile') }
-          className={ INACTIVE }
+          className="headerButton-button"
         >
           <img
-            src={ profileIcon }
+            src={ __perfil }
             data-testid="profile-top-btn"
             alt="profile-top-btn"
           />
@@ -43,15 +42,15 @@ export default function Header({ namePage }) {
             type="button"
             id="search-top-btn"
             onClick={ () => setToggleInput(!toggleInput) }
-            className={ toggleInput ? ACTIVE : INACTIVE }
+            className="headerButton-button"
           >
             <img
-              src={ searchIcon }
+              src={ toggleInput ? __lupaRosa : __lupa }
               alt="search-top-btn"
               data-testid="search-top-btn"
               className={ toggleInput
-                ? 'active-search-button-img'
-                : 'iactive-search-button-img' }
+                ? 'activePageSearchButton-img'
+                : 'inactivePageSearchButton-img' }
             />
           </button>)}
       </section>

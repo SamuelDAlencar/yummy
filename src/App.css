@@ -72,11 +72,12 @@ html, body {
   transition: all 0.2s ease-in-out 0s;
 }
 
-.header-button {
+.headerButton-button {
   background-color: inherit;
   border: none;
   padding: 1% 5%;
-  transition: all 0.2s ease-in-out 0s;
+  transition: all 0.1s ease-in 0s;
+  width: 22%;
 }
 
 .footer-button {
@@ -96,20 +97,31 @@ html, body {
 .activePage-footer-button {
   background-color: inherit;
   border: 0;
-  border-bottom: 1px solid #f94892;
   border-radius: 50% 50% 0 0;
   color: #f94892;
   font-size: 75%;
   transition: all 0.2s ease-in-out 0s;
-  width: 22%;
+  width: 25%;
 }
 
-.activePage-header-button {
+.activePageSearchButton-img {
   background-color: inherit;
   border: 0;
-  border-bottom: 3px solid #f94892;
-  padding: 1% 5%;
-  transition: all 0.2s ease-in-out 0s;
+  padding: 2% 6%;
+  transition: all 0.1s ease-in 0s;
+  width: 100%;
+}
+
+.inactivePageSearchButton-img {
+  width: 88%;
+}
+
+.shareAndFavBtn-section {
+  display: flex;
+}
+
+.linkCopied-p {
+  color: #f94892;
 }
 
 
