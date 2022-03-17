@@ -49,9 +49,10 @@
 }
 
 .ingredients-ul {
-  border-top: 1px solid #a3a3a3;
+  border-top: 1px solid rgb(218, 218, 218);
   list-style: none;
-  padding-top: 3%;
+  margin: 0 5% 8%;
+  padding: 3% 5%;
 }
 
 .ingredientsTitle-h2 {
@@ -76,12 +77,13 @@
   border-bottom: 1px solid rgb(218, 218, 218);
   border-top: 1px solid rgb(218, 218, 218);
   margin: 0 5% 8%;
-  padding: 5%;
+  padding: 3% 5%;
 }
 
 .instructionsTitle-h2 {
   color: rgb(54, 54, 54);
-  margin: 0 -8% 2%;
+  margin: 5% -8%;
+  width: 100%;
 }
 
 .instructions-p {
@@ -98,7 +100,7 @@
 .recomendationsTitle-h2 {
   color: rgb(54, 54, 54);
   margin: 0;
-  padding: 2%;
+  padding: 0 2% 4%;
 }
 
 .recomendations-section {
@@ -107,7 +109,7 @@
   border-radius: 5% 5% 0 0;
   border-top: 1px solid rgb(190, 190, 190);
   display: flex;
-  margin: 5% 5% 12%;
+  margin: 5% 5% 15%;
   overflow-x: scroll;
 }
 
