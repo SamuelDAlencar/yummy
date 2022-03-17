@@ -22,13 +22,13 @@ export default function Profile() {
           src={ profileIcon }
           alt="profile-top-btn"
         />
-        <inpu
+        <button
           name="lar"
           className="profile-picture-button"
           type="button"
         >
-          Profile Picture
-        </inpu>
+          Edit picture
+        </button>
       </div>
       <h2
         className="profile-email"
