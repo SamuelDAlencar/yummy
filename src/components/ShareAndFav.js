@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import __compartilharRosa from '../images/__compartilharRosa.svg';
+import __compartilharRosa2 from '../images/__compartilharRosa2.svg';
+import __coraçãoRosa from '../images/__coraçãoRosa.svg';
+import __coraçãoRosa2 from '../images/__coraçãoRosa2.svg';
 import favoriteContext from '../contexts/favoriteContext';
 import handleConditionalShare from '../helpers/handleConditionalShare';
 
@@ -11,7 +12,7 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
   alcoholicOrNot, image }) {
   const { favorite, setFavorite } = useContext(favoriteContext);
   const [copied, setCopied] = useState();
-  const MESSAGE_TIMEOUT = 5000;
+  const MESSAGE_TIMEOUT = 1500;
   const { location: { pathname } } = useHistory();
   const { origin } = window.location;
 
@@ -41,49 +42,49 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
     page === '/done-recipes'
       ? (
         <>
+          {copied && <p className="linkCopied-p">Link copied!</p>}
           <input
             data-testid={ `${i}-horizontal-share-btn` }
             type="image"
             onClick={ handleShare }
-            src={ shareIcon }
+            src={ copied ? __compartilharRosa2 : __compartilharRosa }
             alt="share-btn"
           />
-          {copied && <p>Link copied!</p>}
         </>)
       : (
-        <section className="shareAndFavBtn-section">
-          <input
-            data-testid={ page === '/favorite-recipes' ? `${i}-horizontal-share-btn`
-              : 'share-btn' }
-            type="image"
-            onClick={ handleShare }
-            src={ shareIcon }
-            alt="share-btn"
-            className="favBtn-input"
-          />
-          <input
-            src={ (favorite.some((fav) => fav.id === id))
-              ? blackHeartIcon
-              : whiteHeartIcon }
-            alt="favorite-btn"
-            className="shareBtn-input"
-            data-testid={
-              page === '/favorite-recipes'
-                ? `${i}-horizontal-favorite-btn` : 'favorite-btn'
-            }
-            type="image"
-            onClick={ () => handleFavorite({
-              id,
-              type,
-              nationality: area || '',
-              category,
-              alcoholicOrNot: alcoholicOrNot || '',
-              name,
-              image,
-            }) }
-          />
-          {copied && <b>Link copied!</b>}
-        </section>)
+        <>
+          <b className="linkCopied-p">{copied && 'Link copied!'}</b>
+          <section className="shareAndFavBtn-section">
+            <input
+              data-testid={ page === '/favorite-recipes' ? `${i}-horizontal-share-btn`
+                : 'share-btn' }
+              type="image"
+              onClick={ handleShare }
+              src={ copied ? __compartilharRosa2 : __compartilharRosa }
+              alt="share-btn"
+              className="favBtn-input"
+            />
+            <input
+              src={ (favorite.some((fav) => fav.id === id))
+                ? __coraçãoRosa2
+                : __coraçãoRosa }
+              alt="favorite-btn"
+              className="shareBtn-input"
+              data-testid={ page === '/favorite-recipes'
+                ? `${i}-horizontal-favorite-btn` : 'favorite-btn' }
+              type="image"
+              onClick={ () => handleFavorite({
+                id,
+                type,
+                nationality: area || '',
+                category,
+                alcoholicOrNot: alcoholicOrNot || '',
+                name,
+                image,
+              }) }
+            />
+          </section>
+        </>)
   );
 }
 
