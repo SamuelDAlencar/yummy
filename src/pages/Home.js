@@ -7,20 +7,18 @@ import Recipe from '../components/Recipe';
 import '../css/home.css';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
-// import Loading from '../components/Loading';
 
 export default function Home() {
   const history = useHistory();
   const { location: { pathname } } = useHistory();
   const [categoryControl, setCategoryControl] = useState('');
   const [categoryCondition, setCategoryCondition] = useState(true);
-  // const [controlAllCategory, setControlAllCategory] = useState(true);
 
   const INITIAL_RECIPES_AMOUNT = 12;
 
   const {
+    setLoading,
     handleInput,
-    // redirected,
     searchRecipes,
     recipes,
     attemptedSearch,
@@ -30,11 +28,14 @@ export default function Home() {
     setRecipes,
     searchValue,
     searchType,
+    toggleInput,
   } = useContext(homeContext);
 
   const {
     KEY_STR,
   } = useContext(detailedRecipeContext);
+
+  useEffect(() => setLoading(true), [recipes]);
 
   useEffect(() => {
     const api = pathname.includes('/food')
@@ -48,6 +49,7 @@ export default function Home() {
       searchRecipes(prevWay.filt, prevWay.type, api);
       localStorage.setItem('prevWay', '');
     } else { fetchDefault(api); }
+    setLoading(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export default function Home() {
       }
     }
     if (!categoryCondition) setCategoryCondition(true);
+    setLoading(false);
   }, [recipes]);
 
   useEffect(() => {
@@ -67,29 +70,14 @@ export default function Home() {
     }
   }, [attemptedSearch]);
 
-  // const setRecipesAllHome = () => {
-  //   setRecipes(recipes.filter((o) => (
-  //     categories.some((obj) => obj.strCategory === o.strCategory)
-  //   )));
-  // };
-
   const handleClickAllCategory = () => {
+    setLoading(true);
     const api = pathname === '/foods' ? 'themealdb' : 'thecocktaildb';
-    // if (!categoryControl && controlAllCategory) {
-    //   setRecipesAllHome();
-    //   setControlAllCategory(false);
-    // } else if (controlAllCategory) {
-    //   fetchDefault(api, true);
-    //   setControlAllCategory(false);
-    // } else {
-    //   fetchDefault(api);
-    //   setControlAllCategory(true);
-    // }
-    // setCategoryControl('');
     fetchDefault(api);
   };
 
   const handleClickCategory = async ({ target: { id } }) => {
+    setLoading(true);
     setCategoryCondition(false);
     const api = pathname === '/foods' ? 'themealdb' : 'thecocktaildb';
     if (categoryControl !== id) {
@@ -104,9 +92,84 @@ export default function Home() {
 
   return (
     <>
-      <Header />
-      <section>
-        <section>
+      <Header
+        namePage={
+          pathname.substring(1).charAt(0).toUpperCase() + pathname.substring(2)
+        }
+      />
+      <section className="home-section">
+        {toggleInput && (
+          <section className="search-section">
+            <h3 className="searchButton-title">
+              <button
+                type="button"
+                data-testid="exec-search-btn"
+                onClick={ () => {
+                  const api = pathname === '/foods'
+                    ? 'themealdb'
+                    : 'thecocktaildb';
+                  searchRecipes(searchValue, searchType, api);
+                } }
+                className="search-button"
+              >
+                <b>Search by:</b>
+              </button>
+            </h3>
+            <section className="searchOptions-section">
+              <label
+                htmlFor="Ingredient"
+                className="searchOption-label"
+              >
+                <input
+                  name="filter-radio"
+                  type="radio"
+                  id="Ingredient"
+                  data-testid="ingredient-search-radio"
+                  onClick={ handleInput }
+                  className="searchOption-input"
+                />
+                Ingredient
+              </label>
+              <label
+                htmlFor="Name"
+                className="searchOption-label"
+              >
+                <input
+                  name="filter-radio"
+                  type="radio"
+                  id="Name"
+                  data-testid="name-search-radio"
+                  onClick={ handleInput }
+                  className="searchOption-input"
+                />
+                Name
+              </label>
+              <label
+                htmlFor="First letter"
+                className="searchOption-label"
+              >
+                <input
+                  name="filter-radio"
+                  type="radio"
+                  id="First letter"
+                  data-testid="first-letter-search-radio"
+                  onClick={ handleInput }
+                  className="searchOption-input"
+                />
+                First letter
+              </label>
+            </section>
+          </section>)}
+        <h3 className="categoriesTitle-h3">Categories:</h3>
+        <section className="recipesCategories-section">
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ handleClickAllCategory }
+            className="genericHome-button"
+          >
+            All Categories
+          </button>
           { recipes && categories.length > 0 && categories.map((o) => (
             <button
               type="button"
@@ -114,72 +177,26 @@ export default function Home() {
               data-testid={ `${o.strCategory}-category-filter` }
               key={ o.strCategory }
               onClick={ handleClickCategory }
+              className="genericHome-button"
             >
               {o.strCategory}
             </button>
           )) }
-          <button
-            type="button"
-            data-testid="All-category-filter"
-            onClick={ handleClickAllCategory }
-          >
-            All Categories
-          </button>
-        </section>
-        <section className="searchFilters-section">
-          <label htmlFor="Ingredient">
-            Ingredient
-            <input
-              name="filter-radio"
-              type="radio"
-              id="Ingredient"
-              data-testid="ingredient-search-radio"
-              onClick={ handleInput }
-            />
-          </label>
-          <label htmlFor="Name">
-            Name
-            <input
-              name="filter-radio"
-              type="radio"
-              id="Name"
-              data-testid="name-search-radio"
-              onClick={ handleInput }
-            />
-          </label>
-          <label htmlFor="First letter">
-            First letter
-            <input
-              name="filter-radio"
-              type="radio"
-              id="First letter"
-              data-testid="first-letter-search-radio"
-              onClick={ handleInput }
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="exec-search-btn"
-            onClick={ () => {
-              const api = pathname === '/foods'
-                ? 'themealdb'
-                : 'thecocktaildb';
-              searchRecipes(searchValue, searchType, api);
-            } }
-          >
-            Search
-          </button>
         </section>
       </section>
-      {recipes && recipes.map((recipe, i) => i < INITIAL_RECIPES_AMOUNT
-          && <Recipe
+      <section className="recipes-section">
+        {recipes && recipes.slice(0, INITIAL_RECIPES_AMOUNT).map((recipe, i) => (
+          <Recipe
             key={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             id={ pathname === '/foods' ? recipe.idMeal : recipe.idDrink }
             data={ recipe }
             i={ i }
             type={ pathname }
+            cardType="recipe"
             keyStrType={ KEY_STR }
-          />)}
+          />
+        ))}
+      </section>
       <Footer />
     </>
   );

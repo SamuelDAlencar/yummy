@@ -90,7 +90,7 @@ export default function DetailedRecipeProvider({ children }) {
 
   const startRecipeButton = () => {
     const prevItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
+    console.log(prevItem);
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       [INV_CURR_PAGE]: prevItem[INV_CURR_PAGE],
       [CURR_LS_KEY]: {

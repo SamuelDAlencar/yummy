@@ -99,7 +99,7 @@ export default function Login({ history }) {
             disabled={ validator }
             onClick={ handleClick }
           >
-            Get started!
+            Hop in!
           </button>
         </section>
       </div>

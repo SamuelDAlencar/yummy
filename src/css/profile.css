@@ -24,7 +24,9 @@
 }
 
 .profile-picture-button {
-  background-color: #fbe5e5;
+  background-color: inherit;
+  border: 0;
+  border-bottom: 1px solid black;
   margin-top: 20px;
 }
 

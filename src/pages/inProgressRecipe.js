@@ -91,6 +91,7 @@ export default function InProgressRecipe() {
   return (
     recipe
       && (
+
         <section
           className="recipe-section"
         >

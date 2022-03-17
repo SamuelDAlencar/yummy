@@ -1,50 +1,70 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import homeContext from '../contexts/homeContext';
 
-export default function Header() {
-  const [toggleInput, setToggleInput] = useState();
+export default function Header({ namePage }) {
+  const { toggleInput, setToggleInput } = useContext(homeContext);
   const history = useHistory();
-  const { location: { pathname } } = history;
-  let namePage = pathname.substring(1);
-  namePage = namePage.charAt(0).toUpperCase() + namePage.substring(1);
+  const INACTIVE = 'header-button';
+  const ACTIVE = 'activePage-header-button';
+
   const {
     handleInput,
   } = useContext(homeContext);
 
   return (
     <header className="header">
-      <button
-        type="button"
-        id="profile-top-btn"
-        onClick={ () => history.push('/profile') }
-      >
-        <img
-          src={ profileIcon }
-          data-testid="profile-top-btn"
-          alt="profile-top-btn"
-        />
-      </button>
-      <h2 data-testid="page-title">{ namePage }</h2>
+      <section className="header-main-content">
+        <button
+          type="button"
+          id="profile-top-btn"
+          onClick={ () => history.push('/profile') }
+          className={ INACTIVE }
+        >
+          <img
+            src={ profileIcon }
+            data-testid="profile-top-btn"
+            alt="profile-top-btn"
+          />
+        </button>
+        <h2
+          data-testid="page-title"
+          className="header-h1"
+        >
+          { namePage }
+        </h2>
+        { (namePage === 'Foods'
+        || namePage === 'Drinks'
+        || namePage.includes('Natio')) && (
+          <button
+            type="button"
+            id="search-top-btn"
+            onClick={ () => setToggleInput(!toggleInput) }
+            className={ toggleInput ? ACTIVE : INACTIVE }
+          >
+            <img
+              src={ searchIcon }
+              alt="search-top-btn"
+              data-testid="search-top-btn"
+              className={ toggleInput
+                ? 'active-search-button-img'
+                : 'iactive-search-button-img' }
+            />
+          </button>)}
+      </section>
       { toggleInput
            && (
-             <label htmlFor="search-input">
-               <input
-                 data-testid="search-input"
-                 id="search-input"
-                 onChange={ handleInput }
-               />
-             </label>)}
-      <button
-        type="button"
-        id="search-top-btn"
-        onClick={ () => setToggleInput(!toggleInput) }
-      >
-        <img src={ searchIcon } alt="search-top-btn" data-testid="search-top-btn" />
-      </button>
+             <input
+               placeholder="What are we preparing today?"
+               data-testid="search-input"
+               id="search-input"
+               onChange={ handleInput }
+               className="header__search-input"
+               autoComplete="off"
+             />)}
     </header>
   );
 }

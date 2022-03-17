@@ -27,7 +27,7 @@ export default function Profile() {
           className="profile-picture-button"
           type="button"
         >
-          Edit picture
+          Profile Picture
         </button>
       </div>
       <h2

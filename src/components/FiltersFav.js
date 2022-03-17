@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import favoriteContext from '../contexts/favoriteContext';
 
 export default function FiltersFav() {
-  // const [filteredType, setFiltredType] = useState('All');
+  const { filteredType, setFiltredType } = useContext(favoriteContext);
 
-  const handleClickFilter = (type, setType) => {
-    if (filteredType !== type) {
-      setType(type);
+  const handleClickFilter = (type) => {
+    if (!filteredType.includes(type)) {
+      setFiltredType(type);
     }
   };
 
@@ -13,24 +14,24 @@ export default function FiltersFav() {
     <div>
       <button
         type="button"
-        onClick={ handleClickFilter }
+        onClick={ () => handleClickFilter('All') }
         data-testid="filter-by-all-btn"
       >
         All
       </button>
       <button
         type="button"
-        onClick={ handleClickFilter }
+        onClick={ () => handleClickFilter('Drinks') }
         data-testid="filter-by-drink-btn"
       >
         Drinks
       </button>
       <button
         type="button"
-        onClick={ handleClickFilter }
+        onClick={ () => handleClickFilter('Food') }
         data-testid="filter-by-food-btn"
       >
-        Foods
+        Food
       </button>
     </div>
   );

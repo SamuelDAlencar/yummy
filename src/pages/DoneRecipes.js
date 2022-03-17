@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import '../css/doneRecipes.css';
 import ShareAndFav from '../components/ShareAndFav';
 import FavoriteProvider from '../providers/FavoriteProvider';
+import Header from '../components/Header';
 
 export default function DoneRecipes() {
   const history = useHistory();
@@ -38,6 +39,7 @@ export default function DoneRecipes() {
 
   return (
     <>
+      <Header namePage="Done Recipes" />
       <button
         type="button"
         data-testid="filter-by-all-btn"
