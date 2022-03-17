@@ -126,19 +126,3 @@
 .recipeTitle-h3 {
   color: rgb(59, 59, 59);
 }
-
-::-webkit-scrollbar {
-  height: 1px;
-}
-
-::-webkit-scrollbar-track {
-  height: 1px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #f94892;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #f94892;
-}
