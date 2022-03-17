@@ -8,6 +8,7 @@ import __coraçãoRosa2 from '../images/__coraçãoRosa2.svg';
 import favoriteContext from '../contexts/favoriteContext';
 import handleConditionalShare from '../helpers/handleConditionalShare';
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function ShareAndFav({ page, i, id, name, type, area, category,
   alcoholicOrNot, image }) {
   const { favorite, setFavorite } = useContext(favoriteContext);
@@ -52,8 +53,7 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
           />
         </>)
       : (
-        <>
-          <b className="linkCopied-p">{copied && 'Link copied!'}</b>
+        <section className="shareAndFav-section">
           <section className="shareAndFavBtn-section">
             <input
               data-testid={ page === '/favorite-recipes' ? `${i}-horizontal-share-btn`
@@ -84,7 +84,8 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
               }) }
             />
           </section>
-        </>)
+          <b className="linkCopied-p">{copied && 'Link copied!'}</b>
+        </section>)
   );
 }
 
