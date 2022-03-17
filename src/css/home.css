@@ -1,99 +1,56 @@
-.search-section {
-  padding-bottom: 20px;
-}
-
-.searchFilters-section {
-  align-items: flex-start;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.searchFilters-section label {
-  align-items: center;
-  border: 0;
-  border-right: 1px solid silver;
-  display: flex;
-  padding-right: 8px;
-}
-
-.searchFilters-section label:last-of-type {
-  border: 0;
-}
-
-.categories-filters {
-  display: flex;
-  margin-top: 2%;
-  overflow: scroll;
-  padding: 3%;
-}
-
-.searchby-title {
-  margin: 0 0 3%;
-  padding-top: 3%;
-}
-
-.filter-title {
-  border-top: 1px solid silver;
-  margin: 0;
-  padding-top: 7%;
-}
-
 .home-section {
   margin-bottom: 20px;
   padding: 10px;
 }
 
-.home-button {
-  background-color: #f94892;
-  border: 0;
-  border-radius: 3px;
-  box-shadow: 5px 5px 15px #bebebe;
-  color: white;
-  font-size: 90%;
-  margin: 1%;
-  padding: 8px;
-  transition: all 0.1s ease-in-out 0s;
+.home-section > .search-section {
+  padding-bottom: 20px;
 }
 
-.search-button {
+.searchButton-title {
+  margin: 0 0 3%;
+  padding-top: 3%;
+}
+
+.searchButton-title > .search-button {
   background-color: #f94892;
   border: 0;
   border-radius: 3px;
-  box-shadow: 5px 5px 15px #bebebe;
+  box-shadow: 5px 5px 5px #bebebe;
   color: white;
-  font-size: 90%;
+  font-size: 100%;
   margin: 0 0 2%;
   padding: 20px;
-  transition: all 0.1s ease-in-out 0s;
   width: 100%;
 }
 
-.home-button:hover {
-  background-color: #c03971;
-  font-size: 100%;
-  padding: 12px;
+.searchOptions-section {
+  display: flex;
+  justify-content: space-around;
 }
 
-.filter-options-input {
+.searchOptions-section > .searchOption-label {
+  align-items: center;
+  display: flex;
+  margin-top: 5px;
+}
+
+.searchOption-label > .searchOption-input {
   appearance: none;
-  background-color: white;
-  border: 0.15em solid #c03971;
+  border: 0.1em solid #c03971;
   border-radius: 50%;
-  color: #c03971;
   cursor: pointer;
   display: grid;
   font: inherit;
-  height: 1.15em;
+  height: 1em;
   margin: 1px 5px;
   place-content: center;
-  width: 1.15em;
+  width: 1em;
 }
 
-.filter-options-input:before {
+.searchOption-input:before {
   background-color: #c03971;
   border-radius: 50%;
-  box-shadow: inset 1em 1em var(#c03971);
   content: '';
   height: 17px;
   transform: scale(0);
@@ -101,49 +58,75 @@
   width: 17px;
 }
 
-.filter-options-input:checked:before {
+.searchOption-input:checked:before {
   transform: scale(1);
 }
 
+.categoriesTitle-h3 {
+  border-top: 1px solid silver;
+  color: rgb(51, 51, 51);
+  margin: 2% 0;
+  padding-top: 7%;
+}
+
+.recipesCategories-section {
+  border-radius: 25%;
+  display: flex;
+  margin: 2% 2% 0;
+  overflow: scroll;
+  padding: 3%;
+}
+
+.genericHome-button {
+  background-color: #f94892;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 4px 4px 5px #bebebe;
+  color: white;
+  font-size: 90%;
+  margin: 2%;
+  padding: 8px;
+  transition: all 0.1s ease-in-out 0s;
+}
+
+.genericHome-button:hover {
+  background-color: white;
+  border: 0.1em solid #c03971;
+  color: #f94892;
+  font-size: 100%;
+}
+
 .recipes-section {
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .recipe-section {
-  align-items: center;
-  background: white;
-  border-bottom: 1px solid silver;
   box-shadow: 5px 5px 15px #bebebe;
-  color: rgb(39, 39, 39);
   display: flex;
   margin: 3%;
-  padding: 5%;
+  padding: 3%;
 }
 
-.line-breaker-hr {
-  color: black;
+.recipeThumb-img {
+  border-radius: 15px;
+  max-height: 160px;
   width: 50%;
 }
 
-.recipe-info {
+.recipeInfo-section {
   margin: 0 0 0 5%;
 }
 
-.info-p {
+.recipeInfo-section > .recipeInfo-p {
   color: rgb(97, 97, 97);
   font-size: 80%;
   margin: 5% 0;
 }
 
-.recipe-section__recipe-title {
-  color: rgb(39, 39, 39);
+.recipeTitle-h3 {
+  color: rgb(59, 59, 59);
 }
 
-.recipe-section__recipe-img {
-  border-radius: 15px;
-  max-height: 160px;
-  width: 50%;
-}
 
 ::-webkit-scrollbar {
   height: 1px;

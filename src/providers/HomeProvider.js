@@ -34,10 +34,10 @@ export default function HomeProvider({ children }) {
   };
 
   const searchRecipes = async (value, type, api) => {
-    setToggleInput(false);
     if (type === 'First letter' && value.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else if (value.length > 0) {
+      setToggleInput(false);
       setLoading(true);
       const apiReturn = await fetchRecipes(api, value, type);
 

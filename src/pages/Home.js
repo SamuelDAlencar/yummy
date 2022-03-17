@@ -100,7 +100,7 @@ export default function Home() {
       <section className="home-section">
         {toggleInput && (
           <section className="search-section">
-            <h3 className="searchby-title">
+            <h3 className="searchButton-title">
               <button
                 type="button"
                 data-testid="exec-search-btn"
@@ -115,49 +115,58 @@ export default function Home() {
                 <b>Search by:</b>
               </button>
             </h3>
-            <section className="searchFilters-section">
-              <label htmlFor="Ingredient">
+            <section className="searchOptions-section">
+              <label
+                htmlFor="Ingredient"
+                className="searchOption-label"
+              >
                 <input
                   name="filter-radio"
                   type="radio"
                   id="Ingredient"
                   data-testid="ingredient-search-radio"
                   onClick={ handleInput }
-                  className="filter-options-input"
+                  className="searchOption-input"
                 />
                 Ingredient
               </label>
-              <label htmlFor="Name">
+              <label
+                htmlFor="Name"
+                className="searchOption-label"
+              >
                 <input
                   name="filter-radio"
                   type="radio"
                   id="Name"
                   data-testid="name-search-radio"
                   onClick={ handleInput }
-                  className="filter-options-input"
+                  className="searchOption-input"
                 />
                 Name
               </label>
-              <label htmlFor="First letter">
+              <label
+                htmlFor="First letter"
+                className="searchOption-label"
+              >
                 <input
                   name="filter-radio"
                   type="radio"
                   id="First letter"
                   data-testid="first-letter-search-radio"
                   onClick={ handleInput }
-                  className="filter-options-input"
+                  className="searchOption-input"
                 />
                 First letter
               </label>
             </section>
           </section>)}
-        <h3 className="filter-title">Categories:</h3>
-        <section className="categories-filters">
+        <h3 className="categoriesTitle-h3">Categories:</h3>
+        <section className="recipesCategories-section">
           <button
             type="button"
             data-testid="All-category-filter"
             onClick={ handleClickAllCategory }
-            className="home-button"
+            className="genericHome-button"
           >
             All Categories
           </button>
@@ -168,7 +177,7 @@ export default function Home() {
               data-testid={ `${o.strCategory}-category-filter` }
               key={ o.strCategory }
               onClick={ handleClickCategory }
-              className="home-button"
+              className="genericHome-button"
             >
               {o.strCategory}
             </button>
@@ -183,6 +192,7 @@ export default function Home() {
             data={ recipe }
             i={ i }
             type={ pathname }
+            cardType="recipe"
             keyStrType={ KEY_STR }
           />
         ))}

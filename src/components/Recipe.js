@@ -6,7 +6,9 @@ import LoadingRecipe from './LoadingRecipe';
 
 export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
+
   const [ingredients, setIngredients] = useState([]);
+
   const { loading } = useContext(homeContext);
 
   useEffect(() => {
@@ -30,9 +32,7 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
       onKeyPress={ () => {} }
       role="button"
       tabIndex={ i }
-      className={ cardType === 'recomendation'
-        ? 'recomendation-section'
-        : 'recipe-section' }
+      className={ `${cardType}-section` }
     >
       {(!loading && data[`str${keyStrType}Thumb`])
         ? (
@@ -41,41 +41,32 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
               data-testid={ `${i}-card-img` }
               src={ data[`str${keyStrType}Thumb`] }
               alt={ `${type}_thumb` }
-              className={ cardType === 'recomendation'
-                ? 'recomendation-section__recipe-img'
-                : 'recipe-section__recipe-img' }
+              className={ `${cardType}Thumb-img` }
             />
             <section
-              className="recipe-info"
+              className={ `${cardType}Info-section` }
             >
-              {cardType === 'recomendation'
-                ? (
-                  <h3
-                    data-testid={ `${i}-recomendation-title` }
-                    className="recomendation-section__recomendation-title"
-                  >
-                    {data[`str${keyStrType}`]}
-                  </h3>)
-                : (
-                  <h3
-                    data-testid={ `${i}-card-name` }
-                    className="recipe-section__recipe-title"
-                  >
-                    {data[`str${keyStrType}`]}
-                  </h3>)}
+              <h3
+                data-testid={ cardType === 'recomendation'
+                  ? `${i}-recomendation-title`
+                  : `${i}-card-name` }
+                className={ `${cardType}Title-h3` }
+              >
+                {data[`str${keyStrType}`]}
+              </h3>
               { (ingredients && data.strArea)
               && (
-                <p className="info-p">
+                <p className="recipeInfo-p">
                   Nationality:
                   {' '}
                   <b>{ingredients && data.strArea}</b>
                 </p>)}
-              <p className="info-p">
+              <p className="recipeInfo-p">
                 Category:
                 {' '}
                 <b>{ingredients && data.strCategory}</b>
               </p>
-              <p className="info-p">
+              <p className="recipeInfo-p">
                 Ingredients:
                 {' '}
                 <b>{ingredients && ingredients.length}</b>
