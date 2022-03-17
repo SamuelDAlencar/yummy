@@ -22,7 +22,7 @@ export default function LoadingRecipe() {
         style={ {
           display: 'flex',
           flexDirection: 'column',
-          padding: '10% 0 0 10%',
+          padding: '3% 0 0 6%',
         } }
       >
         <img
@@ -35,7 +35,7 @@ export default function LoadingRecipe() {
         />
         <img
           style={ {
-            margin: '5% 0 0',
+            margin: '0',
             width: '30%',
           } }
           alt="loader"
@@ -44,6 +44,14 @@ export default function LoadingRecipe() {
         <img
           style={ {
             margin: '0',
+            width: '30%',
+          } }
+          alt="loader"
+          src={ loader2 }
+        />
+        <img
+          style={ {
+            margin: '0 0 5%',
             width: '30%',
           } }
           alt="loader"

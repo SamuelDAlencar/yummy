@@ -50,36 +50,44 @@ export default function DetailedRecipe() {
       ? (
         <>
           <section
-            className="recipe-section"
+            className="detailedRecipe-section"
           >
             <img
               alt="recipe-thumb"
               src={ recipe[`str${KEY_STR}Thumb`] }
               data-testid="recipe-photo"
-              className="recipe-section__recipe-img"
+              className="detailedRecipeThumb-img"
             />
-            <h1 data-testid="recipe-title">
-              {recipe[`str${KEY_STR}`]}
-            </h1>
-            <FavoriteProvider>
-              <ShareAndFav
-                page={ pathname }
-                i={ null }
-                id={ recipe[`id${KEY_STR}`] }
-                name={ recipe[`str${KEY_STR}`] }
-                type={ RECIPE_TYPE }
-                area={ recipe.strArea }
-                category={ recipe.strCategory }
-                alcoholicOrNot={ recipe.strAlcoholic }
-                image={ recipe[`str${KEY_STR}Thumb`] }
-              />
-            </FavoriteProvider>
-            <h4 data-testid="recipe-category">
+            <section className="detailedRecipeTitle-section">
+              <h1
+                data-testid="recipe-title"
+                className="detailedRecipe-title"
+              >
+                {recipe[`str${KEY_STR}`]}
+              </h1>
+              <FavoriteProvider>
+                <ShareAndFav
+                  page={ pathname }
+                  i={ null }
+                  id={ recipe[`id${KEY_STR}`] }
+                  name={ recipe[`str${KEY_STR}`] }
+                  type={ RECIPE_TYPE }
+                  area={ recipe.strArea }
+                  category={ recipe.strCategory }
+                  alcoholicOrNot={ recipe.strAlcoholic }
+                  image={ recipe[`str${KEY_STR}Thumb`] }
+                />
+              </FavoriteProvider>
+            </section>
+            <h4
+              data-testid="recipe-category"
+              className="detailedRecipe-category"
+            >
               {recipe.strCategory}
               {isCurrPageDrinks
-          && ` - ${recipe.strAlcoholic}`}
+                && ` - ${recipe.strAlcoholic}`}
             </h4>
-            <ul>
+            <ul className="ingredients-ul">
               <h2>Ingredients</h2>
               {ingredients.map((ingredient, i) => (
                 <li

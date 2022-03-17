@@ -4,7 +4,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import homeContext from '../contexts/homeContext';
 import LoadingRecipe from './LoadingRecipe';
 
-export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
+export default function Recipe({
+  id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
 
   const [ingredients, setIngredients] = useState([]);
@@ -54,17 +55,23 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
               >
                 {data[`str${keyStrType}`]}
               </h3>
-              { (ingredients && data.strArea)
-              && (
-                <p className="recipeInfo-p">
-                  Nationality:
-                  {' '}
-                  <b>{ingredients && data.strArea}</b>
-                </p>)}
+              {type === '/foods'
+                ? (
+                  <p className="recipeInfo-p">
+                    Nationality:
+                    {' '}
+                    <b>{data.strArea}</b>
+                  </p>)
+                : (
+                  <p className="recipeInfo-p">
+                    Alcoholic:
+                    {' '}
+                    <b>{data.strAlcoholic}</b>
+                  </p>)}
               <p className="recipeInfo-p">
                 Category:
                 {' '}
-                <b>{ingredients && data.strCategory}</b>
+                <b>{data.strCategory}</b>
               </p>
               <p className="recipeInfo-p">
                 Ingredients:
