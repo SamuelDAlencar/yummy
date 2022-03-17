@@ -1,9 +1,30 @@
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import homeContext from '../contexts/homeContext';
+import LoadingRecipe from './LoadingRecipe';
 
-export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
+export default function Recipe({
+  id, data, i, type, cardType, keyStrType }) {
   const history = useHistory();
+
+  const [ingredients, setIngredients] = useState([]);
+
+  const { loading } = useContext(homeContext);
+
+  useEffect(() => {
+    Object.entries(data).forEach((entrie) => {
+      if (entrie[0]
+        .includes('strIngredient')
+          && entrie[1] !== ''
+          && entrie[1] !== null) {
+        setIngredients((prevState) => [
+          ...prevState,
+          { [entrie[0]]: entrie[1] },
+        ]);
+      }
+    });
+  }, []);
 
   return (
     <section
@@ -12,31 +33,54 @@ export default function Recipe({ id, data, i, type, cardType, keyStrType }) {
       onKeyPress={ () => {} }
       role="button"
       tabIndex={ i }
-      className={ cardType === 'recomendation'
-        ? 'recomendation-section'
-        : 'recipe-section' }
+      className={ `${cardType}-section` }
     >
-      <img
-        data-testid={ `${i}-card-img` }
-        src={ data[`str${keyStrType}Thumb`] }
-        alt={ `${type}_thumb` }
-        className={ cardType === 'recomendation'
-          ? 'recomendation-section__recipe-img'
-          : 'recipe-section__recipe-img' }
-      />
-      { cardType === 'recomendation'
+      {(!loading && data[`str${keyStrType}Thumb`])
         ? (
-          <h4
-            data-testid={ `${i}-recomendation-title` }
-          >
-            {data[`str${keyStrType}`]}
-          </h4>)
-        : (
-          <h4
-            data-testid={ `${i}-card-name` }
-          >
-            {data[`str${keyStrType}`]}
-          </h4>)}
+          <>
+            <img
+              data-testid={ `${i}-card-img` }
+              src={ data[`str${keyStrType}Thumb`] }
+              alt={ `${type}_thumb` }
+              className={ `${cardType}Thumb-img` }
+            />
+            <section
+              className={ `${cardType}Info-section` }
+            >
+              <h3
+                data-testid={ cardType === 'recomendation'
+                  ? `${i}-recomendation-title`
+                  : `${i}-card-name` }
+                className={ `${cardType}Title-h3` }
+              >
+                {data[`str${keyStrType}`]}
+              </h3>
+              {type === '/foods'
+                ? (
+                  <p className="recipeInfo-p">
+                    Nationality:
+                    {' '}
+                    <b>{data.strArea}</b>
+                  </p>)
+                : (
+                  <p className="recipeInfo-p">
+                    Alcoholic:
+                    {' '}
+                    <b>{data.strAlcoholic}</b>
+                  </p>)}
+              <p className="recipeInfo-p">
+                Category:
+                {' '}
+                <b>{data.strCategory}</b>
+              </p>
+              <p className="recipeInfo-p">
+                Ingredients:
+                {' '}
+                <b>{ingredients && ingredients.length}</b>
+              </p>
+            </section>
+          </>)
+        : <LoadingRecipe />}
     </section>
   );
 }

@@ -40,7 +40,7 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
   return (
     page === '/done-recipes'
       ? (
-        <div>
+        <>
           <input
             data-testid={ `${i}-horizontal-share-btn` }
             type="image"
@@ -49,9 +49,9 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
             alt="share-btn"
           />
           {copied && <p>Link copied!</p>}
-        </div>)
+        </>)
       : (
-        <div>
+        <section className="shareAndFavBtn-section">
           <input
             data-testid={ page === '/favorite-recipes' ? `${i}-horizontal-share-btn`
               : 'share-btn' }
@@ -59,12 +59,14 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
             onClick={ handleShare }
             src={ shareIcon }
             alt="share-btn"
+            className="favBtn-input"
           />
           <input
             src={ (favorite.some((fav) => fav.id === id))
               ? blackHeartIcon
               : whiteHeartIcon }
             alt="favorite-btn"
+            className="shareBtn-input"
             data-testid={
               page === '/favorite-recipes'
                 ? `${i}-horizontal-favorite-btn` : 'favorite-btn'
@@ -80,8 +82,8 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
               image,
             }) }
           />
-          {copied && <p>Link copied!</p>}
-        </div>)
+          {copied && <b>Link copied!</b>}
+        </section>)
   );
 }
 
