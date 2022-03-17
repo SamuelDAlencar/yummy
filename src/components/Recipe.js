@@ -57,23 +57,23 @@ export default function Recipe({
               </h3>
               {type === '/foods'
                 ? (
-                  <p className="recipeInfo-p">
+                  <p className={ `${cardType}Title-h3` }>
                     Nationality:
                     {' '}
                     <b>{data.strArea}</b>
                   </p>)
                 : (
-                  <p className="recipeInfo-p">
+                  <p className={ `${cardType}Info-p` }>
                     Alcoholic:
                     {' '}
                     <b>{data.strAlcoholic}</b>
                   </p>)}
-              <p className="recipeInfo-p">
+              <p className={ `${cardType}Info-p` }>
                 Category:
                 {' '}
                 <b>{data.strCategory}</b>
               </p>
-              <p className="recipeInfo-p">
+              <p className={ `${cardType}Info-p` }>
                 Ingredients:
                 {' '}
                 <b>{ingredients && ingredients.length}</b>

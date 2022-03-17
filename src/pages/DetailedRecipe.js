@@ -99,13 +99,27 @@ export default function DetailedRecipe() {
                   && <b>{` - ${measures[i]}`}</b>}
               </li>))}
           </ul>
-          <h2 className="instructionsTitle-h2">Instructions</h2>
-          <p
-            data-testid="instructions"
-            className="instructions-p"
-          >
-            {recipe.strInstructions}
-          </p>
+          <section className="instructions-section">
+            <h2 className="instructionsTitle-h2">Instructions</h2>
+            <p
+              data-testid="instructions"
+              className="instructions-p"
+            >
+              {recipe.strInstructions}
+            </p>
+            { recipe.strYoutube
+          && (
+            <iframe
+              title="Recipe Tutorial"
+              src={
+                `https://www.youtube.com/embed/${recipe.strYoutube && recipe.strYoutube.replace('https://www.youtube.com/watch?v=', '')}`
+              }
+              data-testid="video"
+              className="recipeTutorialVideo-iframe"
+            >
+              Tutorial
+            </iframe>)}
+          </section>
           <h2 className="recomendationsTitle-h2">Recomendations</h2>
           <section className="recomendations-section">
             {recomendations.slice(0, MAX_RECOMENDATIONS).map((recomendation, i) => (
@@ -125,16 +139,6 @@ export default function DetailedRecipe() {
               </div>))}
           </section>
           <h3 className="tutorialVideoTitle-h3">Tutorial: </h3>
-          <iframe
-            title="Recipe Tutorial"
-            src={
-              `https://www.youtube.com/embed/${recipe.strYoutube && recipe.strYoutube.replace('https://www.youtube.com/watch?v=', '')}`
-            }
-            data-testid="video"
-            className="recipeTutorialVideo-iframe"
-          >
-            Tutorial
-          </iframe>
           { (!isDone) && (
             <button
               data-testid="start-recipe-btn"

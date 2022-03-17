@@ -122,6 +122,8 @@ html, body {
 
 .linkCopied-p {
   color: #f94892;
+  margin: 0;
+  padding: 0;
 }
 
 
