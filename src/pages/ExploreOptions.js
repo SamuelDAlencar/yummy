@@ -19,37 +19,42 @@ export default function ExploreOptions() {
   };
 
   return (
-    <div>
+    <div className="explore-container">
       <Header
         namePage={
           `Explore ${
             relativePath.charAt(0).toUpperCase() + relativePath.substring(1)}`
         }
       />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => history.push(`${pathname}/ingredients`) }
-      >
-        By Ingredient
-      </button>
-      { pathname === '/explore/foods' && (
+      <div className="container-button">
         <button
+          className="explore-button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => history.push(`${pathname}/ingredients`) }
           type="button"
-          data-testid="explore-by-nationality"
-          onClick={ () => history.push(`${pathname}/nationalities`) }
         >
-          By Nationality
+          By Ingredient
         </button>
-      )}
-      { console.log(pathname) }
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleSurprise }
-      >
-        Surprise me!
-      </button>
+        { pathname === '/explore/foods' && (
+          <button
+            className="explore-button"
+            data-testid="explore-by-nationality"
+            onClick={ () => history.push(`${pathname}/nationalities`) }
+            type="button"
+          >
+            By Nationality
+          </button>
+        )}
+        { console.log(pathname) }
+        <button
+          className="explore-button"
+          data-testid="explore-surprise"
+          onClick={ handleSurprise }
+          type="button"
+        >
+          Surprise me!
+        </button>
+      </div>
       <Footer />
     </div>
   );
