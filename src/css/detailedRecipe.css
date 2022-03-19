@@ -105,32 +105,36 @@
 
 .recomendations-section {
   align-items: center;
-  border-left: 1px solid #ffa1c9;
+  border-bottom: 1px solid #bebebe;
   border-radius: 5% 5% 0 0;
-  border-right: 1px solid #ffa1c9;
+  border-top: 1px solid #bebebe;
   display: flex;
-  margin: 5% 5% 15%;
+  margin: 2% 5% 15%;
   overflow-x: scroll;
+  padding: 0 1% 2%;
 }
 
 .recomendation-section {
-  border-radius: 5px;
+  border-radius: 5%;
+  box-shadow: 5px 5px 5px #bebebe;
   margin: 2%;
   width: 100%;
 }
 
 .recomendationThumb-img {
+  border-radius: 5% 5% 0 0;
   width: 220px;
 }
 
 .recomendationTitle-h3 {
-  color: rgb(54, 54, 54);
+  color: #f94892;
+  margin: 2%;
 }
 
 .recomendationInfo-section > .recomendationInfo-p {
   color: rgb(97, 97, 97);
   font-size: 90%;
-  margin: 5% 0;
+  margin: 5%;
 }
 
 .tutorialVideoTitle-h3 {
