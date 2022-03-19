@@ -3,14 +3,14 @@
 }
 
 .profile-h1 {
-  background-color: #e60965;
-  border: 0;
+  background-color: white;
+  border: 1px solid #bebebe;
   border-radius: 3px;
   bottom: 0;
-  color: white;
+  color: #f94892;
   cursor: pointer;
   display: block;
-  font-size: 150%;
+  font-style: italic;
   margin: 0;
   padding: 5% 20%;
   transition: all 0.2s ease-in-out 0s;
@@ -23,28 +23,17 @@
   text-align: center;
 }
 
-.profile-picture-button {
-  background-color: inherit;
-  border: 0;
-  border-bottom: 1px solid black;
-  margin-top: 20px;
+.profile-email {
+  color: rgb(54, 54, 54);
+  padding: 0 0 6%;
 }
 
 .image-profile {
-  background-color: #fbe5e5;
+  border: 1px solid rgb(120, 120, 120);
   border-radius: 100%;
   margin-top: 30px;
   padding: 10px;
   width: 30vw;
-}
-
-.container-button {
-  border: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 2%;
-  padding: 10px;
 }
 
 .profile-button {
@@ -62,11 +51,11 @@
 }
 
 .button-logout {
-  background-color: red;
-  border: 0;
+  background-color: white;
+  border: 1px solid #f94892;
   border-radius: 3px;
   box-shadow: 4px 4px 5px #bebebe;
-  color: white;
+  color: rgb(54, 54, 54);
   font-size: 100%;
   font-weight: 900;
   height: 8vh;
