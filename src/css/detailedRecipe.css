@@ -23,12 +23,12 @@
   width: 60%;
 }
 
-.shareAndFav-section > .shareAndFavBtn-section {
+.detailedRecipeTitle-section > .shareAndFav-section > .shareAndFavBtn-section {
   display: flex;
   justify-content: flex-end;
 }
 
-.shareAndFavBtn-section > .favBtn-input, .shareBtn-input {
+.detailedRecipeTitle-section > .shareAndFavBtn-section > .favBtn-input, .shareBtn-input {
   border-bottom: 1px solid #ffa1c9;
   margin: 0 5% 5%;
   padding: 0 5% 5%;

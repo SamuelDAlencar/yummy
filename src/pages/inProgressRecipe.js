@@ -67,6 +67,7 @@ export default function InProgressRecipe() {
     if (!localStorage.getItem('doneRecipes')) {
       localStorage.setItem('doneRecipes', JSON.stringify([]));
     }
+    window.scrollTo(0, 0);
   }, []);
 
   const finishRecipe = () => {
@@ -134,7 +135,9 @@ export default function InProgressRecipe() {
                   id={ `${i}-ingredient-step` }
                   className="inProgressRecipe-input"
                 />
-                {`${ingredient[`strIngredient${i + 1}`]} - ${measures[i]}`}
+                {measures[i]
+                  ? `${ingredient[`strIngredient${i + 1}`]} - ${measures[i]}`
+                  : `${ingredient[`strIngredient${i + 1}`]}`}
               </label>
             ))}
           </section>
@@ -185,23 +188,25 @@ export default function InProgressRecipe() {
             {`Aaand voilá! Here's an example of how your
               ${recipe[`str${KEY_STR}`]} may look like:`}
           </h2>
-          <img
-            alt="recipe-thumb"
-            src={ recipe[`str${KEY_STR}Thumb`] }
-            data-testid="recipe-photo"
-            className="inProgressRecipeThumb-img"
-          />
-          <FavoriteProvider>
-            <ShareAndFav
-              id={ recipe[`id${KEY_STR}`] }
-              name={ recipe[`str${KEY_STR}`] }
-              type={ RECIPE_TYPE }
-              area={ recipe.strArea }
-              category={ recipe.strCategory }
-              alcoholicOrNot={ recipe.strAlcoholic }
-              image={ recipe[`str${KEY_STR}Thumb`] }
+          <div className="inProgressRecipeThumb-div">
+            <img
+              alt="recipe-thumb"
+              src={ recipe[`str${KEY_STR}Thumb`] }
+              data-testid="recipe-photo"
+              className="inProgressRecipeThumb-img"
             />
-          </FavoriteProvider>
+            <FavoriteProvider>
+              <ShareAndFav
+                id={ recipe[`id${KEY_STR}`] }
+                name={ recipe[`str${KEY_STR}`] }
+                type={ RECIPE_TYPE }
+                area={ recipe.strArea }
+                category={ recipe.strCategory }
+                alcoholicOrNot={ recipe.strAlcoholic }
+                image={ recipe[`str${KEY_STR}Thumb`] }
+              />
+            </FavoriteProvider>
+          </div>
           <button
             type="button"
             data-testid="finish-recipe-btn"
