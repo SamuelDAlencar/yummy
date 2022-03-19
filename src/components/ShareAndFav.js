@@ -61,15 +61,15 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
               type="image"
               onClick={ handleShare }
               src={ copied ? __compartilharRosa2 : __compartilharRosa }
+              className="shareBtn-input"
               alt="share-btn"
-              className="favBtn-input"
             />
             <input
               src={ (favorite.some((fav) => fav.id === id))
                 ? __coraçãoRosa2
                 : __coraçãoRosa }
               alt="favorite-btn"
-              className="shareBtn-input"
+              className="favBtn-input"
               data-testid={ page === '/favorite-recipes'
                 ? `${i}-horizontal-favorite-btn` : 'favorite-btn' }
               type="image"

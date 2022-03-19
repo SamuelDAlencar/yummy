@@ -1,7 +1,7 @@
 .inProgressRecipe-section {
   display: flex;
   flex-direction: column;
-  padding-bottom: 30px;
+  padding-bottom: 70px;
 }
 
 .inProgressRecipeTitle-h1 {
@@ -92,10 +92,17 @@
   padding: 8% 0 0;
 }
 
+.inProgressRecipeThumb-div {
+  border: 2px solid #3d3d3d;
+  margin: 10% auto;
+  padding: 4% 4% 5%;
+  transform: rotate(3deg);
+  width: 70%;
+}
+
 .inProgressRecipe-section .inProgressRecipeThumb-img {
-  border-bottom: 1px solid #a3a3a3;
   border-radius: 5px;
-  padding: 5%;
+  width: 100%;
 }
 
 .inProgressRecipe__ingredient-input:checked + .inProgressRecipe__ingredient-label {
@@ -119,5 +126,34 @@
   border-top: 1px solid #e60965;
   color: #e60965;
   cursor: not-allowed;
+}
+
+.inProgressRecipe-section > .shareAndFav-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  width: 100%;
+}
+
+.inProgressRecipe-section .shareAndFav-section > .shareAndFavBtn-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 5% 0;
+  width: 100%;
+}
+
+.inProgressRecipe-section .shareAndFavBtn-section > .favBtn-input {
+  border-bottom: 1px solid #ffa1c9;
+  width: 15%;
+}
+
+
+.inProgressRecipe-section .shareAndFavBtn-section > .shareBtn-input {
+  border-bottom: 1px solid #ffa1c9;
+  margin: 0;
+  padding: 0;
+  width: 15%;
 }
 
