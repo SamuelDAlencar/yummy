@@ -3,6 +3,7 @@ import FiltersFav from '../components/FiltersFav';
 import Header from '../components/Header';
 import RecipeFav from '../components/RecipeFav';
 import favoriteContext from '../contexts/favoriteContext';
+import '../css/favoriteRecipes.css';
 
 export default function Favorites() {
   const { favorite, filteredType } = useContext(favoriteContext);
