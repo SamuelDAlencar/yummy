@@ -41,6 +41,7 @@ export default function DetailedRecipe() {
     setIngredients([]);
     setMeasures([]);
     addStorageStructure();
+    window.scrollTo(0, 0);
   }, []);
 
   const isCurrPageDrinks = CURR_PAGE === 'drinks';
