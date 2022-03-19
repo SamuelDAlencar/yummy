@@ -5,9 +5,6 @@ import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import addStorageStructure from '../helpers/addStorageStructure';
-// import toggleHeartIcon from '../helpers/toggleHeartIcon';
-// import handleConditionalShare from '../helpers/handleConditionalShare';
-// import addNewFavorite from '../helpers/addNewFavorite';
 
 export default function DetailedRecipeProvider({ children }) {
   const history = useHistory();
@@ -28,8 +25,8 @@ export default function DetailedRecipeProvider({ children }) {
   ] = pathname.includes('foods')
     ? [
       'meals',
-      'meals',
       'cocktails',
+      'meals',
       'themealdb',
       'thecocktaildb',
       'Meal',
@@ -39,8 +36,8 @@ export default function DetailedRecipeProvider({ children }) {
     ]
     : [
       'drinks',
-      'cocktails',
       'meals',
+      'cocktails',
       'thecocktaildb',
       'themealdb',
       'Drink',
@@ -90,7 +87,7 @@ export default function DetailedRecipeProvider({ children }) {
 
   const startRecipeButton = () => {
     const prevItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(prevItem);
+
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       [INV_CURR_PAGE]: prevItem[INV_CURR_PAGE],
       [CURR_LS_KEY]: {
@@ -100,8 +97,6 @@ export default function DetailedRecipeProvider({ children }) {
     }));
     history.push(`${pathname}/in-progress`);
   };
-
-  // const heartIcon = toggleHeartIcon(favorite, recipe, KEY_STR);
 
   return (
     <detailedRecipeContext.Provider

@@ -1,3 +1,123 @@
+.inProgressRecipe-section {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+.inProgressRecipeTitle-h1 {
+  color: #f94892;
+  font-size: 250%;
+  font-style: italic;
+  margin: 5% 5% 0;
+}
+
+.noVideoWarning-h4 {
+  color: #f94892;
+  margin: 2% auto;
+  text-align: center;
+  width: 60%;
+}
+
+.inProgressRecipeCategory-h3 {
+  color: rgb(60, 60, 60);
+  font-style: italic;
+  margin: 0 0 2% 8%;
+}
+
+.inProgressRecipeIngredientsTitle-h2 {
+  border-top: 1px solid rgb(218, 218, 218);
+  color: rgb(60, 60, 60);
+  font-style: italic;
+  margin: 5% 5% 0;
+  padding: 5% 0 0;
+}
+
+.inProgressRecipeIngredients-section {
+  margin: 0 5%;
+  padding: 5%;
+}
+
+.inProgressRecipeIngredient-label {
+  align-items: center;
+  color: rgb(60, 60, 60);
+  display: flex;
+  font-size: 120%;
+  margin: 5% 0;
+}
+
+.inProgressRecipe-input {
+  appearance: none;
+  border: 0.1em solid #c03971;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  height: 0.5em;
+  margin: 1px 10px 1px 2px;
+  place-content: center;
+  width: 0.5em;
+}
+
+.inProgressRecipe-input:before {
+  background-color: #c03971;
+  border-radius: 50%;
+  content: '';
+  height: 10px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  width: 10px;
+}
+
+.inProgressRecipe-input:checked:before {
+  transform: scale(1);
+}
+
+.InProgressRecipeInstructionsTitle-h2 {
+  color: rgb(50, 50, 50);
+  font-style: italic;
+  margin: 0 5%;
+  padding: 5% 0 0;
+}
+
+.inProgressRecipeInstruction-p {
+  line-height: 30px;
+  padding: 0 5%;
+}
+
+.inProgressRecipeThumbTitle-h2 {
+  border-top: 1px solid rgb(218, 218, 218);
+  color: #f94892;
+  font-style: italic;
+  margin: 0 5%;
+  padding: 8% 0 0;
+}
+
+.inProgressRecipe-section .inProgressRecipeThumb-img {
+  border-bottom: 1px solid #a3a3a3;
+  border-radius: 5px;
+  padding: 5%;
+}
+
 .inProgressRecipe__ingredient-input:checked + .inProgressRecipe__ingredient-label {
   text-decoration: line-through;
 }
+
+.inProgressRecipeFinishBtn-button {
+  background-color: #f94892;
+  border: 0;
+  bottom: 0;
+  color: white;
+  font-size: 120%;
+  padding: 5%;
+  position: fixed;
+  transition: all 0.1s ease-in-out 0s;
+  width: 100%;
+}
+
+.inProgressRecipeFinishBtn-button:disabled {
+  background-color: #fbe5e5;
+  border-top: 1px solid #e60965;
+  color: #e60965;
+  cursor: not-allowed;
+}
+

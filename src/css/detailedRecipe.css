@@ -37,8 +37,8 @@
 
 .detailedRecipeTitle-section > .detailedRecipe-title {
   color: #f94892;
-  font-size: 300%;
-  margin: 5% 0 0;
+  font-size: 200%;
+  margin: 5% 0;
 }
 
 .detailedRecipe-category {
@@ -62,7 +62,7 @@
 }
 
 .ingredient-li {
-  color: rgb(54, 54, 54);
+  color: rgb(50, 50, 50);
 }
 
 .ingredient-li:before {
@@ -149,4 +149,10 @@
   position: fixed;
   transition: all 0.1s ease-in-out 0s;
   width: 100%;
+}
+
+.startRecipeBtn-button:disabled {
+  background-color: #fbe5e5;
+  color: #e60965;
+  cursor: not-allowed;
 }
