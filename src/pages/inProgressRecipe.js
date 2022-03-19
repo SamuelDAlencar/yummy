@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
-import '../css/inProgressRecipe.css';
 import FavoriteProvider from '../providers/FavoriteProvider';
 import ShareAndFav from '../components/ShareAndFav';
+import '../css/inProgressRecipe.css';
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function InProgressRecipe() {
   const history = useHistory();
   const { pathname } = history.location;
@@ -91,19 +92,105 @@ export default function InProgressRecipe() {
   return (
     recipe
       && (
-
         <section
-          className="recipe-section"
+          className="inProgressRecipe-section"
         >
+          <h1
+            className="inProgressRecipeTitle-h1"
+            data-testid="recipe-title"
+          >
+            {recipe[`str${KEY_STR}`]}
+          </h1>
+          <h3
+            data-testid="recipe-category"
+            className="inProgressRecipeCategory-h3"
+          >
+            {recipe.strCategory}
+            { CURR_PAGE === 'drinks'
+              && ` - ${recipe.strAlcoholic}`}
+          </h3>
+          <h2
+            className="inProgressRecipeIngredientsTitle-h2"
+          >
+            Let&apos;s go! Here&apos;s the ingredients you&apos;ll need, got everything?
+          </h2>
+          <section className="inProgressRecipeIngredients-section">
+            {ingredients.map((ingredient, i) => (
+              <label
+                key={ `${i}-ingredient` }
+                htmlFor={ `${i}-ingredient-step` }
+                data-testid={ `${i}-ingredient-step` }
+                style={
+                  checked[i]
+                    ? { textDecoration: 'line-through' }
+                    : { textDecoration: 'none' }
+                }
+                className="inProgressRecipeIngredient-label"
+              >
+                <input
+                  type="checkbox"
+                  onChange={ () => checkIngredient(i) }
+                  checked={ checked[i] && 'checked' }
+                  id={ `${i}-ingredient-step` }
+                  className="inProgressRecipe-input"
+                />
+                {`${ingredient[`strIngredient${i + 1}`]} - ${measures[i]}`}
+              </label>
+            ))}
+          </section>
+          <h2
+            className="InProgressRecipeInstructionsTitle-h2"
+          >
+            Here&apos;s how to prepare it
+          </h2>
+          <p
+            data-testid="instructions"
+            className="inProgressRecipeInstruction-p"
+          >
+            { recipe.strYoutube
+              ? (
+                <iframe
+                  title="Recipe Tutorial"
+                  src={
+                    `https://www.youtube.com/embed/${recipe.strYoutube && recipe.strYoutube.replace('https://www.youtube.com/watch?v=', '')}`
+                  }
+                  data-testid="video"
+                  className="recipeTutorialVideo-iframe"
+                >
+                  Tutorial
+                </iframe>)
+              : (
+                <h4
+                  className="noVideoWarning-h4"
+                >
+                  &#40;&#32;&#32;
+                  Sorry, we don&#39;t have a video tutorial for this one 😢&#32;&#32;&#41;
+                </h4>)}
+            {recipe.strInstructions.includes('2. ')
+              ? recipe.strInstructions.split('. ').map((p, i) => (
+                <p key={ `${i}-p` }>
+                  {recipe.strInstructions}
+                </p>
+              ))
+              : recipe.strInstructions.split('. ').map((p, i) => (
+                <p key={ `${i}-p` }>
+              &nbsp;&nbsp;
+                  {`- ${p};`}
+                </p>
+              ))}
+          </p>
+          <h2
+            className="inProgressRecipeThumbTitle-h2"
+          >
+            {`Aaand voilá! Here's an example of how your
+              ${recipe[`str${KEY_STR}`]} may look like:`}
+          </h2>
           <img
             alt="recipe-thumb"
             src={ recipe[`str${KEY_STR}Thumb`] }
             data-testid="recipe-photo"
-            className="recipe-section__recipe-img"
+            className="inProgressRecipeThumb-img"
           />
-          <h1 data-testid="recipe-title">
-            { recipe[`str${KEY_STR}`]}
-          </h1>
           <FavoriteProvider>
             <ShareAndFav
               id={ recipe[`id${KEY_STR}`] }
@@ -115,55 +202,15 @@ export default function InProgressRecipe() {
               image={ recipe[`str${KEY_STR}Thumb`] }
             />
           </FavoriteProvider>
-          {/* <button
-            data-testid="share-btn"
-            type="button"
-            onClick={ handleShare }
-          >
-            <img src={ shareIcon } alt="share-btn" />
-          </button>
-          <input
-            data-testid="favorite-btn"
-            type="image"
-            onClick={ () => handleFavorite(setFavorite) }
-            src={ whiteHeartIcon }
-            alt="favorite-btn"
-          /> */}
-          <h4 data-testid="recipe-category">
-            {recipe.strCategory}
-            { CURR_PAGE === 'drinks'
-              && ` - ${recipe.strAlcoholic}`}
-          </h4>
-          <h2>Ingredients</h2>
-          {ingredients.map((ingredient, i) => (
-            <label
-              htmlFor={ `${i}-ingredient-step` }
-              data-testid={ `${i}-ingredient-step` }
-              key={ `${i}-ingredient` }
-              style={
-                checked[i]
-                  ? { textDecoration: 'line-through' }
-                  : { textDecoration: 'none' }
-              }
-            >
-              {`${ingredient[`strIngredient${i + 1}`]} - ${measures[i]}`}
-              <input
-                type="checkbox"
-                onChange={ () => checkIngredient(i) }
-                checked={ checked[i] && 'checked' }
-                id={ `${i}-ingredient-step` }
-              />
-            </label>))}
-          <h2>Instructions</h2>
-          <p data-testid="instructions">{recipe.strInstructions}</p>
           <button
             type="button"
             data-testid="finish-recipe-btn"
             onClick={ () => finishRecipe() }
             disabled={ checked && (
               Object.keys(checked).length !== ingredients.length
-          || Object.values(checked).some((check) => check === false)
+              || Object.values(checked).some((check) => check === false)
             ) }
+            className="inProgressRecipeFinishBtn-button"
           >
             Finish Recipe
           </button>

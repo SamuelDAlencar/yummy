@@ -44,6 +44,7 @@ export default function DetailedRecipe() {
   }, []);
 
   const isCurrPageDrinks = CURR_PAGE === 'drinks';
+  console.log(isProgress);
 
   return (
     (recipe && recomendations)

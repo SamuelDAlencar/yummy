@@ -7,7 +7,7 @@ import Header from '../components/Header';
 
 export default function ExploreByNationalitie() {
   const [nationalities, setNationalities] = useState([]);
-  const { recipes, fetchDefault, searchRecipes } = useContext(homeContext);
+  const { recipes, fetchDefault, searchRecipes, setLoading } = useContext(homeContext);
   const mgn = 12;
 
   const setOptNationalities = async () => {
@@ -26,6 +26,9 @@ export default function ExploreByNationalitie() {
     setOptNationalities();
     fetchDefault('themealdb');
   }, []);
+
+  useEffect(() => setLoading(true), []);
+  useEffect(() => setLoading(false), [recipes]);
 
   return (
     <div>
