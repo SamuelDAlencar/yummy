@@ -28,7 +28,7 @@ export default function Recipe({
 
   return (
     <section
-      data-testid={ `${i}-recipe-card` }
+      data-testid={ `${i}-${cardType}-card` }
       onClick={ () => history.push(`${type}/${id}`) }
       onKeyPress={ () => {} }
       role="button"

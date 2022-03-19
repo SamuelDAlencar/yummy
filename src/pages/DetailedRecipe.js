@@ -133,20 +133,15 @@ export default function DetailedRecipe() {
           </h3>
           <section className="recomendations-section">
             {recomendations.slice(0, MAX_RECOMENDATIONS).map((recomendation, i) => (
-              <div
+              <Recipe
                 key={ `recomendation-${i}` }
-                data-testid={ `${i}-recomendation-card` }
-                className="recomendation-section"
-              >
-                <Recipe
-                  id={ recomendation[`id${INV_KEY_STR}`] }
-                  data={ recomendation }
-                  i={ i }
-                  type={ INV_URL_TYPE }
-                  cardType="recomendation"
-                  keyStrType={ INV_KEY_STR }
-                />
-              </div>))}
+                id={ recomendation[`id${INV_KEY_STR}`] }
+                data={ recomendation }
+                i={ i }
+                type={ INV_URL_TYPE }
+                cardType="recomendation"
+                keyStrType={ INV_KEY_STR }
+              />))}
           </section>
           <h3 className="tutorialVideoTitle-h3">Tutorial: </h3>
           { (!isDone) && (
