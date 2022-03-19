@@ -18,6 +18,7 @@ export default function Profile() {
     <div className="container-profile">
       {/* <h1 className="profile-h1" data-testid="page-title">Profile</h1> */}
       <Header namePage="Profile" />
+      <p>ME TIRA DAQUI!!!!!!!!!!</p>
       <div className="container-image-profile">
         <img
           className="image-profile"
