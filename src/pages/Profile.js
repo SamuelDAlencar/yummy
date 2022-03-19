@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import Footer from '../components/Footer';
 import '../css/profile.css';
-import Header from '../components/Header';
 
 export default function Profile() {
   const getEmailLogin = JSON.parse(localStorage.getItem('user')).email;
@@ -16,22 +15,13 @@ export default function Profile() {
 
   return (
     <div className="container-profile">
-      {/* <h1 className="profile-h1" data-testid="page-title">Profile</h1> */}
-      <Header namePage="Profile" />
-      <p>ME TIRA DAQUI!!!!!!!!!!</p>
+      <h1 className="profile-h1">Profile</h1>
       <div className="container-image-profile">
         <img
           className="image-profile"
           src={ profileIcon }
           alt="profile-top-btn"
         />
-        <button
-          name="lar"
-          className="profile-picture-button"
-          type="button"
-        >
-          Profile Picture
-        </button>
       </div>
       <h2
         className="profile-email"
