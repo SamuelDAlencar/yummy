@@ -1,128 +1,39 @@
-.home-section {
-  margin-bottom: 20px;
-  padding: 10px;
-}
-
-.home-section > .search-section {
-  padding-bottom: 20px;
-}
-
-.searchButton-title {
-  margin: 0 0 3%;
-  padding-top: 3%;
-}
-
-.searchButton-title > .search-button {
-  background-color: #f94892;
-  border: 0;
-  border-radius: 3px;
-  box-shadow: 5px 5px 5px #bebebe;
-  color: white;
-  font-size: 100%;
-  margin: 0 0 2%;
-  padding: 20px;
-  width: 100%;
-}
-
-.searchOptions-section {
-  display: flex;
-  justify-content: space-around;
-}
-
-.searchOptions-section > .searchOption-label {
-  align-items: center;
-  display: flex;
-  margin-top: 5px;
-}
-
-.searchOption-label > .searchOption-input {
-  appearance: none;
-  border: 0.1em solid #c03971;
-  border-radius: 50%;
-  cursor: pointer;
-  display: grid;
-  font: inherit;
-  height: 1em;
-  margin: 1px 5px;
-  place-content: center;
-  width: 1em;
-}
-
-.searchOption-input:before {
-  background-color: #c03971;
-  border-radius: 50%;
-  content: '';
-  height: 17px;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  width: 17px;
-}
-
-.searchOption-input:checked:before {
-  transform: scale(1);
-}
-
-.categoriesTitle-h3 {
-  border-top: 1px solid silver;
-  color: rgb(51, 51, 51);
-  margin: 2% 0;
-  padding-top: 7%;
-}
-
-.recipesCategories-section {
+.recipes {
   border-radius: 25%;
   display: flex;
+  height: 190px;
+  justify-content: center;
   margin: 2% 2% 0;
-  overflow: scroll;
-  padding: 3%;
 }
 
-.genericHome-button {
-  background-color: #f94892;
-  border: 0;
-  border-radius: 3px;
-  box-shadow: 4px 4px 5px #bebebe;
-  color: white;
-  font-size: 90%;
-  margin: 2%;
-  padding: 8px;
-  transition: all 0.1s ease-in-out 0s;
+.recipe-img {
+  border-radius: 5% 5% 0 0;
+  height: 150px;
+  width: 170px;
 }
 
-.genericHome-button:hover {
-  background-color: white;
-  border: 0.1em solid #c03971;
-  color: #f94892;
-  font-size: 100%;
-}
-
-.recipes-section {
-  margin-bottom: 80px;
-}
-
-.recipe-section {
-  box-shadow: 5px 5px 15px #bebebe;
+.recipeInfo {
   display: flex;
-  margin: 3%;
-  padding: 3%;
+  flex-direction: column;
+  margin: 0 5%;
 }
 
-.recipeThumb-img {
-  border-radius: 15px;
-  max-height: 160px;
-  width: 50%;
+.recipeTitle {
+  color: rgb(54, 54, 54);
+  display: flex;
+  margin: 0;
+  padding: 0 2% 3%;
+  text-decoration: none;
 }
 
-.recipeInfo-section {
-  margin: 0 0 0 5%;
-}
-
-.recipeInfo-section > .recipeInfo-p {
+.recipe-p {
   color: rgb(97, 97, 97);
   font-size: 80%;
-  margin: 5% 0;
+  margin: 10% 0;
 }
 
-.recipeTitle-h3 {
-  color: rgb(59, 59, 59);
+.shareAndFavBtn {
+  display: flex;
+  margin-top: 10px;
 }
+
