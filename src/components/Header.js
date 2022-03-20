@@ -36,8 +36,7 @@ export default function Header({ namePage }) {
           { namePage }
         </h2>
         { (namePage === 'Foods'
-        || namePage === 'Drinks'
-        || namePage.includes('Natio')) && (
+        || namePage === 'Drinks') && (
           <button
             type="button"
             id="search-top-btn"

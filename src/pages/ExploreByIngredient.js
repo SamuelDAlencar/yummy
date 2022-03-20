@@ -23,7 +23,7 @@ export default function ExploreByIngredient() {
   }, []);
 
   return (
-    <div>
+    <div className="exploreNat">
       <Header namePage="Explore Ingredients" />
       { ingredients.length > 0 && ingredients.map((o, i) => (
         <Link
