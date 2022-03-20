@@ -33,6 +33,7 @@ export default function Home() {
 
   const {
     KEY_STR,
+    API_TYPE,
   } = useContext(detailedRecipeContext);
 
   useEffect(() => setLoading(true), [recipes]);
@@ -194,6 +195,7 @@ export default function Home() {
             type={ pathname }
             cardType="recipe"
             keyStrType={ KEY_STR }
+            apiType={ API_TYPE }
           />
         ))}
       </section>

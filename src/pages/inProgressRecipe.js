@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import FavoriteProvider from '../providers/FavoriteProvider';
 import ShareAndFav from '../components/ShareAndFav';
+import Loading from '../components/Loading';
 import '../css/inProgressRecipe.css';
+import homeContext from '../contexts/homeContext';
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export default function InProgressRecipe() {
@@ -22,6 +24,8 @@ export default function InProgressRecipe() {
     setIngredients,
     setMeasures,
   } = useContext(detailedRecipeContext);
+
+  const { loading, setLoading } = useContext(homeContext);
 
   const [checked, setChecked] = useState({});
 
@@ -60,6 +64,7 @@ export default function InProgressRecipe() {
   };
 
   useEffect(() => {
+    setLoading(true);
     getRecipe();
     setIngredients([]);
     setMeasures([]);
@@ -91,8 +96,8 @@ export default function InProgressRecipe() {
   };
 
   return (
-    recipe
-      && (
+    (!loading && recipe)
+      ? (
         <section
           className="inProgressRecipe-section"
         >
@@ -220,6 +225,6 @@ export default function InProgressRecipe() {
             Finish Recipe
           </button>
         </section>
-      )
+      ) : <Loading />
   );
 }

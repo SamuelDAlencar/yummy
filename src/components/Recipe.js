@@ -3,28 +3,48 @@ import { useHistory } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
 import homeContext from '../contexts/homeContext';
 import LoadingRecipe from './LoadingRecipe';
+import fetchRecipe from '../services/fetchRecipe';
 
 export default function Recipe({
-  id, data, i, type, cardType, keyStrType }) {
+  id, i, type, cardType, keyStrType, apiType }) {
   const history = useHistory();
+  const pathname = history.location;
 
   const [ingredients, setIngredients] = useState([]);
+  const [data, setdata] = useState([]);
 
-  const { loading } = useContext(homeContext);
+  const { loading, setLoading } = useContext(homeContext);
+
+  const getMoreInfo = async () => {
+    setdata(Object.values(await fetchRecipe(apiType, id))[0][0]);
+    setLoading(false);
+    return Object.values(await fetchRecipe(apiType, id))[0][0];
+  };
+
+  const assistFunc = (entrie) => {
+    if (entrie[0]
+      .includes('strIngredient')
+      && entrie[1] !== ''
+      && entrie[1] !== null) {
+      setIngredients((prevState) => [
+        ...prevState,
+        { [entrie[0]]: entrie[1] },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getMoreInfo();
+    }
+    setLoading(false);
+  }, [pathname, id]);
 
   useEffect(() => {
     Object.entries(data).forEach((entrie) => {
-      if (entrie[0]
-        .includes('strIngredient')
-          && entrie[1] !== ''
-          && entrie[1] !== null) {
-        setIngredients((prevState) => [
-          ...prevState,
-          { [entrie[0]]: entrie[1] },
-        ]);
-      }
+      assistFunc(entrie);
     });
-  }, []);
+  }, [data]);
 
   return (
     <section
