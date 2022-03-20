@@ -4,6 +4,7 @@ import fetchNationalities from '../services/fetchNaionalities';
 import Recipe from '../components/Recipe';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../css/home.css';
 
 export default function ExploreByNationalitie() {
   const [nationalities, setNationalities] = useState([]);
@@ -37,6 +38,7 @@ export default function ExploreByNationalitie() {
         <select
           data-testid="explore-by-nationality-dropdown"
           onChange={ handleChangeNation }
+          classNmae=""
         >
           {nationalities.map((o) => (
             <option
@@ -47,15 +49,18 @@ export default function ExploreByNationalitie() {
               {o.strArea}
             </option>))}
         </select>)}
-      {recipes.length > 0 && recipes.slice(0, mgn).map((recipe, i) => (
-        <Recipe
-          key={ recipe.idMeal }
-          id={ recipe.idMeal }
-          data={ recipe }
-          i={ i }
-          type="/foods"
-          keyStrType="Meal"
-        />))}
+      <section className="recipes-section">
+        {recipes.length > 0 && recipes.slice(0, mgn).map((recipe, i) => (
+          <Recipe
+            key={ recipe.idMeal }
+            id={ recipe.idMeal }
+            data={ recipe }
+            i={ i }
+            type="/foods"
+            keyStrType="Meal"
+            cardType="recipe"
+          />))}
+      </section>
       <Footer />
     </div>
   );
