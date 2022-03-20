@@ -1,0 +1,21 @@
+.card-section {
+  align-items: center;
+  box-shadow: 5px 5px 15px #bebebe;
+  display: flex;
+  justify-content: center;
+  margin: 3%;
+  padding: 3%;
+}
+
+.cardTitle {
+  align-items: center;
+  color:#f94892;
+  margin: 0 0 3%;
+  padding-top: 3%;
+}
+
+.cardThumb-img {
+  border-radius: 15px;
+  max-height: 160px;
+  width: 100%;
+}

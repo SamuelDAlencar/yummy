@@ -41,6 +41,7 @@ export default function ExploreByIngredient() {
             name={ o[`strIngredient${complement}`] }
             index={ i }
             type={ apiType }
+            cardType="recipe"
           />
         </Link>
       )) }
