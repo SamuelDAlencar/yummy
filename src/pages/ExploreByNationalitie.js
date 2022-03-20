@@ -32,13 +32,13 @@ export default function ExploreByNationalitie() {
   useEffect(() => setLoading(false), [recipes]);
 
   return (
-    <div>
+    <div className="exploreNat">
       <Header namePage="Explore Nationalities" />
       {nationalities.length > 0 && (
         <select
           data-testid="explore-by-nationality-dropdown"
           onChange={ handleChangeNation }
-          classNmae=""
+          className="exploreOptions-select"
         >
           {nationalities.map((o) => (
             <option
@@ -59,6 +59,7 @@ export default function ExploreByNationalitie() {
             type="/foods"
             keyStrType="Meal"
             cardType="recipe"
+            apiType="themealdb"
           />))}
       </section>
       <Footer />
