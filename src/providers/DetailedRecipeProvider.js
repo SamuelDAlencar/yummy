@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchRecipe from '../services/fetchRecipe';
 import fetchRecipes from '../services/fetchRecipes';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import addStorageStructure from '../helpers/addStorageStructure';
+import homeContext from '../contexts/homeContext';
 
 export default function DetailedRecipeProvider({ children }) {
   const history = useHistory();
@@ -51,6 +52,10 @@ export default function DetailedRecipeProvider({ children }) {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
 
+  const {
+    setLoading,
+  } = useContext(homeContext);
+
   const getRecipe = async () => {
     const id = pathname.replace(/\D/g, '');
     const recipeData = await fetchRecipe(API_TYPE, id);
@@ -78,10 +83,13 @@ export default function DetailedRecipeProvider({ children }) {
         ]);
       }
     });
+    setLoading(false);
   };
 
   const getRecomendations = async () => {
-    const recomendationsData = await fetchRecipes(INV_API_TYPE);
+    const recomendationsData = await fetchRecipes(
+      pathname.includes('foods') ? 'thecocktaildb' : 'themealdb',
+    );
     setRecomendations(Object.values(recomendationsData)[0]);
   };
 
@@ -109,6 +117,7 @@ export default function DetailedRecipeProvider({ children }) {
         CURR_LS_KEY,
         CURR_PAGE,
         API_TYPE,
+        INV_API_TYPE,
         pathname,
         recipe,
         recomendations,

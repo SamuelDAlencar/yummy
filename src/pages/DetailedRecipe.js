@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Recipe from '../components/Recipe';
 import '../css/detailedRecipe.css';
+import homeContext from '../contexts/homeContext';
 import detailedRecipeContext from '../contexts/detailedRecipeContext';
 import Loading from '../components/Loading';
 import findItemDone, { findItemProg } from '../helpers/findItemInLocalStorage';
@@ -33,7 +34,13 @@ export default function DetailedRecipe() {
     addStorageStructure,
   } = useContext(detailedRecipeContext);
 
+  const {
+    loading,
+    setLoading,
+  } = useContext(homeContext);
+
   useEffect(() => {
+    setLoading(true);
     setDone(findItemDone(pathname));
     setProgress(findItemProg(pathname));
     getRecomendations();
@@ -45,10 +52,9 @@ export default function DetailedRecipe() {
   }, []);
 
   const isCurrPageDrinks = CURR_PAGE === 'drinks';
-  console.log(isProgress);
 
   return (
-    (recipe && recomendations)
+    (!loading && recipe && recomendations)
       ? (
         <section
           className="detailedRecipe-section"
@@ -141,6 +147,7 @@ export default function DetailedRecipe() {
                 type={ INV_URL_TYPE }
                 cardType="recomendation"
                 keyStrType={ INV_KEY_STR }
+                apiType={ pathname.includes('foods') ? 'thecocktaildb' : 'themealdb' }
               />))}
           </section>
           <h3 className="tutorialVideoTitle-h3">Tutorial: </h3>
