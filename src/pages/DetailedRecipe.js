@@ -150,7 +150,6 @@ export default function DetailedRecipe() {
                 apiType={ pathname.includes('foods') ? 'thecocktaildb' : 'themealdb' }
               />))}
           </section>
-          <h3 className="tutorialVideoTitle-h3">Tutorial: </h3>
           { (!isDone) && (
             <button
               data-testid="start-recipe-btn"

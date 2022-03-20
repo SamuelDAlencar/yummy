@@ -1,6 +1,7 @@
 .detailedRecipe-section {
   display: flex;
   flex-direction: column;
+  margin-bottom: 5%;
 }
 
 .detailedRecipe-section > .detailedRecipeThumb-img {
@@ -28,9 +29,13 @@
   justify-content: flex-end;
 }
 
-.detailedRecipeTitle-section > .shareAndFavBtn-section > .favBtn-input, .shareBtn-input {
-  border-bottom: 1px solid #ffa1c9;
-  margin: 0 5% 5%;
+.detailedRecipeTitle-section .shareAndFavBtn-section > .favBtn-input {
+  margin-left: 5%;
+  padding: 0 5% 5%;
+  width: 35px;
+}
+
+.detailedRecipeTitle-section .shareAndFavBtn-section > .shareBtn-input {
   padding: 0 5% 5%;
   width: 30px;
 }
