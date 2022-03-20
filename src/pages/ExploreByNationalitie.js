@@ -38,6 +38,7 @@ export default function ExploreByNationalitie() {
         <select
           data-testid="explore-by-nationality-dropdown"
           onChange={ handleChangeNation }
+          classNmae=""
         >
           {nationalities.map((o) => (
             <option
