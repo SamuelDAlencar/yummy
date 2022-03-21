@@ -9,6 +9,7 @@ export default function CardIngredient({ name, index, type }) {
     <section className="card-section">
       <div
         data-testid={ `${index}-ingredient-card` }
+        className="ingredientCard"
       >
         <h1
           data-testid={ `${index}-card-name` }
