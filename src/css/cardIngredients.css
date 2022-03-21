@@ -9,8 +9,9 @@
 
 .cardTitle {
   align-items: center;
-  color:#f94892;
-  margin: 0 0 3%;
+  border: 0;
+  color: #f94892;
+  margin: 0 0 10%;
   padding-top: 3%;
 }
 
@@ -18,4 +19,12 @@
   border-radius: 15px;
   max-height: 160px;
   width: 100%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.ingredientCard {
+  text-align: center;
 }

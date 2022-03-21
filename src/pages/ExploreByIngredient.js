@@ -36,6 +36,7 @@ export default function ExploreByIngredient() {
               type: 'Ingredient',
             }));
           } }
+          className="link"
         >
           <CardIngredient
             name={ o[`strIngredient${complement}`] }
