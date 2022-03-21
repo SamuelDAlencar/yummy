@@ -39,7 +39,7 @@
 .recipe-section {
   border-radius: 3%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 2% 2% 0;
   margin-top: 20px;
 }

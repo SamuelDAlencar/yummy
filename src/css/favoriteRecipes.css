@@ -1,40 +1,49 @@
 .recipes {
   border-radius: 25%;
-  display: flex;
   height: 190px;
   justify-content: center;
   margin: 2% 2% 0;
 }
 
 .recipe-img {
-  border-radius: 5% 5% 0 0;
+  border-radius: 5%;
   height: 150px;
-  width: 170px;
+  width: 50%;
 }
 
 .recipeInfo {
   display: flex;
   flex-direction: column;
-  margin: 0 5%;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0 0 0 4%;
+  position: relative;
+  width: 50%;
 }
 
 .recipeTitle {
   color: rgb(54, 54, 54);
   display: flex;
-  margin: 0;
+  margin: 5% 0 0;
   padding: 0 2% 3%;
-  text-decoration: none;
 }
 
 .recipe-p {
   color: rgb(97, 97, 97);
   font-size: 80%;
-  margin: 10% 0;
+  margin: 2% 0 5%;
 }
 
-.shareAndFavBtn {
+.favoritePage .shareAndFavBtn {
   display: flex;
-  margin-top: 10px;
-  text-align: center;
+  justify-content: flex-end;
+
 }
 
+.favoritePage .shareBtn-input, .favoritePage .favBtn-input {
+  width: 25px;
+}
+
+.removeTextDecoration {
+  text-decoration: none;
+}

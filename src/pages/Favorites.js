@@ -17,7 +17,7 @@ export default function Favorites() {
   };
 
   return (
-    <div>
+    <div className="favoritePage">
       <Header namePage="Favorite Recipes" />
       <FiltersFav />
       { renderCards(filteredType) }
