@@ -16,6 +16,7 @@ export default function FiltersFav() {
         type="button"
         onClick={ () => handleClickFilter('All') }
         data-testid="filter-by-all-btn"
+        className="recipe-button"
       >
         All
       </button>
@@ -23,6 +24,7 @@ export default function FiltersFav() {
         type="button"
         onClick={ () => handleClickFilter('Drinks') }
         data-testid="filter-by-drink-btn"
+        className="recipe-button"
       >
         Drinks
       </button>
@@ -30,6 +32,7 @@ export default function FiltersFav() {
         type="button"
         onClick={ () => handleClickFilter('Food') }
         data-testid="filter-by-food-btn"
+        className="recipe-button"
       >
         Food
       </button>

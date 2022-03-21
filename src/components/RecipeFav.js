@@ -22,7 +22,10 @@ export default function RecipeFav({ recipe, i }) {
           onClick={ () => push(`${redirectTo}/${recipe.id}`) }
         />
         <section className="recipeInfo">
-          <Link to={ `${redirectTo}/${recipe.id}` }>
+          <Link
+            to={ `${redirectTo}/${recipe.id}` }
+            className="removeTextDecoration"
+          >
             <h3
               className="recipeTitle"
               data-testid={ `${i}-horizontal-name` }
@@ -31,12 +34,19 @@ export default function RecipeFav({ recipe, i }) {
             </h3>
           </Link>
           {recipe.type.includes('drink') ? (
-            <p
-              className="recipeInfo-p"
-              data-testid={ `${i}-horizontal-top-text` }
-            >
-              { recipe.alcoholicOrNot }
-            </p>)
+            <section data-testid={ `${i}-horizontal-top-text` }>
+              <p className="recipe-p">
+                Alcoholic:
+                {' '}
+                <b data-testid={ `${i}-horizontal-top-text` }>{recipe.alcoholicOrNot}</b>
+              </p>
+              <p className="recipe-p">
+                Category:
+                <b>
+                  {recipe.category}
+                </b>
+              </p>
+            </section>)
             : (
               <section data-testid={ `${i}-horizontal-top-text` }>
                 <p className="recipe-p">
@@ -52,7 +62,6 @@ export default function RecipeFav({ recipe, i }) {
                   </b>
                 </p>
               </section>)}
-
           <section className="shareAndFavBtn">
             <ShareAndFav
               page="/favorite-recipes"
