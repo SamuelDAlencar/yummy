@@ -5,6 +5,19 @@
   margin: 2% 2% 0;
 }
 
+.recipe-button {
+  background-color: #f94892;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 4px 4px 5px #bebebe;
+  color: white;
+  font-size: 90%;
+  margin: 2%;
+  padding: 8px;
+  transition: all 0.1s ease-in-out 0s;
+  width: 100px;
+}
+
 .recipe-img {
   border-radius: 5%;
   height: 150px;
@@ -37,7 +50,6 @@
 .favoritePage .shareAndFavBtn {
   display: flex;
   justify-content: flex-end;
-
 }
 
 .favoritePage .shareBtn-input, .favoritePage .favBtn-input {

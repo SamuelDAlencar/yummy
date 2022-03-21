@@ -42,16 +42,19 @@ export default function ShareAndFav({ page, i, id, name, type, area, category,
   return (
     page === '/done-recipes'
       ? (
-        <>
-          {copied && <p className="linkCopied-p">Link copied!</p>}
-          <input
-            data-testid={ `${i}-horizontal-share-btn` }
-            type="image"
-            onClick={ handleShare }
-            src={ copied ? __compartilharRosa2 : __compartilharRosa }
-            alt="share-btn"
-          />
-        </>)
+        <section className="shareAndFav-section">
+          <section className="shareAndFavBtn-section">
+            {copied && <p className="linkCopied-p">Link copied!</p>}
+            <input
+              data-testid={ `${i}-horizontal-share-btn` }
+              type="image"
+              onClick={ handleShare }
+              src={ copied ? __compartilharRosa2 : __compartilharRosa }
+              alt="share-btn"
+              className="shareBtn-input"
+            />
+          </section>
+        </section>)
       : (
         <section className="shareAndFav-section">
           <section className="shareAndFavBtn-section">
