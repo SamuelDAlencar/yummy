@@ -38,9 +38,10 @@ export default function DoneRecipes() {
   };
 
   return (
-    <>
+    <section>
       <Header namePage="Done Recipes" />
       <button
+        className="recipe-button"
         type="button"
         data-testid="filter-by-all-btn"
         onClick={ filterDoneRecipes }
@@ -49,6 +50,7 @@ export default function DoneRecipes() {
         All
       </button>
       <button
+        className="recipe-button"
         type="button"
         data-testid="filter-by-food-btn"
         onClick={ filterDoneRecipes }
@@ -57,6 +59,7 @@ export default function DoneRecipes() {
         Food
       </button>
       <button
+        className="recipe-button"
         type="button"
         data-testid="filter-by-drink-btn"
         onClick={ filterDoneRecipes }
@@ -64,78 +67,87 @@ export default function DoneRecipes() {
       >
         Drinks
       </button>
-
       {doneRecipes && doneRecipes.map((recipe, i) => {
         const { tags } = recipe;
 
         return (
-          <section key={ recipe.id }>
-            <button
-              type="button"
-              onClick={ () => redirectButton(recipe) }
-              style={ { backgroundColor: 'inherit', border: 'none' } }
-            >
-              <img
-                alt="recipe_img"
-                src={ recipe.image }
-                data-testid={ `${i}-horizontal-image` }
-                className="doneRecipe-section__recipe-img"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={ () => redirectButton(recipe) }
-              style={ { backgroundColor: 'inherit', border: 'none' } }
-            >
-              <h3
-                data-testid={ `${i}-horizontal-name` }
+          <section
+            key={ recipe.id }
+          >
+            <section className="recipe-list">
+              <button
+                type="button"
+                onClick={ () => redirectButton(recipe) }
+                style={ { backgroundColor: 'inherit', border: 'none' } }
               >
-                {recipe.name}
-              </h3>
-            </button>
-            <h4
-              data-testid={ `${i}-horizontal-top-text` }
-            >
-              { recipe.type === 'food'
-                ? `${recipe.nationality} - ${recipe.category}`
-                : `${recipe.alcoholicOrNot} - ${recipe.category}`}
-            </h4>
-            <p
-              data-testid={ `${i}-horizontal-done-date` }
-            >
-              {recipe.doneDate}
-            </p>
-            {tags
-            && (
-              <>
-                <span>Tags:</span>
-
-                {tags.map((tag, tagI) => (
-                  <span
-                    key={ tag }
-                    data-testid={ `${i}-${tag}-horizontal-tag` }
+                <img
+                  alt="recipe_img"
+                  src={ recipe.image }
+                  data-testid={ `${i}-horizontal-image` }
+                  className="doneRecipe-section__recipe-img"
+                />
+              </button>
+              <section className="recipe-infos">
+                <button
+                  className="recipe-p"
+                  type="button"
+                  onClick={ () => redirectButton(recipe) }
+                  style={ { backgroundColor: 'inherit', border: 'none' } }
+                >
+                  <h3
+                    className="recipeTitle"
+                    data-testid={ `${i}-horizontal-name` }
                   >
-                    {tagI === tags.length - 1
-                      ? `${tag}`
-                      : ` ${tag}, `}
-                  </span>
-                ))}
-              </>)}
-            <FavoriteProvider>
-              <ShareAndFav
-                page={ pathname }
-                i={ i }
-                id={ recipe.id }
-                name={ recipe.name }
-                type={ recipe.type }
-                area={ recipe.nationality }
-                category={ recipe.category }
-                alcoholicOrNot={ recipe.alcoholicOrNot }
-                image={ recipe.image }
-              />
-            </FavoriteProvider>
+                    {recipe.name}
+                  </h3>
+                </button>
+                <h3
+                  className="recipeTitle"
+                  data-testid={ `${i}-horizontal-top-text` }
+                >
+                  { recipe.type === 'food'
+                    ? `${recipe.nationality} - ${recipe.category}`
+                    : `${recipe.alcoholicOrNot} - ${recipe.category}`}
+                </h3>
+                <p
+                  className="recipe-p"
+                  data-testid={ `${i}-horizontal-done-date` }
+                >
+                  {recipe.doneDate}
+                </p>
+                {tags
+                && (
+                  <>
+                    <p className="recipeInfo-p">Tags: </p>
+
+                    {tags.map((tag, tagI) => (
+                      <span
+                        key={ tag }
+                        data-testid={ `${i}-${tag}-horizontal-tag` }
+                      >
+                        {tagI === tags.length - 1
+                          ? `${tag}`
+                          : ` ${tag}, `}
+                      </span>
+                    ))}
+                  </>)}
+                <FavoriteProvider>
+                  <ShareAndFav
+                    page={ pathname }
+                    i={ i }
+                    id={ recipe.id }
+                    name={ recipe.name }
+                    type={ recipe.type }
+                    area={ recipe.nationality }
+                    category={ recipe.category }
+                    alcoholicOrNot={ recipe.alcoholicOrNot }
+                    image={ recipe.image }
+                  />
+                </FavoriteProvider>
+              </section>
+            </section>
           </section>);
       })}
-    </>
+    </section>
   );
 }

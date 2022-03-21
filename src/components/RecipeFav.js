@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import React from 'react';
 import ShareAndFav from './ShareAndFav';
 import '../css/favoriteRecipes.css';
+import '../css/doneRecipes.css';
 
 // import ShareAndFav from './ShareAndFav';
 
