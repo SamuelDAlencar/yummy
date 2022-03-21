@@ -38,7 +38,7 @@ export default function DoneRecipes() {
   };
 
   return (
-    <section>
+    <section className="donePage">
       <Header namePage="Done Recipes" />
       <button
         className="recipe-button"
@@ -72,38 +72,31 @@ export default function DoneRecipes() {
 
         return (
           <section
+            onClick={ () => redirectButton(recipe) }
+            onKeyPress={ () => {} }
+            role="button"
+            tabIndex={ i }
             key={ recipe.id }
+            className="recipes"
           >
-            <section className="recipe-list">
-              <button
-                type="button"
-                onClick={ () => redirectButton(recipe) }
-                style={ { backgroundColor: 'inherit', border: 'none' } }
-              >
-                <img
-                  alt="recipe_img"
-                  src={ recipe.image }
-                  data-testid={ `${i}-horizontal-image` }
-                  className="doneRecipe-section__recipe-img"
-                />
-              </button>
-              <section className="recipe-infos">
-                <button
-                  className="recipe-p"
-                  type="button"
-                  onClick={ () => redirectButton(recipe) }
-                  style={ { backgroundColor: 'inherit', border: 'none' } }
-                >
-                  <h3
-                    className="recipeTitle"
-                    data-testid={ `${i}-horizontal-name` }
-                  >
-                    {recipe.name}
-                  </h3>
-                </button>
-                <h3
+            <section className="recipe-section">
+              <img
+                alt="recipe_img"
+                src={ recipe.image }
+                data-testid={ `${i}-horizontal-image` }
+                className="recipe-img"
+              />
+              <section className="recipeInfo">
+                <h2
                   className="recipeTitle"
+                  data-testid={ `${i}-horizontal-name` }
+                >
+                  {recipe.name}
+                </h2>
+                <h3
+                  className="recipe-p"
                   data-testid={ `${i}-horizontal-top-text` }
+                  style={ { marginBottom: '15px' } }
                 >
                   { recipe.type === 'food'
                     ? `${recipe.nationality} - ${recipe.category}`
@@ -113,17 +106,18 @@ export default function DoneRecipes() {
                   className="recipe-p"
                   data-testid={ `${i}-horizontal-done-date` }
                 >
+                  <b>Done date: </b>
                   {recipe.doneDate}
                 </p>
                 {tags
                 && (
                   <>
-                    <p className="recipeInfo-p">Tags: </p>
-
+                    <span className="tagsTitle"><b>Tags:</b></span>
                     {tags.map((tag, tagI) => (
                       <span
                         key={ tag }
                         data-testid={ `${i}-${tag}-horizontal-tag` }
+                        className="tag"
                       >
                         {tagI === tags.length - 1
                           ? `${tag}`
