@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -17,6 +17,10 @@ export default function ExploreOptions() {
     const x = `/${relativePath}/${Object.values(Object.values(response)[0])[0]}`;
     history.push(x);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="explore-container">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../css/doneRecipes.css';
 import ShareAndFav from '../components/ShareAndFav';
@@ -36,6 +36,10 @@ export default function DoneRecipes() {
       ? '/foods'
       : '/drinks'}/${recipe.id}`);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="donePage">
