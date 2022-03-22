@@ -1,11 +1,11 @@
-# yummy
+# yummy 🍽
 
   Aplicativo de receitas de comidas e bebidas feito em grupo como projeto de conclusão do módulo de front-end na trybe 💚
 
   Na yummy você pode consultar diversas receitas pelo app, filtar pela sua categoria, nacionalidade, favoritar uma receita, salvar seu progresso, consultar suas receitas ja concluidas e favoritadas, explorar receitas por ingredientes ou nacionalidades, ou pesquisar usando diferentes filtros referentes ao titulo da receita!
 
 
-# Habilidades colocadas em prática:
+# Habilidades colocadas em prática 👨‍💻:
 
   * Utilizar Redux para gerenciar estado
   * Utilizar a biblioteca React-Redux
@@ -15,7 +15,7 @@
   * Utilizar o React Hook useEffect
   * Criar Hooks customizados
 
-# O timasso 💚💚:
+# O timasso 💚:
 
 <table>
   <tbody>
