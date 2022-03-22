@@ -26,6 +26,7 @@ export default function ExploreByNationalitie() {
   useEffect(() => {
     setOptNationalities();
     fetchDefault('themealdb');
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => setLoading(true), []);

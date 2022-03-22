@@ -116,6 +116,7 @@ export default function DetailedRecipeProvider({ children }) {
         INV_URL_TYPE,
         CURR_LS_KEY,
         CURR_PAGE,
+        INV_CURR_PAGE,
         API_TYPE,
         INV_API_TYPE,
         pathname,

@@ -20,6 +20,7 @@ export default function ExploreByIngredient() {
 
   useEffect(() => {
     FetchDefaultIngredients();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

@@ -17,6 +17,7 @@ export default function DetailedRecipe() {
 
   const {
     MAX_RECOMENDATIONS,
+    INV_CURR_PAGE,
     CURR_PAGE,
     INV_URL_TYPE,
     KEY_STR,
@@ -133,7 +134,7 @@ export default function DetailedRecipe() {
           >
             Want other options? checkout thos recipes from the
             {' '}
-            {CURR_PAGE}
+            {INV_CURR_PAGE}
             {' '}
             section:
           </h3>
