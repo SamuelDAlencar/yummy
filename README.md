@@ -14,3 +14,15 @@
   * Utilizar o React Hook useContext
   * Utilizar o React Hook useEffect
   * Criar Hooks customizados
+
+# O time:
+
+<table>
+  <tbody>
+    <tr>
+      <td>a</td>
+      <td>a</td>
+      <td>a</td>
+    </tr>
+  </tbody>
+</table>
