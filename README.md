@@ -21,19 +21,19 @@
   <tbody>
     <tr>
       <td>
-        <img src="https://media-exp1.licdn.com/dms/image/C4E03AQEiKJw6sGngXA/profile-displayphoto-shrink_800_800/0/1643754528114?e=1653523200&v=beta&t=UfXQI7q5Nwtk6PfF_VCXZjOSUOn1UhwcDLJYQzRotqA"/>
+        <img style="width: "5px"" src="https://media-exp1.licdn.com/dms/image/C4E03AQEiKJw6sGngXA/profile-displayphoto-shrink_800_800/0/1643754528114?e=1653523200&v=beta&t=UfXQI7q5Nwtk6PfF_VCXZjOSUOn1UhwcDLJYQzRotqA"/>
       </td>
       <td>
-        <img src="https://media-exp1.licdn.com/dms/image/C5603AQFFd7_vj9XyTg/profile-displayphoto-shrink_800_800/0/1623251086464?e=1653523200&v=beta&t=Z25XNB6Qr_VD0w_hG_Pe7h9w82_5yD_VslWxdmzJK6g"/>
+        <img style="width: "5px"" src="https://media-exp1.licdn.com/dms/image/C5603AQFFd7_vj9XyTg/profile-displayphoto-shrink_800_800/0/1623251086464?e=1653523200&v=beta&t=Z25XNB6Qr_VD0w_hG_Pe7h9w82_5yD_VslWxdmzJK6g"/>
       </td>
       <td>
-        <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFV43spQIBWPQ/profile-displayphoto-shrink_800_800/0/1632263153466?e=2147483647&v=beta&t=rpxgiZ-fYyklZuZnpJmxKSA5J7GiFqTA5zqQIdUYo7c"/>
+        <img style="width: "5px"" src="https://media-exp1.licdn.com/dms/image/C4E03AQFV43spQIBWPQ/profile-displayphoto-shrink_800_800/0/1632263153466?e=2147483647&v=beta&t=rpxgiZ-fYyklZuZnpJmxKSA5J7GiFqTA5zqQIdUYo7c"/>
       </td>
       <td>
-        <img src="https://ca.slack-edge.com/TMDDFEPFU-U02EMAMHNPQ-b0bd7393b35b-512"/>
+        <img style="width: "5px"" src="https://ca.slack-edge.com/TMDDFEPFU-U02EMAMHNPQ-b0bd7393b35b-512"/>
       </td>
       <td>
-        <img src="https://media-exp1.licdn.com/dms/image/C4E03AQE-H9YIQ0slTA/profile-displayphoto-shrink_800_800/0/1647962774162?e=1653523200&v=beta&t=XC0jytIGAlXCeiVJR-MXfcBNvuLPp4XOjl3Z9O0wVMc"/>
+        <img style="width: "5px"" src="https://media-exp1.licdn.com/dms/image/C4E03AQE-H9YIQ0slTA/profile-displayphoto-shrink_800_800/0/1647962774162?e=1653523200&v=beta&t=XC0jytIGAlXCeiVJR-MXfcBNvuLPp4XOjl3Z9O0wVMc"/>
       </td>
     </tr>
   </tbody>
