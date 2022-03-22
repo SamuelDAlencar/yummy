@@ -34,11 +34,11 @@
       </td>
       <td>
         <img style="width: 250px" src="https://ca.slack-edge.com/TMDDFEPFU-U02EMAMHNPQ-b0bd7393b35b-512"/>
-        <b><a href="https://github.com/thomazpro">Thomaz</a></b>
+        <b><a href="https://github.com/thomazpro">Thomaz Gontijo</a></b>
       </td>
       <td>
         <img style="width: 250px" src="https://media-exp1.licdn.com/dms/image/C4E03AQE-H9YIQ0slTA/profile-displayphoto-shrink_800_800/0/1647962774162?e=1653523200&v=beta&t=XC0jytIGAlXCeiVJR-MXfcBNvuLPp4XOjl3Z9O0wVMc"/>
-        <b><a href=""></a></b>
+        <b><a href="https://github.com/SamuelDAlencar">Samuel de Alencar Rocha</a></b>
       </td>
     </tr>
   </tbody>
