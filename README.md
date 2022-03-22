@@ -4,7 +4,7 @@
 
   Na yummy você pode consultar diversas receitas pelo app, filtar pela sua categoria, nacionalidade, favoritar uma receita, salvar seu progresso, consultar suas receitas ja concluidas e favoritadas, explorar receitas por ingredientes ou nacionalidades, ou pesquisar usando diferentes filtros referentes ao titulo da receita!
   
-  <img src="/yummy/src/videos/recipes-app2.mp4" />
+  <video src="/yummy/src/videos/recipes-app2.mp4" />
 
 
 # Habilidades colocadas em prática 👨‍💻:
