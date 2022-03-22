@@ -27,9 +27,9 @@
         <img style="width: 250px" src="https://media-exp1.licdn.com/dms/image/C5603AQFFd7_vj9XyTg/profile-displayphoto-shrink_800_800/0/1623251086464?e=1653523200&v=beta&t=Z25XNB6Qr_VD0w_hG_Pe7h9w82_5yD_VslWxdmzJK6g"/>
         <b><a href="https://github.com/vazmatheus">Matheus Vaz</a></b>
       </td>
-      <td style="text-align: center">
+      <td>
         <img style="width: 250px" src="https://media-exp1.licdn.com/dms/image/C4E03AQFV43spQIBWPQ/profile-displayphoto-shrink_800_800/0/1632263153466?e=2147483647&v=beta&t=rpxgiZ-fYyklZuZnpJmxKSA5J7GiFqTA5zqQIdUYo7c"/>
-        <b><a href="https://github.com/alexcssilva">Alex Silva</a></b>
+        <b><a style="text-align: center" href="https://github.com/alexcssilva">Alex Silva</a></b>
       </td>
       <td style="text-align: center">
         <img style="width: 250px" src="https://ca.slack-edge.com/TMDDFEPFU-U02EMAMHNPQ-b0bd7393b35b-512"/>
