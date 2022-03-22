@@ -3,7 +3,7 @@
 Aplicativo de receitas de comidas e bebidas feito em grupo por mim, @gabrielgoonn, @alexcssilva, @thomazpro
 , e @vazmatheus como projeto de conclusão do módulo de front-end na trybe 💚
 
-Na yummy você pode consultar diversas receitas pelo app, filtar pela sua categoria, nacionalidade, favoritar uma receita, salvar seu progresso, consultar suas receitas ja concluidas e favoritadas, explorar receitas por ingredientes, ou pesquisar usando diferentes filtros referentes ao titulo da receita!
+Na yummy você pode consultar diversas receitas pelo app, filtar pela sua categoria, nacionalidade, favoritar uma receita, salvar seu progresso, consultar suas receitas ja concluidas e favoritadas, explorar receitas por ingredientes ou nacionalidades, ou pesquisar usando diferentes filtros referentes ao titulo da receita!
 
 # Habilidades colocadas em prática:
 
