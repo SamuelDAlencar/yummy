@@ -14,12 +14,12 @@
   * Utilizar o React Hook useEffect
   * Criar Hooks customizados
 
-# O timasso 💚:
+# O timasso 💚💚:
 
 <table>
   <tbody>
     <tr>
-      <td style="text-align: center">
+      <td>
         <img style="width: 250px" src="https://media-exp1.licdn.com/dms/image/C4E03AQEiKJw6sGngXA/profile-displayphoto-shrink_800_800/0/1643754528114?e=1653523200&v=beta&t=UfXQI7q5Nwtk6PfF_VCXZjOSUOn1UhwcDLJYQzRotqA"/>
         <b><a href="https://github.com/gabrielgoonn">Gabriel Matos</a></b>
       </td>
