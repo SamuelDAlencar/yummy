@@ -1,24 +1,22 @@
 # yummy 🍽
 
-  Aplicativo de receitas de comidas e bebidas feito em grupo como projeto de conclusão do módulo de front-end na trybe 💚
+  Recipes app made in group as a module conclusion project at trybe
 
   <p style="align: center">
     <video style="margin: 0; width: 150px" src="https://user-images.githubusercontent.com/77287225/159553268-4e6d9cbe-8cd2-4801-a37f-2a0457c53e2f.mp4"></video>
   </p>
   
- Na yummy você pode consultar diversas receitas pelo app, filtar pela sua categoria, nacionalidade, favoritar uma receita, salvar seu progresso, consultar suas receitas ja concluidas e favoritadas, explorar receitas por ingredientes ou nacionalidades, ou pesquisar usando diferentes filtros referentes ao titulo da receita!
+ At Yummy you can explore a vast list of recipes, filter them by it's category, nationality, favorite a recipe, save it's progress, have a section inside the app to consult your done and favorited recipes, explore recipes by it's nationality or ingredient, or search for recipes using a name filter, ingredient filter, or category filter!
   
-# Habilidades colocadas em prática 👨‍💻:
+# Skills put into practice  👨‍💻:
 
-  * Utilizar Redux para gerenciar estado
-  * Utilizar a biblioteca React-Redux
-  * Utilizar a Context API do React para gerenciar estado
-  * Utilizar o React Hook useState
-  * Utilizar o React Hook useContext
-  * Utilizar o React Hook useEffect
-  * Criar Hooks customizados
+  * Use React's Context API to manage the aplication state
+  * Use React Hook's useState
+  * Use React Hook's useContext
+  * Use React Hook's useEffect
+  * Create custom Hooks
 
-# O timasso 💚:
+# The squad 💚:
 
 <table>
   <tbody>
