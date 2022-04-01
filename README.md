@@ -38,7 +38,7 @@
         <b><a href="https://github.com/thomazpro">Thomaz Gontijo</a></b>
       </td>
       <td align="center">
-        <img style="width: 250px" src="https://media-exp1.licdn.com/dms/image/C4E03AQE-H9YIQ0slTA/profile-displayphoto-shrink_800_800/0/1647962774162?e=1653523200&v=beta&t=XC0jytIGAlXCeiVJR-MXfcBNvuLPp4XOjl3Z9O0wVMc" style="max-width: 100%"/>
+        <img style="width: 250px" src="https://media-exp1.licdn.com/dms/image/C4E03AQEJa0Wn24UWHA/profile-displayphoto-shrink_800_800/0/1648043326740?e=1654128000&v=beta&t=vHAvcP-j36F3PqGBOTn8Uplt8IBA84BnRf0JALwm8XE" style="max-width: 100%"/>
         <b><a href="https://github.com/SamuelDAlencar">Samuel de Alencar Rocha</a></b>
       </td>
     </tr>
