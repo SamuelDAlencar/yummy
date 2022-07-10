@@ -7,6 +7,7 @@
   </p>
   
  At Yummy you can explore a vast list of recipes, filter them by it's category, nationality, favorite a recipe, save it's progress, have a section inside the app to consult your done and favorited recipes, explore recipes by it's nationality or ingredient, or search for recipes using a name filter, ingredient filter, or category filter!
+ > Still only mobile responsive
   
 # Skills put into practice  👨‍💻:
 
