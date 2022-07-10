@@ -7,7 +7,7 @@
   </p>
   
  At Yummy you can explore a vast list of recipes, filter them by it's category, nationality, favorite a recipe, save it's progress, have a section inside the app to consult your done and favorited recipes, explore recipes by it's nationality or ingredient, or search for recipes using a name filter, ingredient filter, or category filter!
- > Still only mobile responsive
+ > Desktop responsiveness not implemented yet, only mobile
   
 # Skills put into practice  👨‍💻:
 
@@ -16,6 +16,13 @@
   * Use React Hook's useContext
   * Use React Hook's useEffect
   * Create custom Hooks
+
+# How to run and test the application 👨‍💻
+
+ * Clone this rep: (SSH) `git clone git@github.com:SamuelDAlencar/trybe_tunes.git` in the terminal
+ * Install the dependencies with `npm i`
+ * Start the application with `npm start`
+ > To activate the mobile layout in Chrome, press `F12` and click at the cellphone icon on the left side of the `console` tab (DevTools)
 
 # The squad 💚:
 
